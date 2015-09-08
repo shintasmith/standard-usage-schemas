@@ -2217,9 +2217,14 @@
                wadl/cadf.wadl#UserAccessEvent
                wadl/cadf.wadl#UserAccessEventTenant"/></programlisting>
                 </para></section>
-        <section xml:id="Adding_JSON_CADF_events"><title>Adding a JSON CADF non-useraccess event feed</title>
-                <para>Cloud Feeds supports CADF events that are not of type <emphasis role="italic"
-                        >useraccess</emphasis>. The following rules apply for these events:</para>
+        <section xml:id="Adding_JSON_CADF_events"><title>Adding a generic JSON CADF event feed</title>
+                <para>Cloud Feeds supports generic CADF events that are not of type <emphasis
+                        role="italic">useraccess</emphasis>. These events are automatically
+                    considered private. They cannot be viewed by customers and are not included in
+                    customer archives in Cloud Files. Generic events of type CADF are still
+                    accessible to internal users with the <code>cloudfeeds:service-admin</code>
+                    role.</para>
+                <para>The following rules apply for these events:</para>
                 <para>
                     <itemizedlist>
                         <listitem>
@@ -2227,7 +2232,18 @@
                                 JSON. </para>
                         </listitem>
                         <listitem>
-                            <para>The event can have an Atom XML envelope.</para>
+                            <para>The event can have an Atom XML envelope. If the event is published
+                                in JSON and retrieved in XML, only the Atom envelope is translated.
+                                The event payload remains in JSON.</para>
+                        </listitem>
+                        <listitem>
+                            <para> Cloud Feeds does not perform any validation on the attributes in
+                                the event payload and therefore there is no product schema for the
+                                events. </para>
+                        </listitem>
+                        <listitem>
+                            <para>Cloud Feeds cannot perform any operations, such as usage summary
+                                calculations, on the attributes in the event payload.</para>
                         </listitem>
                         <listitem>
                             <para>The <code>atom:content</code> node must be of
@@ -2239,9 +2255,8 @@
                         </listitem>
                     </itemizedlist>
                 </para>
-                <para>To add a JSON CADF event that is not of type <emphasis role="italic"
-                        >useraccess</emphasis>, add the following resource to <emphasis role="bold"
-                        >allfeeds.wadl</emphasis>:</para>
+                <para>To add a generic JSON CADF event, add the following resource to <emphasis
+                        role="bold">allfeeds.wadl</emphasis>:</para>
                 <para>
                     <programlisting>&lt;resource id="<replaceable>new_feed_name_</replaceable>events"
            path="<replaceable>new_feed_name</replaceable>/events"

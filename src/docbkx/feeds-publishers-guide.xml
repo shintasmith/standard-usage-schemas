@@ -2414,7 +2414,7 @@
                 your feed and events.</para>
             <para>To test your feed, type the following command at a command-line interface:</para>
             <para>
-                <programlisting>mvn test</programlisting>
+                <programlisting> mvn -P tiamat_check test </programlisting>
             </para>
             <para>Running this test notifies you if any issues exist with the product schema or
                 sample files.</para></section>

@@ -2414,7 +2414,8 @@
                 your feed and events.</para>
             <para>To test your feed, type the following command at a command-line interface:</para>
             <para>
-                <programlisting> mvn -P tiamat_check test </programlisting>
+                <programlisting>git submodule update --init --remote cloudfeeds-nabu
+mvn -P tiamat-check compile </programlisting>
             </para>
             <para>Running this test notifies you if any issues exist with the product schema or
                 sample files.</para></section>

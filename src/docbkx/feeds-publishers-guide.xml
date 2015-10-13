@@ -101,9 +101,9 @@
         <para>Cloud Feeds uses AtomPub to publish different types of feeds. AtomPub is based on an
             HTTP transfer of Atom-formatted representations. The Atom format is documented in the
             Atom Syndication Format.</para>
-        <para>Cloud Feeds events must be defined using the Common Event Format (CEF). The Usage
-            Measurement Service (UMS) uses CEF for tracking, but CEF can be also used for other
-            events and by third-party event publishers. CEF supports versioning of the event and
+        <para>Cloud Feeds events must be defined using the Common Usage Format (CUF). The Usage
+            Measurement Service (UMS) uses CUF for tracking, but CUF can be also used for other
+            events and by third-party event publishers. CUF supports versioning of the event and
             product nodes through the <emphasis role="italic">version</emphasis> attribute, which
             enables products to release new versions of their schema.</para>
         <para>To read the official documentation for the Atom Syndication Format, see <link
@@ -133,7 +133,7 @@
                             that a server be shut down. </para>
                     </listitem>
                     <listitem>
-                        <para>Non user-access events in CADF </para>
+                        <para>Generic events in CADF </para>
                     </listitem>
                 </itemizedlist>
             </para>
@@ -225,13 +225,14 @@
                                 XML is not verified.</td>
                         </tr>
                         <tr>
-                            <td>useraccess feed</td>
-                            <td>This setting specifies that the feed is of type useraccess. </td>
+                            <td>useraccess event feed</td>
+                            <td>This setting specifies that the feed is of type useraccess.
+                                Useraccess event type feeds are validated by Cloud Feeds.</td>
                         </tr>
                         <tr>
                             <td>unvalidated CADF</td>
                             <td>This setting specifies that the feed is of type unvalidated CADF.
-                                The content node must be of type=application/json.</td>
+                                The content node must be of <code>type=application/json</code>.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -2004,35 +2005,6 @@
                 </section>
         </section>
     </chapter>
-    <chapter xml:id="Generic_CADF"><title>Generic CADF format</title>
-        <para>Cloud Feeds supports feeds that are in generic <link
-                xlink:href="https://www.dmtf.org/standards/cadf">Cloud Auditing Data
-                Federation</link> format.  CADF is a standard for the submission and retrieval of
-            normative audit event data from cloud providers in the form of customized reports and
-            logs.</para><para>Generic CADF feeds do not include any of the features that other feeds provide, such as
-            private and generated attributes. By default, CADF feeds do no provide customer
-            archives. To set up a customer archive for  a CADF, you need to provide the tenant id
-            and a category.  Categories are not automatically applied for generic CADF feeds.</para>
-        <para>The content of the atom entry of generic CADF feeds must be of
-                <code>type="application/json"</code>, the atom envelope can be of type XML or JSON. </para>
-        <para>The following example shows a generic CADF event of type="application/json":</para>
-        <para>
-            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
-  &lt;atom:content type="application/json"
-       { "name" : "Jonas" }
-   &lt;/atom:content>&lt;/atom:entry></programlisting>
-        </para>
-        <para>By default generic CADF feeds are privat unless they have the <code>tid:</code>
-            category prefix defined. The following shows an example of a generic CADF event with a
-            category prefix of type <code>tid:</code> defined:</para>
-        <para>
-            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
-   &lt;atom:category term="tid:5821027"/>
-   &lt;atom:content type="application/json">
-     { "name" : "Jonas" }
-   &lt;/atom:content>
-&lt;/atom:entry> </programlisting>
-        </para></chapter>
     <chapter xml:id="Using_Cloud_Feeds">
         <title>Preparing a feed for publication through Cloud Feeds</title>
         <para>To define a new event, you need to submit a pull request on the <link
@@ -2149,7 +2121,6 @@
                         <para>
                             <programlisting>$ mvn initialize</programlisting>
                         </para>
-
                     </listitem>
                 </orderedlist>
             </para>
@@ -2166,8 +2137,10 @@
                 </note>
             </para>
         </section>
-        <section xml:id="Add_feed_to_wadl"><title>Adding the feed to the allfeeds.wadl file</title><para>After you have generated the appropriate schemas and WADLs, you need to add your feed to the
-                    <emphasis role="bold">allfeeds.wadl</emphasis> file.</para>
+        <section xml:id="Add_feed_to_wadl">
+            <title>Adding the feed to the allfeeds.wadl file</title>
+            <para>After you have generated the appropriate schemas and WADLs, you need to add your
+                feed to the <emphasis role="bold">allfeeds.wadl</emphasis> file.</para>
             <para>Before adding your feed, you need to determine the validation mode of your feed: <itemizedlist>
                     <listitem>
                         <para><link linkend="Adding_resource_product_feed">product
@@ -2177,20 +2150,13 @@
                         <para><link linkend="Adding_resource_product_feed">validated
                             feed</link></para>
                     </listitem>
-                    <listitem>
-                        <para><link linkend="Adding_user_access_event_feed">user access event
-                                feed</link></para>
-                    </listitem>
-                    <listitem>
-                        <para><link linkend="Adding_JSON_CADF_events">JSON CADF event
-                            feed</link></para>
-                    </listitem>
                 </itemizedlist></para>
             <para>For more information about the validation modes, read <link
-                    linkend="Feed_Validation">Feed validation</link>.</para>
-            <section xml:id="Adding_resource_product_feed"><title>Adding a resource for a product feed</title>
-            <para>To add a resource for a <emphasis role="bold">product feed</emphasis>, complete
-                    the following steps:<orderedlist>
+                    linkend="Feed_Validation">Feed validation</link>. </para>
+            <section xml:id="Adding_resource_product_feed">
+                <title>Adding a resource for a product feed</title>
+                <para>To add a resource for a <emphasis role="bold">product feed</emphasis>,
+                    complete the following steps:<orderedlist>
                         <listitem>
                             <para>Open <emphasis role="bold">allfeeds.wadl</emphasis> and add a new
                                 resource for your feed.</para>
@@ -2237,88 +2203,26 @@
                             </para>
                         </listitem>
                     </orderedlist>
-                </para></section><section xml:id="Adding_resource_validated_feed"><title>Adding a resource for a validated feed</title>
-            <para>To mark a feed to be <emphasis role="bold">validated</emphasis>, add the following
-                    resource to <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
-            <para>
-                <programlisting>&lt;resource id="<replaceable>new_product</replaceable>"
+                </para>
+            </section>
+            <section xml:id="Adding_resource_validated_feed">
+                <title>Adding a resource for a validated feed</title>
+                <para>To mark a feed to be <emphasis role="bold">validated</emphasis>, add the
+                    following resource to <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
+                <para>
+                    <programlisting>&lt;resource id="<replaceable>new_product</replaceable>"
        path="<replaceable>new_product</replaceable>/events"
        type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/></programlisting>
-            </para>
+                </para>
                 <para>The following example shows the resource for a validated feed:</para>
                 <para>
                     <programlisting> &lt;resource id="core_events"
         path="core/events"
         type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/></programlisting>
-                </para></section>
-        <section xml:id="Adding_user_access_event_feed"><title>Adding a user access event feed</title><para>To add a feed of type user access event feed, add the following resource to <emphasis
-                        role="bold">allfeeds.wadl</emphasis>:</para>
-                <para>
-                    <programlisting>&lt;resource id="<replaceable>access_event_name</replaceable>"
-         path="<replaceable>access_event_name</replaceable>/events"
-         type="wadl/feed.wadl#UserAccessEvent"/></programlisting>
                 </para>
-        <para>The following example shows the resource of a user access event with multiple feed
-                    types:</para>
-                <para>
-                    <programlisting>  &lt;resource id="feedsaccess_events"
-         path="feeds_access/events"
-         type="wadl/feed.wadl#AtomFeed
-               wadl/feed.wadl#TenantAtomFeed
-               wadl/cadf.wadl#UserAccessEvent
-               wadl/cadf.wadl#UserAccessEventTenant"/></programlisting>
-                </para></section>
-        <section xml:id="Adding_JSON_CADF_events"><title>Adding a generic JSON CADF event feed</title>
-                <para>Cloud Feeds supports generic CADF events that are not of type <emphasis
-                        role="italic">useraccess</emphasis>. These events are automatically
-                    considered private. They cannot be viewed by customers and are not included in
-                    customer archives in Cloud Files. Generic events of type CADF are still
-                    accessible to internal users with the <code>cloudfeeds:service-admin</code>
-                    role.</para>
-                <para>The following rules apply for these events:</para>
-                <para>
-                    <itemizedlist>
-                        <listitem>
-                            <para>The content for CADF events of non-useraccess type must be in
-                                JSON. </para>
-                        </listitem>
-                        <listitem>
-                            <para>The event can have an Atom XML envelope. If the event is published
-                                in JSON and retrieved in XML, only the Atom envelope is translated.
-                                The event payload remains in JSON.</para>
-                        </listitem>
-                        <listitem>
-                            <para> Cloud Feeds does not perform any validation on the attributes in
-                                the event payload and therefore there is no product schema for the
-                                events. </para>
-                        </listitem>
-                        <listitem>
-                            <para>Cloud Feeds cannot perform any operations, such as usage summary
-                                calculations, on the attributes in the event payload.</para>
-                        </listitem>
-                        <listitem>
-                            <para>The <code>atom:content</code> node must be of
-                                    <code>type="applicaton/json"</code> as shown in the following
-                                example:</para>
-                            <para>
-                                <programlisting> &lt;atom:content type="application/json"></programlisting>
-                            </para>
-                        </listitem>
-                    </itemizedlist>
-                </para>
-                <para>To add a generic JSON CADF event, add the following resource to <emphasis
-                        role="bold">allfeeds.wadl</emphasis>:</para>
-                <para>
-                    <programlisting>&lt;resource id="<replaceable>new_feed_name_</replaceable>events"
-           path="<replaceable>new_feed_name</replaceable>/events"
-           type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"></programlisting>
-                </para>
-                <para>The following example shows the resource of a JSON CADF event:</para>
-                <programlisting>        &lt;resource id="jsoncontentonlytest_events"
-                  path="jsoncontentonlytest/events"
-                  type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"/></programlisting></section>
+            </section>
         </section>
-            <section xml:id="Add_sample_files">
+        <section xml:id="Add_sample_files">
             <title>Adding samples</title>
             <para>You can use Maven to generate sample responses and entries for each version of
                 your product schema. To use Maven, ensure that you have version 3.0.5 installed. For
@@ -2428,10 +2332,12 @@
                 </itemizedlist>
             </para>
         </section>
-        <section xml:id="Add_feed_to_the_document"><title>Adding the feed to the documentation</title><para>As a next step, you need to add your feed to the documentation source files to ensure that the
-                feed appears in the <emphasis role="italic">Cloud Feeds Developers Guide</emphasis>.
-                These source files are located in the <emphasis role="bold">src/docbkx</emphasis>
-                location.</para>
+        <section xml:id="Add_feed_to_the_document">
+            <title>Adding the feed to the documentation</title>
+            <para>As a next step, you need to add your feed to the documentation source files to
+                ensure that the feed appears in the <emphasis role="italic">Cloud Feeds Developers
+                    Guide</emphasis>. These source files are located in the <emphasis role="bold"
+                    >src/docbkx</emphasis> location.</para>
             <para>Edit the following files depending on whether your feed is for internal or
                 external users:</para>
             <para>
@@ -2445,8 +2351,8 @@
                                 <emphasis role="bold">external</emphasis> users</para>
                     </listitem>
                 </itemizedlist>
-  </para>
-        <para>
+            </para>
+            <para>
                 <note>
                     <para>Different resources are required for internal and external feeds.</para>
                 </note>
@@ -2454,9 +2360,9 @@
             <para>You need to add a <code>section</code> node to the appropriate source file that
                 contains information specific to the feed, including a <code>title</code> attribute,
                 as well as the corresponding URL and the appropriate resource hrefs.</para>
-        <para>A <code>section</code> node for a new feed to be added to the <emphasis role="bold"
-                    >api-operations-internal.xml</emphasis> source file should look like the
-                following
+            <para>A <code>section</code> node for a new feed to be added to the <emphasis
+                    role="bold">api-operations-internal.xml</emphasis> source file should look like
+                the following
                 example:<programlisting>&lt;section xml:id="bigdata.product">
    &lt;title>Cloud Big Data&lt;/title>
    &lt;resources xmlns="http://wadl.dev.java.net/2009/02">
@@ -2475,20 +2381,176 @@
   &lt;resource href="../../allfeeds.wadl#bigddata_events_getEntry_BigDataTenant"/>
  &lt;/resources>
 &lt;/section></programlisting>
-            </para></section>
-        <section xml:id="Test_your_feed"><title>Testing the feed</title><para>After you have added all the appropriate resources for your feed, you can use Maven to test
-                your feed and events.</para>
+            </para>
+        </section>
+        <section xml:id="Test_your_feed">
+            <title>Testing the feed</title>
+            <para>After you have added all the appropriate resources for your feed, you can use
+                Maven to test your feed and events.</para>
             <para>To test your feed, type the following command at a command-line interface:</para>
             <para>
                 <programlisting>mvn test</programlisting>
             </para>
             <para>Running this test notifies you if any issues exist with the product schema or
-                sample files.</para></section>
-        <section xml:id="Submit_Pull_Request"><title>Submitting a pull request</title>
+                sample files.</para>
+        </section>
+        <section xml:id="Submit_Pull_Request">
+            <title>Submitting a pull request</title>
             <para>After you have completed all the steps for creating a feed, submit a pull request
                 on the <link xlink:href="https://github.com/rackerlabs/standard-usage-schemas"
                         ><emphasis role="bold"
                         >https://github.com/rackerlabs/standard-usage-schemas</emphasis></link>
-                repository.</para></section>
+                repository.</para>
+        </section>
+    </chapter>
+    <chapter xml:id="Generic_CADF"><title>Working with feeds in generic CADF format</title>
+        <para>Cloud Feeds supports feeds that are in  <link
+                xlink:href="https://www.dmtf.org/standards/cadf">Cloud Auditing Data
+                Federation</link> (CADF) format. CADF is a standard for the submission and retrieval
+            of normative audit event data from cloud providers in the form of customized reports and
+            logs.</para>
+        <para>Currently, Cloud Feeds supports the following two types of CADF feeds:</para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>Useraccess event feeds</para>
+                </listitem>
+                <listitem>
+                    <para>Generic CADF event feeds</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>Generic CADF events are automatically considered private. They cannot be viewed by
+            customers and are not included in customer archives in Cloud Files. Generic events of
+            type CADF are still accessible to internal users with the
+                <code>cloudfeeds:service-admin</code> role.</para>
+        <para>The following rules apply for these events:</para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para> Cloud Feeds does not perform any validation on the attributes in the
+                        event payload and therefore there is no product schema for the events.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>By default, CADF feeds do no provide customer archives. To set up a
+                        customer archive for a CADF, you need to provide the tenant id and a
+                        category. Categories are not automatically applied for generic CADF
+                        feeds.</para>
+                </listitem>
+                <listitem>
+                    <para>Cloud Feeds cannot perform any operations, such as usage summary
+                        calculations, on the attributes in the event payload.</para>
+                </listitem>
+                <listitem>
+                    <para>The content for CADF events of non-useraccess type must be in JSON.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>The event can have an Atom XML envelope. If the event is published in JSON
+                        and retrieved in XML, only the Atom envelope is translated. The event
+                        payload remains in JSON.</para>
+                </listitem>
+                <listitem>
+                    <para>The <code>atom:content</code> node must be of
+                            <code>type="applicaton/json"</code> as shown in the following
+                        example:</para>
+                    <para><programlisting> &lt;atom:content type="application/json"></programlisting>The
+                        following example shows a generic CADF event of
+                        type="application/json":</para>
+
+
+        <para>
+            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
+  &lt;atom:content type="application/json"
+       { "name" : "Jonas" }
+   &lt;/atom:content>&lt;/atom:entry></programlisting>
+        </para>
+</listitem>
+        <listitem><para>Generic CADF feeds are private unless they have the <code>tid:</code> category prefix
+            defined. The following shows an example of a generic CADF event with a category prefix
+            of type <code>tid:</code> defined:</para>
+        <para>
+            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
+   &lt;atom:category term="tid:5821027"/>
+   &lt;atom:content type="application/json">
+     { "name" : "Jonas" }
+   &lt;/atom:content>
+&lt;/atom:entry> </programlisting></para>
+        </listitem>
+</itemizedlist>
+        </para>
+    
+    <section xml:id="Getting_a_generic_CADF_feed_ready_for_pub"><title>Getting a generic CADF feed ready for publication</title><para>To prepare a generic CADF feed for publication requires that you complete a separate set of
+                steps:</para>
+            <para>
+                <orderedlist>
+                    <listitem>
+                        <para>Add the feed to allfeeds.wadl</para>
+                        <para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>For generic feeds, see <link
+                                            linkend="Adding_JSON_CADF_events">Adding a generic CADF
+                                            feed to allfeeds.wadl</link>.</para>
+                                </listitem>
+                                <listitem>
+                                    <para>For user access event feeds, see <link
+                                            linkend="Adding_user_access_event_feed">Adding a user
+                                            access event feed to allfeeds.wadl</link>.</para>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para><link linkend="Add_feed_to_the_document">Add your feed to the
+                                documentation</link>.</para>
+                    </listitem>
+                    <listitem>
+                        <para><link linkend="Test_your_feed">Test your feed</link>.</para>
+                    </listitem>
+                </orderedlist>
+            </para>
+        <para>   <note>
+                    <para>When adding a generic feed, you add the feed itself but not the attribute
+                        because there is no resource that is being validated. Also, when adding a
+                        generic CADF feed you are not required to add any samples.</para>
+                </note></para>
+                    <section xml:id="Adding_JSON_CADF_events">
+                        <title>Adding a generic CADF feed to allfeeds.wadl<?sbr?></title>
+                        <para>To add a generic JSON CADF event, add the following resource to
+                                <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
+                        <para>
+                            <programlisting>&lt;resource id="<replaceable>new_feed_name_</replaceable>events"
+           path="<replaceable>new_feed_name</replaceable>/events"
+           type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"></programlisting>
+                        </para>
+                        <para>The following example shows the resource of a JSON CADF event:</para>
+                        <programlisting>        &lt;resource id="jsoncontentonlytest_events"
+                  path="jsoncontentonlytest/events"
+                  type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"/></programlisting>
+                    </section>
+
+            <section xml:id="Adding_user_access_event_feed">
+                <title>Adding a user access event feed to allfeeds.wadl</title>
+                <para>To add a feed of type user access event feed, add the following resource to
+                        <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
+                <para>
+                    <programlisting>&lt;resource id="<replaceable>access_event_name</replaceable>"
+         path="<replaceable>access_event_name</replaceable>/events"
+         type="wadl/feed.wadl#UserAccessEvent"/></programlisting>
+                </para>
+                <para>The following example shows the resource of a user access event with multiple
+                    feed types:</para>
+                <para>
+                    <programlisting>  &lt;resource id="feedsaccess_events"
+         path="feeds_access/events"
+         type="wadl/feed.wadl#AtomFeed
+               wadl/feed.wadl#TenantAtomFeed
+               wadl/cadf.wadl#UserAccessEvent
+               wadl/cadf.wadl#UserAccessEventTenant"/></programlisting>
+                </para>
+            </section>
+    </section>      
     </chapter>
 </book>

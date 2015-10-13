@@ -219,6 +219,20 @@
                                     <link linkend="Define_product_schema">Defining your product
                                     schema</link>.</td>
                         </tr>
+                        <tr>
+                            <td>unvalidated feed</td>
+                            <td>This setting implies that the Atom entry is not validated and the
+                                XML is not verified.</td>
+                        </tr>
+                        <tr>
+                            <td>useraccess feed</td>
+                            <td>This setting specifies that the feed is of type useraccess. </td>
+                        </tr>
+                        <tr>
+                            <td>unvalidated CADF</td>
+                            <td>This setting specifies that the feed is of type unvalidated CADF.
+                                The content node must be of type=application/json.</td>
+                        </tr>
                     </tbody>
                 </table>
             </para></section>
@@ -1864,10 +1878,161 @@
                             then the T is omitted. A duration of two years is written as P2Y. A
                             leading minus sign before the P indicates a negative duration.</para>
                 </note>
-            </para>
-        </section>
+            </para></section>
+                <section xml:id="Define_product_schema">
+                    <title>Defining your product schema</title>
+                    <para>After you have forked the repository and created a branch, you need to
+                        create a new XML file to define the product-specific schema.</para>
+                    <para>Create a new file by using the <emphasis role="bold"
+                                >sample_product_schemas/<emphasis role="italic"
+                                >newProductName</emphasis>.xml</emphasis> naming convention, for
+                        example <emphasis role="italic">sample_product_schemas/nova.xml</emphasis>. </para>
+                    <para>To define your product schema, complete the following steps:</para>
+                    <para>
+                        <orderedlist>
+                            <listitem>
+                                <para>Read the <link linkend="Product_node"><emphasis role="bold"
+                                            >Product node</emphasis></link> section.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Define the productSchema node.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Define the <code>description</code> node.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Add the attributes and attribute groups for your
+                                    product.</para>
+                            </listitem>
+                        </orderedlist>
+                    </para>
+                    <section xml:id="defining_product_schema_node">
+                        <title>Defining the product schema node</title>
+                        <para>When you create your product schema, you first need to define the
+                            product schema node. Defining the product schema node requires that you
+                                <link linkend="Selecting_namespace">select a namespace for your
+                                product</link>.</para>
+                        <para>For a list of the attributes that are part of the product schema node,
+                            see <link linkend="product_schema_node">Product schema
+                            node</link>.</para>
+                        <para>Following is an example of a product schema node: <example>
+                                <title>Product schema node example</title>
+                                <programlisting>&lt;<emphasis role="bold">productSchema</emphasis> xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/event/ebs/bu-team"
+               serviceCode="EBS"
+               writeRole="cloudfeeds:customer_access_policy-publisher"
+               type="CREATE UPDATE DELETE"
+               version="1"></programlisting>
+                            </example></para>
+                        <para> </para>
+                        <section xml:id="Selecting_namespace">
+                            <title>Selecting a namespace</title>
+                            <para>When you specify the product schema node, you need to define an
+                                appropriate <code>namespace</code> attribute for your product. </para>
+                            <para>For <emphasis role="bold">usage</emphasis> events, use the
+                                following convention for namespaces:</para>
+                            <programlisting>http://docs.rackspace.com/usage/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>    </programlisting>
+                            <para>Following are examples of namespaces for usage events:</para>
+                            <programlisting>http://docs.rackspace.com/usage/sites/subscription</programlisting>
+                            <programlisting>http://docs.rackspace.com/usage/cloudbackup/storage</programlisting>
+                            <para>For <emphasis role="bold">system</emphasis> events, the convention
+                                of the namespace is as follows:</para>
+                            <programlisting>http://docs.rackspace.com/event/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>   </programlisting>
+                            <para>Following is an example of a namespace for a system event:</para>
+                            <programlisting>http://docs.rackspace.com/event/lbaas/node</programlisting>
+                        </section>
+                    </section>
+                    <section xml:id="Adding_a_description">
+                        <title>Defining the description node </title>
+                        <para>After you have defined the product schema node, you need to add a
+                            description node. In the description node, you need to include a brief
+                            description of what kind of information is included in the event.</para>
+                        <para>Following is an example of a description node. <example>
+                                <title>Description node example</title>
+                                <programlisting><emphasis role="bold">&lt;description></emphasis>
+        Specifies the team mapping to the business unit.
+<emphasis role="bold">&lt;/description></emphasis></programlisting>
+                            </example></para>
+                    </section>
+                    <section xml:id="Defining_attributes_and_attribute_groups">
+                        <title>Defining the attributes and attribute groups</title>
+                        <para>After you have defined the product schema and description nodes, you
+                            need to add the appropriate attibute and attribute group nodes for your
+                            product. For more information about attributes an attribute groups, see
+                                <link linkend="Attribute_group"><emphasis role="bold">Attribute
+                                    node</emphasis></link> and <link linkend="Attribute_group"
+                                    ><emphasis role="bold">Attribute group</emphasis></link>.</para>
+                        <para>Following is an example of a completed product schema file:</para>
+                        <para>
+                            <example>
+                                <title>Completed product schema file example</title>
+                                <programlisting>&lt;productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/event/ebs/bu-team"
+               serviceCode="EBS"
+               type="CREATE UPDATE DELETE"
+               version="1">
+    &lt;description>
+        Specifies the team mapping to the business unit.
+    &lt;/description>
+    &lt;attribute name="businessUnit" type="string" use="required"
+         maxLength="150">
+        Specifies the business unit name.
+    &lt;/attribute>
+
+    &lt;attribute name="description" type="string" use="required"
+        maxLength="255">
+        Specifies the description of the event.
+    &lt;/attribute>
+    &lt;attributeGroup name="team" minOccurs="0" maxOccurs="unbounded">
+        &lt;description>
+            Specifies the team name and number which belongs to
+        the listed business number.
+        &lt;/description>
+        &lt;attribute name="name" type="string" use="required"
+        maxLength="255">
+            Specifes the team name.
+        &lt;/attribute>
+        &lt;attribute name="number" type="string" use="required"
+       maxLength="150">
+            Specifies the team number.
+        &lt;/attribute>
+    &lt;/attributeGroup>
+&lt;/productSchema></programlisting>
+                            </example>
+                        </para>
+                    </section>
+                </section>
         </section>
     </chapter>
+    <chapter xml:id="Generic_CADF"><title>Generic CADF format</title>
+        <para>Cloud Feeds supports feeds that are in generic <link
+                xlink:href="https://www.dmtf.org/standards/cadf">Cloud Auditing Data
+                Federation</link> format.  CADF is a standard for the submission and retrieval of
+            normative audit event data from cloud providers in the form of customized reports and
+            logs.</para><para>Generic CADF feeds do not include any of the features that other feeds provide, such as
+            private and generated attributes. By default, CADF feeds do no provide customer
+            archives. To set up a customer archive for  a CADF, you need to provide the tenant id
+            and a category.  Categories are not automatically applied for generic CADF feeds.</para>
+        <para>The content of the atom entry of generic CADF feeds must be of
+                <code>type="application/json"</code>, the atom envelope can be of type XML or JSON. </para>
+        <para>The following example shows a generic CADF event of type="application/json":</para>
+        <para>
+            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
+  &lt;atom:content type="application/json"
+       { "name" : "Jonas" }
+   &lt;/atom:content>&lt;/atom:entry></programlisting>
+        </para>
+        <para>By default generic CADF feeds are privat unless they have the <code>tid:</code>
+            category prefix defined. The following shows an example of a generic CADF event with a
+            category prefix of type <code>tid:</code> defined:</para>
+        <para>
+            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
+   &lt;atom:category term="tid:5821027"/>
+   &lt;atom:content type="application/json">
+     { "name" : "Jonas" }
+   &lt;/atom:content>
+&lt;/atom:entry> </programlisting>
+        </para></chapter>
     <chapter xml:id="Using_Cloud_Feeds">
         <title>Preparing a feed for publication through Cloud Feeds</title>
         <para>To define a new event, you need to submit a pull request on the <link
@@ -1876,9 +2041,6 @@
         <para>To submit this pull request, you first need to complete the following steps:</para>
         <para>
             <itemizedlist>
-                <listitem>
-                    <para><link linkend="Define_product_schema">Define your product schema</link>. </para>
-                </listitem>
                 <listitem>
                     <para><link linkend="Generate_schema_and_WADLs">Generate schemas and
                             WADLs</link>.</para>
@@ -1912,121 +2074,10 @@
                     installed on your computer.</para>
             </important>
         </para>
-        <section xml:id="Define_product_schema">
-            <title>Defining your product schema</title>
-            <para>After you have forked the repository and created a branch, you need to create a
-                new XML file to define the product-specific schema.</para>
-            <para>Create a new file by using the <emphasis role="bold"
-                        >sample_product_schemas/<emphasis role="italic"
-                    >newProductName</emphasis>.xml</emphasis> naming convention, for example
-                    <emphasis role="italic">sample_product_schemas/nova.xml</emphasis>. </para>
-            <para>To define your product schema, complete the following steps:</para>
-            <para>
-                <orderedlist>
-                    <listitem>
-                        <para>Read the <link linkend="Product_node"><emphasis role="bold">Product
-                                    node</emphasis></link> section.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Define the productSchema node.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Define the <code>description</code> node.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Add the attributes and attribute groups for your product.</para>
-                    </listitem>
-                </orderedlist>
-            </para>
-            <section xml:id="defining_product_schema_node"><title>Defining the product schema node</title>
-
-            <para>When you create your product schema, you first need to define the product schema
-                    node. Defining the product schema node requires that you <link
-                        linkend="Selecting_namespace">select a namespace for your
-                    product</link>.</para>
-                <para>For a list of the attributes that are part of the product schema node, see
-                        <link linkend="product_schema_node">Product schema node</link>.</para>
-                <para>Following is an example of a product schema node: <example>
-                        <title>Product schema node example</title>
-                        <programlisting>&lt;<emphasis role="bold">productSchema</emphasis> xmlns="http://docs.rackspace.com/core/usage/schema"
-               namespace="http://docs.rackspace.com/event/ebs/bu-team"
-               serviceCode="EBS"
-               writeRole="cloudfeeds:customer_access_policy-publisher"
-               type="CREATE UPDATE DELETE"
-               version="1"></programlisting>
-                    </example></para>
-            <para> </para>
-        <section xml:id="Selecting_namespace">
-            <title>Selecting a namespace</title>
-            <para>When you specify the product schema node, you need to define an appropriate
-                            <code>namespace</code> attribute for your product. </para>
-            <para>For <emphasis role="bold">usage</emphasis> events, use the following convention
-                        for namespaces:</para>
-            <programlisting>http://docs.rackspace.com/usage/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>    </programlisting>
-            <para>Following are examples of namespaces for usage events:</para>
-                <programlisting>http://docs.rackspace.com/usage/sites/subscription</programlisting>
-<programlisting>http://docs.rackspace.com/usage/cloudbackup/storage</programlisting>
-            <para>For <emphasis role="bold">system</emphasis> events, the convention of the
-                        namespace is as follows:</para>
-            <programlisting>http://docs.rackspace.com/event/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>   </programlisting>
-            <para>Following is an example of a namespace for a system event:</para>
-                <programlisting>http://docs.rackspace.com/event/lbaas/node</programlisting></section></section>
-            <section xml:id="Adding_a_description"><title>Defining the description node </title>
-            <para>After you have defined the product schema node, you need to add a description
-                    node. In the description node, you need to include a brief description of what
-                    kind of information is included in the event.</para>
-                <para>Following is an example of a description
-                    node.
-                    <example><title>Description node example</title><programlisting><emphasis role="bold">&lt;description></emphasis>
-        Specifies the team mapping to the business unit.
-<emphasis role="bold">&lt;/description></emphasis></programlisting></example></para>
-            </section>
-        <section xml:id="Defining_attributes_and_attribute_groups"><title>Defining the attributes and attribute groups</title><para>After you have defined the product schema and description nodes, you need to add the
-                    appropriate attibute and attribute group nodes for your product. For more
-                    information about attributes an attribute groups, see <link
-                        linkend="Attribute_group"><emphasis role="bold">Attribute
-                        node</emphasis></link> and <link linkend="Attribute_group"><emphasis
-                            role="bold">Attribute group</emphasis></link>.</para>
-                <para>Following is an example of a completed product schema file:</para>
-                <para>
-                    <example><title>Completed product schema file example</title>
-                    <programlisting>&lt;productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
-               namespace="http://docs.rackspace.com/event/ebs/bu-team"
-               serviceCode="EBS"
-               type="CREATE UPDATE DELETE"
-               version="1">
-    &lt;description>
-        Specifies the team mapping to the business unit.
-    &lt;/description>
-    &lt;attribute name="businessUnit" type="string" use="required"
-         maxLength="150">
-        Specifies the business unit name.
-    &lt;/attribute>
-
-    &lt;attribute name="description" type="string" use="required"
-        maxLength="255">
-        Specifies the description of the event.
-    &lt;/attribute>
-    &lt;attributeGroup name="team" minOccurs="0" maxOccurs="unbounded">
-        &lt;description>
-            Specifies the team name and number which belongs to
-        the listed business number.
-        &lt;/description>
-        &lt;attribute name="name" type="string" use="required"
-        maxLength="255">
-            Specifes the team name.
-        &lt;/attribute>
-        &lt;attribute name="number" type="string" use="required"
-       maxLength="150">
-            Specifies the team number.
-        &lt;/attribute>
-    &lt;/attributeGroup>
-&lt;/productSchema></programlisting></example>
-                </para></section></section>
         <section xml:id="Generate_schema_and_WADLs">
             <title>Generating schemas and WADL files</title>
-            <para>After you have created the sample product schema, you need to perform a build to
-                generate the schemas and WADL files.</para>
+            <para>To start getting your feed ready for publication, you first need to perform a
+                build to generate the schemas and WADL files.</para>
             <para>
                 <important>
                     <para>To perform a build to generate the schemas and WADL files, you need to

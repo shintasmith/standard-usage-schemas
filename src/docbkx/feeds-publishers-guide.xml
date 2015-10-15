@@ -2410,14 +2410,44 @@
  &lt;/resources>
 &lt;/section></programlisting>
             </para></section>
-        <section xml:id="Test_your_feed"><title>Testing the feed</title><para>After you have added all the appropriate resources for your feed, you can use Maven to test
-                your feed and events.</para>
-            <para>To test your feed, type the following command at a command-line interface:</para>
+        <section xml:id="Test_your_feed"><title>Testing the feed</title><para>After you have added all the appropriate resources for your feed, you can use Maven to compile
+                your feed and events and subsequently test it.</para>
+            <para>To compile and test your feed, type the following command at a command-line
+                interface:</para>
             <para>
-                <programlisting>mvn test</programlisting>
+                <programlisting>git submodule update --init --remote cloudfeeds-nabu
+mvn -P tiamat-check test</programlisting>
             </para>
-            <para>Running this test notifies you if any issues exist with the product schema or
-                sample files.</para></section>
+            <para>During the compile phase, the generated XSLT files are verified against the copies
+                in  <link xlink:href="https://github.com/rackerlabs/cloudfeeds-nabu"
+                    >https://github.com/rackerlabs/cloudfeeds-nabu</link>.</para>
+            <para>If any errors are discovered, you need to issue a pull request on <link
+                    xlink:href="https://github.com/rackerlabs/cloudfeeds-nabu"
+                    >https://github.com/rackerlabs/cloudfeeds-nabu</link>. </para>
+            <para>After cloning the project, copy all generated files to <link
+                    xlink:href="https://github.com/rackerlabs/cloudfeeds-nabu/tree/master/tiamat/src/main/resources"
+                    >https://github.com/rackerlabs/cloudfeeds-nabu/tree/master/tiamat/src/main/resources</link>,
+                and then issue a pull request.</para>
+            <para>The files to copy are:</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>target/xslt-artifacts/rm_private_attrs_for_obs.xsl</para>
+                    </listitem>
+                    <listitem>
+                        <para>target/xslt-artifacts/nonStringAttrs.xsl</para>
+                    </listitem>
+                    <listitem>
+                        <para>target/xslt-artifacts/xml2json-feeds.xsl</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>After the pull request has been accepted you can update the submodule and run the
+                check again by typing the following command:</para>
+            <para>
+                <programlisting>git submodule update --remote cloudfeeds-nabu
+mvn -P tiamat-check test</programlisting>
+            </para></section>
         <section xml:id="Submit_Pull_Request"><title>Submitting a pull request</title>
             <para>After you have completed all the steps for creating a feed, submit a pull request
                 on the <link xlink:href="https://github.com/rackerlabs/standard-usage-schemas"

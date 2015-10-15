@@ -2421,12 +2421,27 @@ mvn -P tiamat-check test</programlisting>
             <para>During the compile phase, the generated XSLT files are verified against the copies
                 in  <link xlink:href="https://github.com/rackerlabs/cloudfeeds-nabu"
                     >https://github.com/rackerlabs/cloudfeeds-nabu</link>.</para>
-            <para>If any errors are discovered, you need to issue a pull request. Navigate to <link
+            <para>If any errors are discovered, you need to issue a pull request on <link
                     xlink:href="https://github.com/rackerlabs/cloudfeeds-nabu"
-                    >https://github.com/rackerlabs/cloudfeeds-nabu</link> and copy the updated XSLT
-                files to the <emphasis role="bold"
-                    >https://github.com/rackerlabs/cloudfeeds-nabu/tree/master/tiamat/src/main/resources</emphasis>
-                folder.</para>
+                    >https://github.com/rackerlabs/cloudfeeds-nabu</link>. </para>
+            <para>After cloning the project, copy all generated files to <link
+                    xlink:href="https://github.com/rackerlabs/cloudfeeds-nabu/tree/master/tiamat/src/main/resources"
+                    >https://github.com/rackerlabs/cloudfeeds-nabu/tree/master/tiamat/src/main/resources</link>,
+                and then issue a pull request.</para>
+            <para>The files to copy are:</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>target/xslt-artifacts/rm_private_attrs_for_obs.xsl</para>
+                    </listitem>
+                    <listitem>
+                        <para>target/xslt-artifacts/nonStringAttrs.xsl</para>
+                    </listitem>
+                    <listitem>
+                        <para>target/xslt-artifacts/xml2json-feeds.xsl</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
             <para>After the pull request has been accepted you can update the submodule and run the
                 check again by typing the following command:</para>
             <para>

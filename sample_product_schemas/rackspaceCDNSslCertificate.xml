@@ -1,0 +1,16 @@
+<productSchema namespace="http://docs.rackspace.com/usage/rackspacecdn/sslcertificate"
+               serviceCode="RackspaceCDN"
+               version="1"
+               xmlns="http://docs.rackspace.com/core/usage/schema"
+               resourceTypes="SSL_CERTIFICATE">
+    <description>
+        Specifies the CDN ssl certificate information.
+    </description>
+    <attribute allowedValues="SHARED SAN DEDICATED"
+               groupBy="true"
+               name="sslType"
+               type="Name"
+               use="required">
+        Type of SSL
+    </attribute>
+</productSchema>

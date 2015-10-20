@@ -318,9 +318,9 @@
                     </listitem>
                 </itemizedlist>
             </para></section></chapter>
-    <chapter xml:id="Common_Usage_format"><title>Common Usage Format</title>
-        <para>This section provides information about events of type Common Usage Format (CUF). This
-            includes the following elements of a Cloud Feeds event entry:</para>
+    <chapter xml:id="Common_Usage_format"><title>Product Events </title>
+        <para>This section provides information about product events This includes the following
+            elements of a Cloud Feeds event entry:</para>
         <para>
             <itemizedlist>
                 <listitem>
@@ -2032,9 +2032,9 @@
     </section>
     </chapter>
     <chapter xml:id="Using_Cloud_Feeds">
-        <title>Preparing a common usage event feed for publication through Cloud Feeds</title>
-        <para>To prepare a common usage event for publication through Cloud Feeds, you need to
-            complete the following steps:</para>
+        <title>Preparing a product event feed for publication through Cloud Feeds</title>
+        <para>To prepare a product event for publication through Cloud Feeds, you need to complete
+            the following steps:</para>
         <para>
             <itemizedlist>
                 <listitem>

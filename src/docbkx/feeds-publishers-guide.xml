@@ -2404,13 +2404,7 @@
   &lt;resource href="../../allfeeds.wadl#bigdata_events_tenanted_feed"/>
   &lt;resource href="../../allfeeds.wadl#bigddata_events_getEntry_BigDataTenant"/>
  &lt;/resources>
-<<<<<<< HEAD
 &lt;/section></programlisting></para></section>
-=======
-&lt;/section></programlisting>
-            </para>
-        </section>
->>>>>>> 3c8e2d7b0bc02da68784bfbbf57919e6d8afb811
         <section xml:id="Test_your_feed">
             <title>Testing the feed</title>
             <para>After you have added all the appropriate resources for your feed, you can use

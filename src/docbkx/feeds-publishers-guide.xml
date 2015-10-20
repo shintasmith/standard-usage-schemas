@@ -101,9 +101,9 @@
         <para>Cloud Feeds uses AtomPub to publish different types of feeds. AtomPub is based on an
             HTTP transfer of Atom-formatted representations. The Atom format is documented in the
             Atom Syndication Format.</para>
-        <para>Cloud Feeds events must be defined using the Common Event Format (CEF). The Usage
-            Measurement Service (UMS) uses CEF for tracking, but CEF can be also used for other
-            events and by third-party event publishers. CEF supports versioning of the event and
+        <para>Cloud Feeds events must be defined using the Common Usage Format (CUF). The Usage
+            Measurement Service (UMS) uses CUF for tracking, but CUF can be also used for other
+            events and by third-party event publishers. CUF supports versioning of the event and
             product nodes through the <emphasis role="italic">version</emphasis> attribute, which
             enables products to release new versions of their schema.</para>
         <para>To read the official documentation for the Atom Syndication Format, see <link
@@ -116,9 +116,9 @@
             <para>
                 <itemizedlist>
                     <listitem>
-                        <para><emphasis role="bold">Usage events</emphasis> record information about
-                            how much a resource is being used over a specified time period —for
-                            example, how much bandwidth, disk space or CPU cycles are being
+                        <para><emphasis role="bold">Product events</emphasis> record information
+                            about how much a resource is being used over a specified time period
+                            —for example, how much bandwidth, disk space or CPU cycles are being
                             used.</para>
                     </listitem>
                     <listitem>
@@ -133,18 +133,21 @@
                             that a server be shut down. </para>
                     </listitem>
                     <listitem>
-                        <para>Non user-access events in CADF </para>
+                        <para><emphasis role="bold">Generic events in CADF</emphasis> adhere to the
+                            CADF standard. For more information, see <link linkend="Generic_CADF"
+                                >Working with feeds in generic CADF format</link>.</para>
                     </listitem>
                 </itemizedlist>
             </para>
         </section>
         <section xml:id="Event_format">
             <title>Feed format</title>
-            <para>Currently, Cloud Feeds supports feeds in XML format. The feeds and events follow
-                the <link xlink:href="http://tools.ietf.org/html/rfc4287">Atom Syndication
+            <para>Currently, Cloud Feeds supports feeds in XML and JSON format. The feeds and events
+                follow the <link xlink:href="http://tools.ietf.org/html/rfc4287">Atom Syndication
                     Format</link> and the API adheres to the <link
                     xlink:href="http://tools.ietf.org/html/rfc5023">Atom Publication
-                Protocol</link>. A feed has the following structure.</para>
+                Protocol</link>. A feed has the following structure. The following is an example of
+                Common Usage Format events.</para>
             <example>
                 <title>Feed structure example</title>
                 <programlisting language="xml"><xi:include href="./samples/AtomFeedElementExample.xml" parse="text"/></programlisting>
@@ -218,6 +221,23 @@
                                 the listed product schemas are allowed. For more information, see
                                     <link linkend="Define_product_schema">Defining your product
                                     schema</link>.</td>
+                        </tr>
+                        <tr>
+                            <td>unvalidated feed</td>
+                            <td>This setting implies that the Atom entry is not validated and the
+                                XML is not verified.</td>
+                        </tr>
+                        <tr>
+                            <td>user access event feed</td>
+                            <td>This setting specifies that the feed is of type useraccess. User
+                                access event type feeds are validated by Cloud Feeds.</td>
+                        </tr>
+                        <tr>
+                            <td>generic CADF</td>
+                            <td>This setting specifies that the feed is of type unvalidated CADF.
+                                The content node must be of <code>type=application/json</code>. For
+                                more information, see <link linkend="Generic_CADF">Working with
+                                    feeds in generic CADF format</link>.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -297,9 +317,21 @@
                             or set of categories.</para>
                     </listitem>
                 </itemizedlist>
-            </para></section>
-    </chapter>
-    <chapter xml:id="Element_of_an_atom_entry">
+            </para></section></chapter>
+    <chapter xml:id="Common_Usage_format"><title>Product Events </title>
+        <para>This section provides information about product events This includes the following
+            elements of a Cloud Feeds event entry:</para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para><link linkend="Event_node">Event node</link></para>
+                </listitem>
+                <listitem>
+                    <para><link linkend="Product_node">Product node</link></para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    <section xml:id="Element_of_an_atom_entry">
         <title>Event node</title>
         <para>The <emphasis role="italic">event node</emphasis> is the main element of a Cloud Feeds
             event entry.</para>
@@ -316,8 +348,9 @@
         </para>
         <para>Following is an example of an event node.</para>
         <para>
-            <example><title>Event node exqmple</title>
-            <programlisting>&lt;event
+            <example>
+                <title>Event node exqmple</title>
+                <programlisting>&lt;event
       <emphasis role="bold">startTime</emphasis>="2014-07-14T22:19:52Z"
       <emphasis role="bold">endTime</emphasis>="2014-07-14T24:00:00Z"
       <emphasis role="bold">region</emphasis>="DFW" <emphasis role="bold">dataCenter</emphasis>="DFW1" <emphasis role="bold">type</emphasis>="USAGE"
@@ -530,7 +563,7 @@
                                     role="bold">INFO</emphasis>, <emphasis role="bold"
                                     >WARNING</emphasis>, and <emphasis role="bold"
                                     >CRITICAL</emphasis>. This is attribute is valid only for system
-                                events, not for usage events.</td>
+                                events, not for product events.</td>
                             <td>This attribute is optional.</td>
                         </tr>
                         <tr>
@@ -794,7 +827,7 @@
                             </tr>
                             <tr>
                                 <td><emphasis role="bold">USAGE_SNAPSHOT</emphasis></td>
-                                <td>Specifies an instantaneous usage event.</td>
+                                <td>Specifies an instantaneous product event.</td>
                                 <td>See <link linkend="USAGE_SNAPSHOT_event_type_requirements"
                                             ><emphasis role="bold">Requirements for USAGE_SNAPSHOT
                                             event type</emphasis></link>.</td>
@@ -875,16 +908,17 @@
                 </section>
             </section>
         </section>
-    </chapter>
-    <chapter xml:id="Product_node">
+    </section>
+    <section xml:id="Product_node">
         <title>Product node</title>
         <para>The product node is located inside of an event node. The product node is custom and
             differs for every product. It provides product-specific information and details about
             the resources. Product nodes are defined by using a product schema. </para>
         <para>Following is an example of a product node.</para>
         <para>
-            <example><title>Product node example</title>
-            <programlisting>&lt;sample:<emphasis role="bold">product</emphasis> serviceCode="EmailAppsMSService"
+            <example>
+                <title>Product node example</title>
+                <programlisting>&lt;sample:<emphasis role="bold">product</emphasis> serviceCode="EmailAppsMSService"
        version="1"
        key="(domain=5002_domain_2.com)|(service=5002_domain_2.com)"
        productType="lync"
@@ -914,7 +948,8 @@
                     <listitem>
                         <para>Product schemas can be versioned and multiple versions can co-exist on
                             a feed. This feature enables products to extend their initial format.
-                            For more information, see <link linkend="Versions">Versioning</link>. </para>
+                            For more information, see <link linkend="Versions">Versioning</link>.
+                        </para>
                     </listitem>
                     <listitem>
                         <para>Product nodes can support attributes of several different types, such
@@ -953,7 +988,7 @@
                         <tr>
                             <td><code>aggregationPeriods</code></td>
                             <td>xsd:dayTimeDuration</td>
-                            <td>Specifies a duration of one of the aggregation periods.  </td>
+                            <td>Specifies a duration of one of the aggregation periods. </td>
                             <td>
                                 <itemizedlist>
                                     <listitem>
@@ -1250,7 +1285,7 @@
                             <tr>
                                 <td><code>searchable</code></td>
                                 <td>Boolean</td>
-                                <td>If this attribute is set to true, then a category  generated for
+                                <td>If this attribute is set to true, then a category generated for
                                     every event based on this attribute's value. The default value
                                     is false.</td>
                                 <td>This attribute is optional. </td>
@@ -1259,10 +1294,9 @@
                                 <td><code>type</code></td>
                                 <td>schema:TypeList</td>
                                 <td>Specifies the data types that are applicable to this attribute —
-                                    for example <code>string</code> or <code>unsignedInt</code>.
-                                    For more information, see <link linkend="Allowed_types"
-                                            ><emphasis role="bold">Allowed data
-                                        types</emphasis></link>.</td>
+                                    for example <code>string</code> or <code>unsignedInt</code>. For
+                                    more information, see <link linkend="Allowed_types"><emphasis
+                                            role="bold">Allowed data types</emphasis></link>.</td>
                                 <td>This attribute is required.</td>
                             </tr>
                             <tr>
@@ -1310,7 +1344,8 @@
                     </table>
                 </para>
                 <para>Following is an example of an attribute for a product schema.</para>
-                <example><title>Attribute example</title>
+                <example>
+                    <title>Attribute example</title>
                     <programlisting>&lt;<emphasis role="bold">attribute</emphasis>
     name="key"
     type="string"
@@ -1318,7 +1353,8 @@
     maxLength="1024"
     use="required">
     Specifies the key of the object that this event corresponds to.
-&lt;/<emphasis role="bold">attribute</emphasis>>                                        </programlisting></example>
+&lt;/<emphasis role="bold">attribute</emphasis>>                                        </programlisting>
+                </example>
             </section>
             <section xml:id="Attribute_group">
                 <title>Attribute group<?sbr?></title>
@@ -1376,8 +1412,9 @@
                 <para>Following is an example of a product schema that contains an attribute
                     group.</para>
                 <para>
-                    <example><title>Attribute group within product schema example</title>
-                    <programlisting>&lt;productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+                    <example>
+                        <title>Attribute group within product schema example</title>
+                        <programlisting>&lt;productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
                namespace="http://docs.rackspace.com/event/emailapps_msservice"
                version="1"
                serviceCode="EmailAppsMSService" type="INFO"
@@ -1412,7 +1449,8 @@
             Specifies the key of the dependent objects.
         &lt;/attribute>
     &lt;/<emphasis role="bold">attributeGroup</emphasis>>
-&lt;/productSchema></programlisting></example>
+&lt;/productSchema></programlisting>
+                    </example>
                 </para>
             </section>
             <section xml:id="x_path_assertion">
@@ -1428,10 +1466,12 @@
                     schema format, but it can be verified with an assertion, as shown in the
                     following example.</para>
                 <para>
-                    <example><title>XPath Assertion example</title>
-                    <programlisting>&lt;<emphasis role="bold">xpathAssertion</emphasis> test="if (not(xsd:boolean(@external))) then @serverID else true()">
+                    <example>
+                        <title>XPath Assertion example</title>
+                        <programlisting>&lt;<emphasis role="bold">xpathAssertion</emphasis> test="if (not(xsd:boolean(@external))) then @serverID else true()">
     <emphasis role="italic">If the server is NOT external, then the serverID attribute is required.</emphasis>
-&lt;/<emphasis role="bold">xpathAssertion</emphasis>></programlisting></example>
+&lt;/<emphasis role="bold">xpathAssertion</emphasis>></programlisting>
+                    </example>
                 </para>
                 <para>This assertion fails if the <code>external</code> value evaluates to <emphasis
                         role="bold">false</emphasis> and the <code>serverID</code> attribute does
@@ -1510,222 +1550,223 @@
                     </note>
                 </para>
             </section>
-        <section xml:id="Allowed_types">
-            <title>Allowed data types</title>
-            <para>The following table provides a list of allowed data types for product schema
-                definitions.</para>
-            <para>
-                <table frame="border">
-                    <caption>Allowed data types</caption>
-                    <col width="25%"/>
-                    <col width="75%"/>
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>anyURI</code></td>
-                            <td>Specifies a Uniform Resource Identifier. This includes not only
-                                Uniform Resource Locators (URLs), but also Uniform Resource Names
-                                (URNs). Both relative and absolute URLs are allowed.</td>
-                        </tr>
-                        <tr>
-                            <td><code>anyURI</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>anyURI</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>base64Binary</code></td>
-                            <td>Specifies an arbitrary sequence of bytes that has been encoded in
-                                ASCII characters using the Base-64 algorithm defined in <link
-                                    xlink:href="https://www.ietf.org/rfc/rfc2045.txt">RFC
-                                    2045</link>. The letters A–Z and a–z, the digits 0–9, and the
-                                punctuation marks + and / are used to encode data according to an
-                                algorithm that maps four of these characters to three arbitrary
-                                bytes. The equal sign is used to pad data at the end if
-                                necessary.</td>
-                        </tr>
-                        <tr>
-                            <td><code>boolean</code></td>
-                            <td>Specifies a Boolean value.</td>
-                        </tr>
-                        <tr>
-                            <td><code>boolean</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>boolean</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>byte</code></td>
-                            <td>Specifies a signed integer that can be represented by a single byte.
-                                    The minimum value of a byte is -128, and the maximum value is
-                                    127.</td>
-                        </tr>
-                        <tr>
-                            <td><code>byte</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>byte</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>date</code></td>
-                            <td>The <code>date</code> type represents a specific day in history such
-                                as September 26, 2005. Dates are written in the form <emphasis
-                                    role="italic">CCYY-MM-DD</emphasis>. For example, September 26,
-                                2005 is written as 2005-09-26.</td>
-                        </tr>
-                        <tr>
-                            <td><code>date</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>date</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>dateTime</code></td>
-                            <td>Specifies a specific moment in history, such as 3:32 p.m., September
-                                    26, 2003. An optional time zone indicator in the form ±<emphasis
-                                        role="italic">hh:mm</emphasis> can be suffixed to provide a
-                                    time. For example, 2003-09-26T15:32:00-05:00 is 3:32 p.m.,
-                                    September 26, 2003 in the U.S. Eastern time zone.</td>
-                        </tr>
-                        <tr>
-                            <td><code>dateTime</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>dateTime</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>double</code></td>
-                            <td>Specifies a decimal value that can be represented by an eight-byte
-                                floating-point number in IEEE 754 format. Values such as INF
-                                (infinity) and NaN (not a number) are allowed.</td>
-                        </tr>
-                        <tr>
-                            <td><code>double</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>double</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>duration</code></td>
-                            <td>Specifies a length of time, such as 15 minutes; 2 hours; or 3 years,
-                                    7 months, 2 days, 8 hours, 32 minutes, and 12 seconds. This
-                                    value does not have a specific beginning or end. For more
+            <section xml:id="Allowed_types">
+                <title>Allowed data types</title>
+                <para>The following table provides a list of allowed data types for product schema
+                    definitions.</para>
+                <para>
+                    <table frame="border">
+                        <caption>Allowed data types</caption>
+                        <col width="25%"/>
+                        <col width="75%"/>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>anyURI</code></td>
+                                <td>Specifies a Uniform Resource Identifier. This includes not only
+                                    Uniform Resource Locators (URLs), but also Uniform Resource
+                                    Names (URNs). Both relative and absolute URLs are allowed.</td>
+                            </tr>
+                            <tr>
+                                <td><code>anyURI</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>anyURI</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>base64Binary</code></td>
+                                <td>Specifies an arbitrary sequence of bytes that has been encoded
+                                    in ASCII characters using the Base-64 algorithm defined in <link
+                                        xlink:href="https://www.ietf.org/rfc/rfc2045.txt">RFC
+                                        2045</link>. The letters A–Z and a–z, the digits 0–9, and
+                                    the punctuation marks + and / are used to encode data according
+                                    to an algorithm that maps four of these characters to three
+                                    arbitrary bytes. The equal sign is used to pad data at the end
+                                    if necessary.</td>
+                            </tr>
+                            <tr>
+                                <td><code>boolean</code></td>
+                                <td>Specifies a Boolean value.</td>
+                            </tr>
+                            <tr>
+                                <td><code>boolean</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>boolean</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>byte</code></td>
+                                <td>Specifies a signed integer that can be represented by a single
+                                    byte. The minimum value of a byte is -128, and the maximum value
+                                    is 127.</td>
+                            </tr>
+                            <tr>
+                                <td><code>byte</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>byte</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>date</code></td>
+                                <td>The <code>date</code> type represents a specific day in history
+                                    such as September 26, 2005. Dates are written in the form
+                                        <emphasis role="italic">CCYY-MM-DD</emphasis>. For example,
+                                    September 26, 2005 is written as 2005-09-26.</td>
+                            </tr>
+                            <tr>
+                                <td><code>date</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>date</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>dateTime</code></td>
+                                <td>Specifies a specific moment in history, such as 3:32 p.m.,
+                                    September 26, 2003. An optional time zone indicator in the form
+                                        ±<emphasis role="italic">hh:mm</emphasis> can be suffixed to
+                                    provide a time. For example, 2003-09-26T15:32:00-05:00 is 3:32
+                                    p.m., September 26, 2003 in the U.S. Eastern time zone.</td>
+                            </tr>
+                            <tr>
+                                <td><code>dateTime</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>dateTime</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>double</code></td>
+                                <td>Specifies a decimal value that can be represented by an
+                                    eight-byte floating-point number in IEEE 754 format. Values such
+                                    as INF (infinity) and NaN (not a number) are allowed.</td>
+                            </tr>
+                            <tr>
+                                <td><code>double</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>double</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>duration</code></td>
+                                <td>Specifies a length of time, such as 15 minutes; 2 hours; or 3
+                                    years, 7 months, 2 days, 8 hours, 32 minutes, and 12 seconds.
+                                    This value does not have a specific beginning or end. For more
                                     information, see the note following the table. </td>
-                        </tr>
-                        <tr>
-                            <td><code>duration</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>duration</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>float</code></td>
-                            <td>Specifies a decimal value that can be represented by a four-byte
-                                floating-point number in IEEE 754 format. Values such as INF
-                                (infinity) and NaN (not a number) are allowed.</td>
-                        </tr>
-                        <tr>
-                            <td><code>float</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>float</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>gDay</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>gDay</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>gMonth</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>gMonth</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>gYear</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>gYear</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>gMonthDay</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>gMonthDay</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>gMonthYear</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>gMonthYear</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>int</code></td>
-                            <td>Specifies a signed integer that can be represented by four bytes.
-                                    The minimum value of <code>int</code> is -2147483648, and the
-                                    maximum value is 2147483647.</td>
-                        </tr>
-                        <tr>
-                            <td><code>int</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>int</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>integer</code></td>
-                            <td>Specifies an integer value of arbitrary size.</td>
-                        </tr>
-                        <tr>
-                            <td><code>integer</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>integer</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>long</code></td>
-                            <td>Specifies a signed integer that can be represented by eight bytes.
-                                    The minimum value of <code>long</code> is 9223372036854775807,
-                                    and the maximum value is -9223372036854775808.</td>
-                        </tr>
-                        <tr>
-                            <td><code>long</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>long</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>Name</code></td>
-                            <td>Specifies a valid name. This name must be a string that consists
+                            </tr>
+                            <tr>
+                                <td><code>duration</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>duration</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>float</code></td>
+                                <td>Specifies a decimal value that can be represented by a four-byte
+                                    floating-point number in IEEE 754 format. Values such as INF
+                                    (infinity) and NaN (not a number) are allowed.</td>
+                            </tr>
+                            <tr>
+                                <td><code>float</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>float</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>gDay</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>gDay</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>gMonth</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>gMonth</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>gYear</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>gYear</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>gMonthDay</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>gMonthDay</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>gMonthYear</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>gMonthYear</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>int</code></td>
+                                <td>Specifies a signed integer that can be represented by four
+                                    bytes. The minimum value of <code>int</code> is -2147483648, and
+                                    the maximum value is 2147483647.</td>
+                            </tr>
+                            <tr>
+                                <td><code>int</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>int</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>integer</code></td>
+                                <td>Specifies an integer value of arbitrary size.</td>
+                            </tr>
+                            <tr>
+                                <td><code>integer</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>integer</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>long</code></td>
+                                <td>Specifies a signed integer that can be represented by eight
+                                    bytes. The minimum value of <code>long</code> is
+                                    9223372036854775807, and the maximum value is
+                                    -9223372036854775808.</td>
+                            </tr>
+                            <tr>
+                                <td><code>long</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>long</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>Name</code></td>
+                                <td>Specifies a valid name. This name must be a string that consists
                                     exclusively of letters, digits, ideographs, underscores,
                                     hyphens, periods, and colons. Digits, hyphens, and periods may
                                     not be used to start a name, although they can be used inside
                                     the name.</td>
-                        </tr>
-                        <tr>
-                            <td><code>Name</code>*</td>
-                            <td>Specifies a list of <code>Name</code> values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>short</code></td>
-                            <td>Specifies a signed integer that can be represented by two bytes. The
-                                minimum value of a <code>short</code> is -32768, the maximum value
-                                is 32767.</td>
-                        </tr>
-                        <tr>
-                            <td><code>short</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>short</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>string</code></td>
-                            <td>Specifies any sequence of characters. <emphasis role="bold"
+                            </tr>
+                            <tr>
+                                <td><code>Name</code>*</td>
+                                <td>Specifies a list of <code>Name</code> values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>short</code></td>
+                                <td>Specifies a signed integer that can be represented by two bytes.
+                                    The minimum value of a <code>short</code> is -32768, the maximum
+                                    value is 32767.</td>
+                            </tr>
+                            <tr>
+                                <td><code>short</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>short</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>string</code></td>
+                                <td>Specifies any sequence of characters. <emphasis role="bold"
                                         >Note</emphasis>: the size of a string can be set in
                                         the<code> maxLength</code> attribute. It is not limited to
                                     255 characters. For more information, see <link
                                         linkend="Attribute_node">Attribute node</link>.</td>
-                        </tr>
-                        <tr>
-                            <td><code>string</code>*</td>
-                            <td>Specifies a space-separated list of <code>string</code> values.
+                            </tr>
+                            <tr>
+                                <td><code>string</code>*</td>
+                                <td>Specifies a space-separated list of <code>string</code> values.
                                         <emphasis role="bold">Note</emphasis>: the size of a string
                                     can be set in the<code> maxLength</code> attribute. It is not
                                     limited to 255 characters. For more information, see <link
                                         linkend="Attribute_node">Attribute node</link>.</td>
-                        </tr>
-                        <tr>
-                            <td><code>time</code></td>
-                            <td>Specifies a specific time of day on no particular day, such as 3:32
-                                    p.m. Times are written in the form ±<emphasis role="italic"
+                            </tr>
+                            <tr>
+                                <td><code>time</code></td>
+                                <td>Specifies a specific time of day on no particular day, such as
+                                    3:32 p.m. Times are written in the form ±<emphasis role="italic"
                                         >hh:mm:ss.xxx</emphasis> using a 24-hour clock and as many
                                     fractions of a second as necessary. An optional time zone
                                     indicator in the form ±<emphasis role="italic">hh:mm</emphasis>
@@ -1734,97 +1775,97 @@
                                     3:32 p.m., in the U.S. Eastern time zone. A <emphasis
                                         role="bold">Z</emphasis> can be used instead to indicate
                                     UTC: 00:00:00Z.</td>
-                        </tr>
-                        <tr>
-                            <td><code>time</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>time</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedByte</code></td>
-                            <td>Specifies an unsigned integer that can be represented by a single
-                                    byte. The minimum value of <code>unsignedByte</code> is 0, and
-                                    the maximum value is 255.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedByte</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>unsignedByte</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedInt</code></td>
-                            <td>Specifies an unsigned integer that can be represented by four bytes.
-                                    The minimum value of <code>unsignedInt</code> is 0, and the
-                                    maximum value is 4294967295.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedInt</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>unsignedInt</code>
+                            </tr>
+                            <tr>
+                                <td><code>time</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>time</code>
                                     values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedLong</code></td>
-                            <td>Specifies an unsigned integer that can be represented by eight
+                            </tr>
+                            <tr>
+                                <td><code>unsignedByte</code></td>
+                                <td>Specifies an unsigned integer that can be represented by a
+                                    single byte. The minimum value of <code>unsignedByte</code> is
+                                    0, and the maximum value is 255.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unsignedByte</code>*</td>
+                                <td>Specifies a whitespace-separated list of
+                                        <code>unsignedByte</code> values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unsignedInt</code></td>
+                                <td>Specifies an unsigned integer that can be represented by four
+                                    bytes. The minimum value of <code>unsignedInt</code> is 0, and
+                                    the maximum value is 4294967295.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unsignedInt</code>*</td>
+                                <td>Specifies a whitespace-separated list of
+                                        <code>unsignedInt</code> values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unsignedLong</code></td>
+                                <td>Specifies an unsigned integer that can be represented by eight
                                     bytes. The minimum value of <code>unsignedLong</code> is 0, and
                                     the maximum value is 18446744073709551615.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedLong</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>unsignedLong</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedShort</code></td>
-                            <td>Specifies an unsigned integer that can be represented by two bytes.
-                                    The minimum value of <code>unsignedShort</code> is 0, and the
-                                    maximum value is 65535.</td>
-                        </tr>
-                        <tr>
-                            <td><code>unsignedShort</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>unsignedShort</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>utcDateTime</code></td>
-                            <td>Specifies a <code>dateTime</code> constraint to be in the UTC time
-                                zone. That is the time zone offset must be 0 or the value must end
-                                with Z.</td>
-                        </tr>
-                        <tr>
-                            <td><code>utcDateTime</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>utcDateTime</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>utcTime</code></td>
-                            <td>Specifies a time constraint for the UTC time zone. The time zone
-                                offset must be 0 or the value must end with Z.</td>
-                        </tr>
-                        <tr>
-                            <td><code>utcTime</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>utcTime</code>
-                                values.</td>
-                        </tr>
-                        <tr>
-                            <td><code>UUID</code></td>
-                            <td>Specifies a universally unique identifier in its canonical form: 32
-                                hexadecimal digits, displayed in five groups separated by hyphens,
-                                in the form 8-4-4-4-12 for a total of 36 characters (32 digits and
-                                four hyphens). For example,
-                                7eadda6a-9f3e-11e1-9ef4-77b6922f8866.</td>
-                        </tr>
-                        <tr>
-                            <td><code>UUID</code>*</td>
-                            <td>Specifies a whitespace-separated list of <code>UUID</code>
-                                values.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </para>
-            <para>
-                <note>
-                    <para>Durations are represented by using the ISO-8601 standard format P<emphasis
-                                role="italic">n</emphasis>Y<emphasis role="italic"
+                            </tr>
+                            <tr>
+                                <td><code>unsignedLong</code>*</td>
+                                <td>Specifies a whitespace-separated list of
+                                        <code>unsignedLong</code> values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unsignedShort</code></td>
+                                <td>Specifies an unsigned integer that can be represented by two
+                                    bytes. The minimum value of <code>unsignedShort</code> is 0, and
+                                    the maximum value is 65535.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unsignedShort</code>*</td>
+                                <td>Specifies a whitespace-separated list of
+                                        <code>unsignedShort</code> values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>utcDateTime</code></td>
+                                <td>Specifies a <code>dateTime</code> constraint to be in the UTC
+                                    time zone. That is the time zone offset must be 0 or the value
+                                    must end with Z.</td>
+                            </tr>
+                            <tr>
+                                <td><code>utcDateTime</code>*</td>
+                                <td>Specifies a whitespace-separated list of
+                                        <code>utcDateTime</code> values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>utcTime</code></td>
+                                <td>Specifies a time constraint for the UTC time zone. The time zone
+                                    offset must be 0 or the value must end with Z.</td>
+                            </tr>
+                            <tr>
+                                <td><code>utcTime</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>utcTime</code>
+                                    values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>UUID</code></td>
+                                <td>Specifies a universally unique identifier in its canonical form:
+                                    32 hexadecimal digits, displayed in five groups separated by
+                                    hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32
+                                    digits and four hyphens). For example,
+                                    7eadda6a-9f3e-11e1-9ef4-77b6922f8866.</td>
+                            </tr>
+                            <tr>
+                                <td><code>UUID</code>*</td>
+                                <td>Specifies a whitespace-separated list of <code>UUID</code>
+                                    values.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </para>
+                <para>
+                    <note>
+                        <para>Durations are represented by using the ISO-8601 standard format
+                                P<emphasis role="italic">n</emphasis>Y<emphasis role="italic"
                                 >n</emphasis>M<emphasis role="italic">n</emphasis>DT<emphasis
                                 role="italic">n</emphasis>H<emphasis role="italic"
                                 >n</emphasis>M<emphasis role="italic">n</emphasis>S:</para>
@@ -1863,22 +1904,139 @@
                             can be written as P2YT2M. If there are no hours, minutes, or seconds,
                             then the T is omitted. A duration of two years is written as P2Y. A
                             leading minus sign before the P indicates a negative duration.</para>
-                </note>
-            </para>
+                    </note>
+                </para>
+            </section>
+            <section xml:id="Define_product_schema">
+                <title>Defining your product schema</title>
+                <para>After you have forked the repository and created a branch, you need to create
+                    a new XML file to define the product-specific schema.</para>
+                <para>Create a new file by using the <emphasis role="bold"
+                            >sample_product_schemas/<emphasis role="italic"
+                            >newProductName</emphasis>.xml</emphasis> naming convention, for example
+                        <emphasis role="italic">sample_product_schemas/nova.xml</emphasis>. </para>
+                <para>To define your product schema, complete the following steps:</para>
+                <para>
+                    <orderedlist>
+                        <listitem>
+                            <para>Read the <link linkend="Product_node"><emphasis role="bold"
+                                        >Product node</emphasis></link> section.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Define the productSchema node.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Define the <code>description</code> node.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Add the attributes and attribute groups for your product.</para>
+                        </listitem>
+                    </orderedlist>
+                </para>
+                <section xml:id="defining_product_schema_node">
+                    <title>Defining the product schema node</title>
+                    <para>When you create your product schema, you first need to define the product
+                        schema node. Defining the product schema node requires that you <link
+                            linkend="Selecting_namespace">select a namespace for your
+                        product</link>.</para>
+                    <para>For a list of the attributes that are part of the product schema node, see
+                            <link linkend="product_schema_node">Product schema node</link>.</para>
+                    <para>Following is an example of a product schema node: <example>
+                            <title>Product schema node example</title>
+                            <programlisting>&lt;<emphasis role="bold">productSchema</emphasis> xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/event/ebs/bu-team"
+               serviceCode="EBS"
+               writeRole="cloudfeeds:customer_access_policy-publisher"
+               type="CREATE UPDATE DELETE"
+               version="1"></programlisting>
+                        </example></para>
+                    <para> </para>
+                    <section xml:id="Selecting_namespace">
+                        <title>Selecting a namespace</title>
+                        <para>When you specify the product schema node, you need to define an
+                            appropriate <code>namespace</code> attribute for your product. </para>
+                        <para>For product events, use the following convention for
+                            namespaces:</para>
+                        <programlisting>http://docs.rackspace.com/usage/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>    </programlisting>
+                        <para>Following are examples of namespaces for product events:</para>
+                        <programlisting>http://docs.rackspace.com/usage/sites/subscription</programlisting>
+                        <programlisting>http://docs.rackspace.com/usage/cloudbackup/storage</programlisting>
+                        <para>For <emphasis role="bold">system</emphasis> events, the convention of
+                            the namespace is as follows:</para>
+                        <programlisting>http://docs.rackspace.com/event/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>   </programlisting>
+                        <para>Following is an example of a namespace for a system event:</para>
+                        <programlisting>http://docs.rackspace.com/event/lbaas/node</programlisting>
+                    </section>
+                </section>
+                <section xml:id="Adding_a_description">
+                    <title>Defining the description node </title>
+                    <para>After you have defined the product schema node, you need to add a
+                        description node. In the description node, you need to include a brief
+                        description of what kind of information is included in the event.</para>
+                    <para>Following is an example of a description node. <example>
+                            <title>Description node example</title>
+                            <programlisting><emphasis role="bold">&lt;description></emphasis>
+        Specifies the team mapping to the business unit.
+<emphasis role="bold">&lt;/description></emphasis></programlisting>
+                        </example></para>
+                </section>
+                <section xml:id="Defining_attributes_and_attribute_groups">
+                    <title>Defining the attributes and attribute groups</title>
+                    <para>After you have defined the product schema and description nodes, you need
+                        to add the appropriate attibute and attribute group nodes for your product.
+                        For more information about attributes an attribute groups, see <link
+                            linkend="Attribute_group"><emphasis role="bold">Attribute
+                                node</emphasis></link> and <link linkend="Attribute_group"><emphasis
+                                role="bold">Attribute group</emphasis></link>.</para>
+                    <para>Following is an example of a completed product schema file:</para>
+                    <para>
+                        <example>
+                            <title>Completed product schema file example</title>
+                            <programlisting>&lt;productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/event/ebs/bu-team"
+               serviceCode="EBS"
+               type="CREATE UPDATE DELETE"
+               version="1">
+    &lt;description>
+        Specifies the team mapping to the business unit.
+    &lt;/description>
+    &lt;attribute name="businessUnit" type="string" use="required"
+         maxLength="150">
+        Specifies the business unit name.
+    &lt;/attribute>
+
+    &lt;attribute name="description" type="string" use="required"
+        maxLength="255">
+        Specifies the description of the event.
+    &lt;/attribute>
+    &lt;attributeGroup name="team" minOccurs="0" maxOccurs="unbounded">
+        &lt;description>
+            Specifies the team name and number which belongs to
+        the listed business number.
+        &lt;/description>
+        &lt;attribute name="name" type="string" use="required"
+        maxLength="255">
+            Specifes the team name.
+        &lt;/attribute>
+        &lt;attribute name="number" type="string" use="required"
+       maxLength="150">
+            Specifies the team number.
+        &lt;/attribute>
+    &lt;/attributeGroup>
+&lt;/productSchema></programlisting>
+                        </example>
+                    </para>
+                </section>
+            </section>
         </section>
-        </section>
+    </section>
     </chapter>
     <chapter xml:id="Using_Cloud_Feeds">
-        <title>Preparing a feed for publication through Cloud Feeds</title>
-        <para>To define a new event, you need to submit a pull request on the <link
-                xlink:href="https://github.com/rackerlabs/standard-usage-schemas"
-                >https://github.com/rackerlabs/standard-usage-schemas</link> repository. </para>
-        <para>To submit this pull request, you first need to complete the following steps:</para>
+        <title>Preparing a product event feed for publication through Cloud Feeds</title>
+        <para>To prepare a product event for publication through Cloud Feeds, you need to complete
+            the following steps:</para>
         <para>
             <itemizedlist>
-                <listitem>
-                    <para><link linkend="Define_product_schema">Define your product schema</link>. </para>
-                </listitem>
                 <listitem>
                     <para><link linkend="Generate_schema_and_WADLs">Generate schemas and
                             WADLs</link>.</para>
@@ -1912,121 +2070,10 @@
                     installed on your computer.</para>
             </important>
         </para>
-        <section xml:id="Define_product_schema">
-            <title>Defining your product schema</title>
-            <para>After you have forked the repository and created a branch, you need to create a
-                new XML file to define the product-specific schema.</para>
-            <para>Create a new file by using the <emphasis role="bold"
-                        >sample_product_schemas/<emphasis role="italic"
-                    >newProductName</emphasis>.xml</emphasis> naming convention, for example
-                    <emphasis role="italic">sample_product_schemas/nova.xml</emphasis>. </para>
-            <para>To define your product schema, complete the following steps:</para>
-            <para>
-                <orderedlist>
-                    <listitem>
-                        <para>Read the <link linkend="Product_node"><emphasis role="bold">Product
-                                    node</emphasis></link> section.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Define the productSchema node.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Define the <code>description</code> node.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Add the attributes and attribute groups for your product.</para>
-                    </listitem>
-                </orderedlist>
-            </para>
-            <section xml:id="defining_product_schema_node"><title>Defining the product schema node</title>
-
-            <para>When you create your product schema, you first need to define the product schema
-                    node. Defining the product schema node requires that you <link
-                        linkend="Selecting_namespace">select a namespace for your
-                    product</link>.</para>
-                <para>For a list of the attributes that are part of the product schema node, see
-                        <link linkend="product_schema_node">Product schema node</link>.</para>
-                <para>Following is an example of a product schema node: <example>
-                        <title>Product schema node example</title>
-                        <programlisting>&lt;<emphasis role="bold">productSchema</emphasis> xmlns="http://docs.rackspace.com/core/usage/schema"
-               namespace="http://docs.rackspace.com/event/ebs/bu-team"
-               serviceCode="EBS"
-               writeRole="cloudfeeds:customer_access_policy-publisher"
-               type="CREATE UPDATE DELETE"
-               version="1"></programlisting>
-                    </example></para>
-            <para> </para>
-        <section xml:id="Selecting_namespace">
-            <title>Selecting a namespace</title>
-            <para>When you specify the product schema node, you need to define an appropriate
-                            <code>namespace</code> attribute for your product. </para>
-            <para>For <emphasis role="bold">usage</emphasis> events, use the following convention
-                        for namespaces:</para>
-            <programlisting>http://docs.rackspace.com/usage/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>    </programlisting>
-            <para>Following are examples of namespaces for usage events:</para>
-                <programlisting>http://docs.rackspace.com/usage/sites/subscription</programlisting>
-<programlisting>http://docs.rackspace.com/usage/cloudbackup/storage</programlisting>
-            <para>For <emphasis role="bold">system</emphasis> events, the convention of the
-                        namespace is as follows:</para>
-            <programlisting>http://docs.rackspace.com/event/<emphasis role="italic">product</emphasis>/<emphasis role="italic">resource</emphasis>   </programlisting>
-            <para>Following is an example of a namespace for a system event:</para>
-                <programlisting>http://docs.rackspace.com/event/lbaas/node</programlisting></section></section>
-            <section xml:id="Adding_a_description"><title>Defining the description node </title>
-            <para>After you have defined the product schema node, you need to add a description
-                    node. In the description node, you need to include a brief description of what
-                    kind of information is included in the event.</para>
-                <para>Following is an example of a description
-                    node.
-                    <example><title>Description node example</title><programlisting><emphasis role="bold">&lt;description></emphasis>
-        Specifies the team mapping to the business unit.
-<emphasis role="bold">&lt;/description></emphasis></programlisting></example></para>
-            </section>
-        <section xml:id="Defining_attributes_and_attribute_groups"><title>Defining the attributes and attribute groups</title><para>After you have defined the product schema and description nodes, you need to add the
-                    appropriate attibute and attribute group nodes for your product. For more
-                    information about attributes an attribute groups, see <link
-                        linkend="Attribute_group"><emphasis role="bold">Attribute
-                        node</emphasis></link> and <link linkend="Attribute_group"><emphasis
-                            role="bold">Attribute group</emphasis></link>.</para>
-                <para>Following is an example of a completed product schema file:</para>
-                <para>
-                    <example><title>Completed product schema file example</title>
-                    <programlisting>&lt;productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
-               namespace="http://docs.rackspace.com/event/ebs/bu-team"
-               serviceCode="EBS"
-               type="CREATE UPDATE DELETE"
-               version="1">
-    &lt;description>
-        Specifies the team mapping to the business unit.
-    &lt;/description>
-    &lt;attribute name="businessUnit" type="string" use="required"
-         maxLength="150">
-        Specifies the business unit name.
-    &lt;/attribute>
-
-    &lt;attribute name="description" type="string" use="required"
-        maxLength="255">
-        Specifies the description of the event.
-    &lt;/attribute>
-    &lt;attributeGroup name="team" minOccurs="0" maxOccurs="unbounded">
-        &lt;description>
-            Specifies the team name and number which belongs to
-        the listed business number.
-        &lt;/description>
-        &lt;attribute name="name" type="string" use="required"
-        maxLength="255">
-            Specifes the team name.
-        &lt;/attribute>
-        &lt;attribute name="number" type="string" use="required"
-       maxLength="150">
-            Specifies the team number.
-        &lt;/attribute>
-    &lt;/attributeGroup>
-&lt;/productSchema></programlisting></example>
-                </para></section></section>
         <section xml:id="Generate_schema_and_WADLs">
             <title>Generating schemas and WADL files</title>
-            <para>After you have created the sample product schema, you need to perform a build to
-                generate the schemas and WADL files.</para>
+            <para>To start getting your feed ready for publication, you first need to perform a
+                build to generate the schemas and WADL files.</para>
             <para>
                 <important>
                     <para>To perform a build to generate the schemas and WADL files, you need to
@@ -2098,7 +2145,6 @@
                         <para>
                             <programlisting>$ mvn initialize</programlisting>
                         </para>
-
                     </listitem>
                 </orderedlist>
             </para>
@@ -2115,8 +2161,10 @@
                 </note>
             </para>
         </section>
-        <section xml:id="Add_feed_to_wadl"><title>Adding the feed to the allfeeds.wadl file</title><para>After you have generated the appropriate schemas and WADLs, you need to add your feed to the
-                    <emphasis role="bold">allfeeds.wadl</emphasis> file.</para>
+        <section xml:id="Add_feed_to_wadl">
+            <title>Adding the feed to the allfeeds.wadl file</title>
+            <para>After you have generated the appropriate schemas and WADLs, you need to add your
+                feed to the <emphasis role="bold">allfeeds.wadl</emphasis> file.</para>
             <para>Before adding your feed, you need to determine the validation mode of your feed: <itemizedlist>
                     <listitem>
                         <para><link linkend="Adding_resource_product_feed">product
@@ -2126,20 +2174,13 @@
                         <para><link linkend="Adding_resource_product_feed">validated
                             feed</link></para>
                     </listitem>
-                    <listitem>
-                        <para><link linkend="Adding_user_access_event_feed">user access event
-                                feed</link></para>
-                    </listitem>
-                    <listitem>
-                        <para><link linkend="Adding_JSON_CADF_events">JSON CADF event
-                            feed</link></para>
-                    </listitem>
                 </itemizedlist></para>
             <para>For more information about the validation modes, read <link
-                    linkend="Feed_Validation">Feed validation</link>.</para>
-            <section xml:id="Adding_resource_product_feed"><title>Adding a resource for a product feed</title>
-            <para>To add a resource for a <emphasis role="bold">product feed</emphasis>, complete
-                    the following steps:<orderedlist>
+                    linkend="Feed_Validation">Feed validation</link>. </para>
+            <section xml:id="Adding_resource_product_feed">
+                <title>Adding a resource for a product feed</title>
+                <para>To add a resource for a <emphasis role="bold">product feed</emphasis>,
+                    complete the following steps:<orderedlist>
                         <listitem>
                             <para>Open <emphasis role="bold">allfeeds.wadl</emphasis> and add a new
                                 resource for your feed.</para>
@@ -2186,73 +2227,26 @@
                             </para>
                         </listitem>
                     </orderedlist>
-                </para></section><section xml:id="Adding_resource_validated_feed"><title>Adding a resource for a validated feed</title>
-            <para>To mark a feed to be <emphasis role="bold">validated</emphasis>, add the following
-                    resource to <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
-            <para>
-                <programlisting>&lt;resource id="<replaceable>new_product</replaceable>"
+                </para>
+            </section>
+            <section xml:id="Adding_resource_validated_feed">
+                <title>Adding a resource for a validated feed</title>
+                <para>To mark a feed to be <emphasis role="bold">validated</emphasis>, add the
+                    following resource to <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
+                <para>
+                    <programlisting>&lt;resource id="<replaceable>new_product</replaceable>"
        path="<replaceable>new_product</replaceable>/events"
        type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/></programlisting>
-            </para>
+                </para>
                 <para>The following example shows the resource for a validated feed:</para>
                 <para>
                     <programlisting> &lt;resource id="core_events"
         path="core/events"
         type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/></programlisting>
-                </para></section>
-        <section xml:id="Adding_user_access_event_feed"><title>Adding a user access event feed</title><para>To add a feed of type user access event feed, add the following resource to <emphasis
-                        role="bold">allfeeds.wadl</emphasis>:</para>
-                <para>
-                    <programlisting>&lt;resource id="<replaceable>access_event_name</replaceable>"
-         path="<replaceable>access_event_name</replaceable>/events"
-         type="wadl/feed.wadl#UserAccessEvent"/></programlisting>
                 </para>
-        <para>The following example shows the resource of a user access event with multiple feed
-                    types:</para>
-                <para>
-                    <programlisting>  &lt;resource id="feedsaccess_events"
-         path="feeds_access/events"
-         type="wadl/feed.wadl#AtomFeed
-               wadl/feed.wadl#TenantAtomFeed
-               wadl/cadf.wadl#UserAccessEvent
-               wadl/cadf.wadl#UserAccessEventTenant"/></programlisting>
-                </para></section>
-        <section xml:id="Adding_JSON_CADF_events"><title>Adding a JSON CADF non-useraccess event feed</title>
-                <para>Cloud Feeds supports CADF events that are not of type <emphasis role="italic"
-                        >useraccess</emphasis>. The following rules apply for these events:</para>
-                <para>
-                    <itemizedlist>
-                        <listitem>
-                            <para>The content for CADF events of non-useraccess type must be in
-                                JSON. </para>
-                        </listitem>
-                        <listitem>
-                            <para>The event can have an Atom XML envelope.</para>
-                        </listitem>
-                        <listitem>
-                            <para>The <code>atom:content</code> node must be of
-                                    <code>type="applicaton/json"</code> as shown in the following
-                                example:</para>
-                            <para>
-                                <programlisting> &lt;atom:content type="application/json"></programlisting>
-                            </para>
-                        </listitem>
-                    </itemizedlist>
-                </para>
-                <para>To add a JSON CADF event that is not of type <emphasis role="italic"
-                        >useraccess</emphasis>, add the following resource to <emphasis role="bold"
-                        >allfeeds.wadl</emphasis>:</para>
-                <para>
-                    <programlisting>&lt;resource id="<replaceable>new_feed_name_</replaceable>events"
-           path="<replaceable>new_feed_name</replaceable>/events"
-           type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"></programlisting>
-                </para>
-                <para>The following example shows the resource of a JSON CADF event:</para>
-                <programlisting>        &lt;resource id="jsoncontentonlytest_events"
-                  path="jsoncontentonlytest/events"
-                  type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"/></programlisting></section>
+            </section>
         </section>
-            <section xml:id="Add_sample_files">
+        <section xml:id="Add_sample_files">
             <title>Adding samples</title>
             <para>You can use Maven to generate sample responses and entries for each version of
                 your product schema. To use Maven, ensure that you have version 3.0.5 installed. For
@@ -2362,10 +2356,12 @@
                 </itemizedlist>
             </para>
         </section>
-        <section xml:id="Add_feed_to_the_document"><title>Adding the feed to the documentation</title><para>As a next step, you need to add your feed to the documentation source files to ensure that the
-                feed appears in the <emphasis role="italic">Cloud Feeds Developers Guide</emphasis>.
-                These source files are located in the <emphasis role="bold">src/docbkx</emphasis>
-                location.</para>
+        <section xml:id="Add_feed_to_the_document">
+            <title>Adding the feed to the documentation</title>
+            <para>As a next step, you need to add your feed to the documentation source files to
+                ensure that the feed appears in the <emphasis role="italic">Cloud Feeds Developers
+                    Guide</emphasis>. These source files are located in the <emphasis role="bold"
+                    >src/docbkx</emphasis> location.</para>
             <para>Edit the following files depending on whether your feed is for internal or
                 external users:</para>
             <para>
@@ -2379,8 +2375,8 @@
                                 <emphasis role="bold">external</emphasis> users</para>
                     </listitem>
                 </itemizedlist>
-  </para>
-        <para>
+            </para>
+            <para>
                 <note>
                     <para>Different resources are required for internal and external feeds.</para>
                 </note>
@@ -2388,9 +2384,9 @@
             <para>You need to add a <code>section</code> node to the appropriate source file that
                 contains information specific to the feed, including a <code>title</code> attribute,
                 as well as the corresponding URL and the appropriate resource hrefs.</para>
-        <para>A <code>section</code> node for a new feed to be added to the <emphasis role="bold"
-                    >api-operations-internal.xml</emphasis> source file should look like the
-                following
+            <para>A <code>section</code> node for a new feed to be added to the <emphasis
+                    role="bold">api-operations-internal.xml</emphasis> source file should look like
+                the following
                 example:<programlisting>&lt;section xml:id="bigdata.product">
    &lt;title>Cloud Big Data&lt;/title>
    &lt;resources xmlns="http://wadl.dev.java.net/2009/02">
@@ -2408,12 +2404,12 @@
   &lt;resource href="../../allfeeds.wadl#bigdata_events_tenanted_feed"/>
   &lt;resource href="../../allfeeds.wadl#bigddata_events_getEntry_BigDataTenant"/>
  &lt;/resources>
-&lt;/section></programlisting>
-            </para></section>
-        <section xml:id="Test_your_feed"><title>Testing the feed</title><para>After you have added all the appropriate resources for your feed, you can use Maven to compile
-                your feed and events and subsequently test it.</para>
-            <para>To compile and test your feed, type the following command at a command-line
-                interface:</para>
+&lt;/section></programlisting></para></section>
+        <section xml:id="Test_your_feed">
+            <title>Testing the feed</title>
+            <para>After you have added all the appropriate resources for your feed, you can use
+                Maven to test your feed and events.</para>
+            <para>To test your feed, type the following command at a command-line interface:</para>
             <para>
                 <programlisting>git submodule update --init --remote cloudfeeds-nabu
 mvn -P tiamat-check test</programlisting>
@@ -2447,12 +2443,189 @@ mvn -P tiamat-check test</programlisting>
             <para>
                 <programlisting>git submodule update --remote cloudfeeds-nabu
 mvn -P tiamat-check test</programlisting>
-            </para></section>
-        <section xml:id="Submit_Pull_Request"><title>Submitting a pull request</title>
+            </para>
+            <para>Running this test notifies you if any issues exist with the product schema or
+                sample files.</para>
+        </section>
+        <section xml:id="Submit_Pull_Request">
+            <title>Submitting a pull request</title>
             <para>After you have completed all the steps for creating a feed, submit a pull request
                 on the <link xlink:href="https://github.com/rackerlabs/standard-usage-schemas"
                         ><emphasis role="bold"
                         >https://github.com/rackerlabs/standard-usage-schemas</emphasis></link>
-                repository.</para></section>
+                repository.</para>
+        </section>
+    </chapter>
+    <chapter xml:id="Generic_CADF"><title>CADF format</title>
+        <para>Cloud Feeds supports feeds that are in <link
+                xlink:href="https://www.dmtf.org/standards/cadf">Cloud Auditing Data
+                Federation</link> (CADF) format. CADF is a standard for the submission and retrieval
+            of normative audit event data from cloud providers in the form of customized reports and
+            logs.</para>
+        <para>Currently, Cloud Feeds supports the following two types of CADF feeds:</para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para><link linkend="User_Accessevents_CADF_Overview">User access events in
+                            CADF</link></para>
+                </listitem>
+                <listitem>
+                    <para><link linkend="Generic_CADF_Overview">Generic CADF event
+                        feeds</link></para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <section xml:id="User_Accessevents_CADF_Overview"><title>User access events in CADF </title>
+            <para>Cloud Feeds supports user access events that are in CADF format. User access
+                events provide a generic approach to capturing all API calls that are issued against
+                Rackspace product web services. </para>
+            <para>Cloud Feeds extends the CADF standard by providing a specific user access event
+                profile that captures audit data that is specific to the user and the Rackspace
+                cloud services they are using.</para>
+            <para> For detailed information about user access events in CADF support in Cloud Feeds,
+                read the <link
+                    xlink:href="http://docs-internal.rackspace.com/cloud-feeds/api/v1.0/feeds-devguide/content/CADF_events.html"
+                    >User access events in CADF</link> section in the <link
+                    xlink:href="http://docs-internal.rackspace.com/cloud-feeds/api/v1.0/feeds-devguide/content/overview.html"
+                    >Cloud Feeds Developer Guide</link>.<?sbr?></para></section>
+        <section xml:id="Generic_CADF_Overview"><title>Generic CADF feeds</title>
+        <para>Generic CADF events are private by default. They cannot be viewed by customers and are
+                not included in customer archives in Cloud Files. Generic events of type CADF are
+                still accessible to internal users with the <code>cloudfeeds:service-admin</code>
+                role.</para>
+        <para>The following rules apply for these events:</para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para> Cloud Feeds does not perform any validation on the attributes in the
+                        event payload and therefore there is no product schema for the events.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>By default, CADF feeds do no provide customer archives. To set up a
+                            customer archive for a CADF, you need to provide the tenant id in a
+                            category, using the <code>tid:</code> preface. Categories are not
+                            automatically applied for generic CADF feeds. For more information see
+                                <link linkend="Enabling_search_on_your_feed">Adding search
+                                categories to your entries</link>.</para>
+                </listitem>
+                <listitem>
+                    <para>Cloud Feeds cannot perform any operations, such as usage summary
+                        calculations, on the attributes in the event payload.</para>
+                </listitem>
+                <listitem>
+                    <para>The content for CADF events of non-user access type must be in JSON. </para>
+                </listitem>
+                <listitem>
+                    <para>The event can have an Atom XML envelope. If the event is published in JSON
+                        and retrieved in XML, only the Atom envelope is translated. The event
+                        payload remains in JSON.</para>
+                </listitem>
+                <listitem>
+                    <para>The <code>atom:content</code> node must be of
+                            <code>type="applicaton/json"</code> as shown in the following
+                        example:</para>
+                    <para><programlisting> &lt;atom:content type="application/json"></programlisting>The
+                        following example shows a generic CADF event of
+                        type="application/json":</para>
+
+
+        <para>
+            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
+  &lt;atom:content type="application/json"
+       { "name" : "Jonas" }
+   &lt;/atom:content>&lt;/atom:entry></programlisting>
+        </para>
+</listitem>
+        <listitem><para>Generic CADF feeds are private unless they have the <code>tid:</code> category prefix
+            defined. The following shows an example of a generic CADF event with a category prefix
+            of type <code>tid:</code> defined:</para>
+        <para>
+            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
+   &lt;atom:category term="tid:5821027"/>
+   &lt;atom:content type="application/json">
+     { "name" : "Jonas" }
+   &lt;/atom:content>
+&lt;/atom:entry> </programlisting></para>
+        </listitem>
+</itemizedlist>
+        </para>
+        </section>
+    <section xml:id="Getting_a_generic_CADF_feed_ready_for_pub"><title>Getting a CADF feed ready for publication</title><para>To prepare a CADF feed for publication requires that you complete the following steps:</para>
+            <para>
+                <orderedlist>
+                    <listitem>
+                        <para>Add the feed to allfeeds.wadl. Instructions are provided below.</para>
+                        <para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>For generic feeds, see <link
+                                            linkend="Adding_JSON_CADF_events">Adding a generic CADF
+                                            feed to allfeeds.wadl</link>.</para>
+                                </listitem>
+                                <listitem>
+                                    <para>For user access event feeds, see <link
+                                            linkend="Adding_user_access_event_feed">Adding a user
+                                            access event feed to allfeeds.wadl</link>.</para>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para><link linkend="Add_feed_to_the_document">Add your feed to the
+                                documentation</link>, which is described in the previous
+                            section.</para>
+                    </listitem>
+                    <listitem>
+                        <para><link linkend="Test_your_feed">Test your feed</link>, which is
+                            described in the previous section.</para>
+                    </listitem>
+                    <listitem>
+                        <para><link linkend="Submit_Pull_Request">Submit a pull request</link>,
+                            which is described in the previous section.</para>
+                    </listitem>
+                </orderedlist>
+            </para>
+        <para>   <note>
+                    <para>When adding a generic feed, you add the feed itself but not the attribute
+                        because there is no resource that is being validated. Also, when adding a
+                        generic CADF feed you are not required to add any samples.</para>
+                </note></para>
+                    <section xml:id="Adding_JSON_CADF_events">
+                        <title>Adding a generic CADF feed to allfeeds.wadl<?sbr?></title>
+                        <para>To add a generic JSON CADF feed, add the following resource to
+                        <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
+                        <para>
+                            <programlisting>&lt;resource id="<replaceable>new_feed_name_</replaceable>events"
+           path="<replaceable>new_feed_name</replaceable>/events"
+           type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"></programlisting>
+                        </para>
+                        <para>The following example shows the resource of a JSON CADF event:</para>
+                        <programlisting>        &lt;resource id="jsoncontentonlytest_events"
+                  path="jsoncontentonlytest/events"
+                  type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#JsonContentOnly"/></programlisting>
+                    </section>
+
+            <section xml:id="Adding_user_access_event_feed">
+                <title>Adding a user access event feed to allfeeds.wadl</title>
+                <para>To add a feed of type user access event feed, add the following resource to
+                        <emphasis role="bold">allfeeds.wadl</emphasis>:</para>
+                <para>
+                    <programlisting>&lt;resource id="<replaceable>access_event_name</replaceable>"
+         path="<replaceable>access_event_name</replaceable>/events"
+         type="wadl/feed.wadl#UserAccessEvent"/></programlisting>
+                </para>
+                <para>The following example shows the resource of a user access event with multiple
+                    feed types:</para>
+                <para>
+                    <programlisting>  &lt;resource id="feedsaccess_events"
+         path="feeds_access/events"
+         type="wadl/feed.wadl#AtomFeed
+               wadl/feed.wadl#TenantAtomFeed
+               wadl/cadf.wadl#UserAccessEvent
+               wadl/cadf.wadl#UserAccessEventTenant"/></programlisting>
+                </para>
+            </section>
+    </section>      
     </chapter>
 </book>

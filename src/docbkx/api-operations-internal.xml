@@ -76,6 +76,12 @@
       <resource href="../../allfeeds.wadl#billing_events_getEntry_BillingService"/>
     </resources>
   </section>
+  <section xml:id="billingaudit.product">
+    <title>Billing Audit</title>
+    <resources xmlns="http://wadl.dev.java.net/2009/02">
+      <resource href="../../allfeeds.wadl#billingaudit_events"/>
+    </resources>
+  </section>
   <section xml:id="cbs.product">
     <title>Cloud Block Storage</title>
     <resources xmlns="http://wadl.dev.java.net/2009/02">

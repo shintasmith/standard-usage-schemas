@@ -18,4 +18,5 @@ Learn how to use the Rackspace Cloud Feeds service by using the REST API.
    using-cloud-feeds
    feeds-archiving
    api-reference
+   api-operations/index
    

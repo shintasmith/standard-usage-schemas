@@ -1,0 +1,9 @@
+
+#
+# Example wadl2rst config file
+#
+
+target/rst/allfeeds.wadl:
+    title: Rackspace Cloud Feeds API Guide - API v1.0
+    output_directory: target/rst/dev-guide/api-operations
+

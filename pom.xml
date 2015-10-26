@@ -891,6 +891,121 @@
             </build>
         </profile>
         <profile>
+            <id>generate-rst</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>generate-normalized-wadl</id>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <exec executable="wadl-tools/bin/normalizeWadl.sh">
+                                            <arg value="-f"/>
+                                            <arg value="tree"/>
+                                            <arg value="-w"/>
+                                            <arg value="allfeeds.wadl"/>
+                                        </exec>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>xml-maven-plugin</artifactId>
+                        <version>1.0</version>
+                        <executions>
+                            <execution>
+                                <id>strip-test-feeds</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>transform</goal>
+                                </goals>
+                                <configuration>
+                                    <transformationSets>
+                                        <transformationSet>
+                                            <dir>${basedir}/normalized</dir>
+                                            <includes>
+                                                <include>allfeeds.wadl</include>
+                                            </includes>
+                                            <outputDir>${project.build.directory}/rst</outputDir>
+                                            <stylesheet>${basedir}/src/main/xsl/striptestfeeds.xsl</stylesheet>
+                                        </transformationSet>
+                                    </transformationSets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>net.sf.saxon</groupId>
+                                <artifactId>Saxon-HE</artifactId>
+                                <version>9.4.0.6</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>rst-install-generate</id>
+                                <phase>process-sources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <exec executable="pip">
+                                            <arg value="install"/>
+                                            <arg value="-e"/>
+                                            <arg value="git+git@github.rackspace.com:Product-DevOps/wadl2rst.git@master#egg=wadl2rst"/>
+                                            <arg value="-I"/>
+                                        </exec>
+                                        <exec executable="wadl2rst"/>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-rst-files</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/api-docs/dev-guide/api-operations/methods/</outputDirectory>
+                                    <resources>          
+                                        <resource>
+                                            <directory>${basedir}/target/rst/dev-guide/api-operations</directory>
+                                            <filtering>true</filtering>
+                                            <includes>
+                                                <include>get-*tid.rst</include>
+                                                <include>get-*tid-entries-id.rst</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>              
+                                </configuration>         
+                            </execution>
+                        </executions>
+                    </plugin>
+                    -->
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>generate-samples</id>
             <build>
                 <plugins>

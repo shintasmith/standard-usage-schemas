@@ -16,5 +16,6 @@ target
 wadl/product.wadl
 generated_product_xsds/*
 core_xsd/usage.xsd
+normalized/*
 TODO.org
 _build

@@ -4,6 +4,3 @@
 [submodule "wadl-tools"]
 	path = wadl-tools
 	url = https://github.com/rackerlabs/wadl-tools.git
-[submodule "docs-migration"]
-	path = docs-migration
-	url = https://github.com/rackerlabs/docs-migration.git

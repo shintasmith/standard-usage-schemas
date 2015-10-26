@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application[
+<!ENTITY % common SYSTEM "../src/docbkx/common/common.ent">
+    %common;
+]>
 <application xmlns="http://wadl.dev.java.net/2009/02"
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:db="http://docbook.org/ns/docbook"
@@ -118,15 +122,13 @@
                 </wadl:doc>
             </param>
         </request>
-        <response status="200">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
-        </response>
-        <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
+          <response status="200">
+            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
             <representation mediaType="application/json"/>
-        </response>
+         </response>
+        <!-- On Error -->
+         &commonFaults;
+         &getFaults;
     </method>
 
     <method id="getFeedAllowJson" name="GET">
@@ -148,12 +150,12 @@
             </param>
         </request>
         <response status="200">
-            <representation mediaType="application/atom+xml"/>
-        </response>
+            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
+            <representation mediaType="application/json"/>
+         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-        </response>
+        &commonFaults;
+        &getFaults;
     </method>
 
     <method id="getEntry" name="GET">
@@ -170,14 +172,12 @@
         </request>
                
         <response status="200">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
-        </response>
-        <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
+            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
             <representation mediaType="application/json"/>
-        </response>
+         </response>
+        <!-- On Error -->
+        &commonFaults;
+        &getFaults;
     </method>
 
     <method id="addPlainUnvalidatedEntry" name="POST">
@@ -192,15 +192,12 @@
             <representation mediaType="application/vnd.rackspace.atom+json"/>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+        &commonFaults;
+        &postPutFaults;
     </method>
 
     <method id="addJsonContentOnly" name="POST">
@@ -221,15 +218,12 @@
             </representation>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+        &commonFaults;
+        &postPutFaults;
     </method>
 
     <method id="addPlainEntry" name="POST">
@@ -294,15 +288,12 @@
             </representation>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+         &commonFaults;
+         &postPutFaults;
     </method>
     
     <method id="addUsageDeadLetter" name="POST">
@@ -369,14 +360,11 @@
             </representation>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+         &commonFaults;
+         &postPutFaults;
     </method>
 </application>

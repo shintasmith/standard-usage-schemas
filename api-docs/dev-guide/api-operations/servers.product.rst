@@ -8,4 +8,5 @@ the Rackspace Cloud Servers service.
 
 
 .. include:: methods/get-get-feed-servers-events-tid.rst
-.. include:: methods/get-servers-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-servers-event-servers-events-tid-entries-id.rst 
+.. include:: methods/get-get-redhat-enterprise-linux-event-servers-events-tid-entries-id.rst

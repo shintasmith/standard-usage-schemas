@@ -8,4 +8,4 @@ the Rackspace Cloud Files service.
 
 
 .. include:: methods/get-get-feed-files-events-tid.rst
-.. include:: methods/get-files-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-files-event-files-events-tid-entries-id.rst 

@@ -7,7 +7,7 @@ public cloud.
 The Cloud Feeds SLA is for publishers and subscribers. The SLA provides a support model 
 that uses Cloud Servers (OpenStack Compute (nova) service as the first product to send 
 events through Cloud Feeds. For information about the number of requests that can be made 
-per role, see :ref:`rate-limits-per-role`_.
+per role, see :ref:`rate-limits-per-role`.
 
 The uptime goal for Cloud Feeds is 99.999 percent. If Cloud Feeds is down, all 
 publishers must continue to hold their events until Cloud Feeds is back up. 

@@ -8,4 +8,4 @@ the Rackspace Cloud Block Storage service.
 
 
 .. include:: methods/get-get-feed-cbs-events-tid.rst
-.. include:: methods/get-cbs-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-block-storage-event-cbs-events-tid-entries-id.rst 

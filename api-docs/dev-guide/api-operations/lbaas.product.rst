@@ -8,4 +8,4 @@ the Rackspace Cloud Load Balancers service.
 
 
 .. include:: methods/get-get-feed-lbaas-events-tid.rst
-.. include:: methods/get-lbaas-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-loadbalancers-event-lbaas-events-tid-entries-id.rst 

@@ -8,4 +8,4 @@ the Rackspace Cloud Identity service.
 
 
 .. include:: methods/get-get-feed-identity-events-tid.rst
-.. include:: methods/get-identity-events-tid-entries-id.rst
+.. include:: methods/get-get-cloudidentity-event-identity-events-tid-entries-id.rst

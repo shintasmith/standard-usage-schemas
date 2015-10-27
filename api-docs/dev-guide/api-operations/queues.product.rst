@@ -8,4 +8,4 @@ the Rackspace Cloud Queues service.
 
 
 .. include:: methods/get-get-feed-queues-events-tid.rst
-.. include:: methods/get-queues-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-queueus-event-queues-events-tid-entries-id.rst 

@@ -915,6 +915,29 @@
                                     <goal>run</goal>
                                 </goals>
                             </execution>
+                            <execution>
+                                <id>rst-install-generate</id>
+                                <phase>process-sources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <exec executable="pip">
+                                            <arg value="install"/>
+                                            <arg value="-e"/>
+                                            <arg value="git+git@github.rackspace.com:Product-DevOps/wadl2rst.git@master#egg=wadl2rst"/>
+                                            <arg value="-I"/>
+                                        </exec>
+                                        <exec executable="wadl2rst"/>
+                                        <copy todir="${basedir}/api-docs/dev-guide/api-operations/methods/">
+                                            <fileset dir="${basedir}/target/rst/dev-guide/api-operations/">
+                                                <include name="get-*tid*.rst"/>
+                                            </fileset>
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
                         </executions>
                     </plugin>
                     <plugin>
@@ -950,58 +973,6 @@
                             </dependency>
                         </dependencies>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>rst-install-generate</id>
-                                <phase>process-sources</phase>
-                                <configuration>
-                                    <tasks>
-                                        <exec executable="pip">
-                                            <arg value="install"/>
-                                            <arg value="-e"/>
-                                            <arg value="git+git@github.rackspace.com:Product-DevOps/wadl2rst.git@master#egg=wadl2rst"/>
-                                            <arg value="-I"/>
-                                        </exec>
-                                        <exec executable="wadl2rst"/>
-                                    </tasks>
-                                </configuration>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!--
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-rst-files</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/api-docs/dev-guide/api-operations/methods/</outputDirectory>
-                                    <resources>          
-                                        <resource>
-                                            <directory>${basedir}/target/rst/dev-guide/api-operations</directory>
-                                            <filtering>true</filtering>
-                                            <includes>
-                                                <include>get-*tid.rst</include>
-                                                <include>get-*tid-entries-id.rst</include>
-                                            </includes>
-                                        </resource>
-                                    </resources>              
-                                </configuration>         
-                            </execution>
-                        </executions>
-                    </plugin>
-                    -->
                 </plugins>
             </build>
         </profile>

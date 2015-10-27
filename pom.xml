@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rackspace.usage</groupId>
     <artifactId>usage-schema</artifactId>
-    <version>1.103.0-SNAPSHOT</version>
+    <version>1.104.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Usage Schema</name>
@@ -904,10 +904,10 @@
                                 <configuration>
                                     <tasks>
                                         <exec executable="wadl-tools/bin/normalizeWadl.sh">
-                                            <arg value="-f"/>
-                                            <arg value="tree"/>
-                                            <arg value="-w"/>
-                                            <arg value="allfeeds.wadl"/>
+                                            <arg value="-f" />
+                                            <arg value="tree" />
+                                            <arg value="-w" />
+                                            <arg value="allfeeds.wadl" />
                                         </exec>
                                     </tasks>
                                 </configuration>

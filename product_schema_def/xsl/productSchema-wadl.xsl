@@ -290,7 +290,7 @@
                     </request>
                     <!-- Okay -->
                     <response status="201" >
-            			<wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
+            			<wadl:doc title="Created">The request has been fulfilled. The entry has been created.</wadl:doc>
         			</response>
                     <!-- On Error -->
                     <response status="400">

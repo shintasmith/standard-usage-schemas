@@ -115,7 +115,9 @@
                         <wadl:doc>urn:uuid:676f3860-447c-40a3-8f61-9791819cc82f</wadl:doc>
                     </param>
                     <method id="getEntry{$id}Tenant" name="GET">
-                    <doc xml:lang="EN" title="Get {$eventName}" xmlns="http://docbook.org/ns/docbook">
+                    <outwadl:doc xml:lang="EN" title="Get {$eventName}" 
+                              xmlns:outwadl="http://wadl.dev.java.net/2009/02" 
+                              xmlns="http://docbook.org/ns/docbook">
                         <para role="shortdesc">This http request fetches one particular event whose ID is listed in the URI.</para>
                             <xsl:apply-templates select="$currentSchemas" mode="wadlDoc">
                                 <xsl:with-param name="sampleMessages" select="$sampleMessages"/>
@@ -123,7 +125,7 @@
                                 <xsl:with-param name="security">external</xsl:with-param>
                                 <xsl:with-param name="summary" select="$summaryOnly"/>
                             </xsl:apply-templates>
-                    </doc>
+                    </outwadl:doc>
                         <xsl:if test="$id != 'CloudMonitoring' and $id != 'CloudServersOpenStack' and $id != 'CloudServers'">
                             <request>
                                 <!-- Restrict representation to application/atom+xml. Means JSON not allowed -->

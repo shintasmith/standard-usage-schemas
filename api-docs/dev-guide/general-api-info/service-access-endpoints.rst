@@ -1,4 +1,4 @@
-.. _service-access-endpoints
+.. _service-access-endpoints:
 
 Service access/endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

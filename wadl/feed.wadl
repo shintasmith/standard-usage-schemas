@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application[
+<!ENTITY % common SYSTEM "../src/docbkx/common/common.ent">
+    %common;
+]>
 <application xmlns="http://wadl.dev.java.net/2009/02"
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:db="http://docbook.org/ns/docbook"
@@ -99,9 +103,11 @@
         <request>
             <param name="ACCEPT" style="header" type="cldfeeds:AcceptHeaderType" repeating="true" required="true"
                 rax:message="getFeed: Accept header contains unsupported media types: application/*json"
-                rax:code="406"><wadl:doc xmlns="http//docbook.org/ns/docbook">
-                    Specifies the type of Accept header to be used in the request.
-                </wadl:doc></param>
+                rax:code="406">
+                <wadl:doc xmlns="http//docbook.org/ns/docbook">
+                   Specifies the type of Accept header to be used in the request.
+                </wadl:doc>
+                </param>
 
             <param name="marker" style="query" type="xs:anyURI" required="false"> 
             <wadl:doc xmlns="http//docbook.org/ns/docbook">
@@ -118,15 +124,13 @@
                 </wadl:doc>
             </param>
         </request>
-        <response status="200">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
-        </response>
-        <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
+          <response status="200">
+            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
             <representation mediaType="application/json"/>
-        </response>
+         </response>
+        <!-- On Error -->
+         &commonFaults;
+         &getFaults;
     </method>
 
     <method id="getFeedAllowJson" name="GET">
@@ -148,18 +152,17 @@
             </param>
         </request>
         <response status="200">
-            <representation mediaType="application/atom+xml"/>
-        </response>
+            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
+            <representation mediaType="application/json"/>
+         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-        </response>
+        &commonFaults;
+        &getFaults;
     </method>
 
     <method id="getEntry" name="GET">
         <wadl:doc xml:lang="EN" title="Get Event ID" xmlns="http://docbook.org/ns/docbook">
             <para role="shortdesc">This operation obtains one particular event whose Id is listed in the URI.</para>
-
         </wadl:doc>
         <request>
             <param name="ACCEPT" style="header" type="cldfeeds:AcceptHeaderType" repeating="true" required="true"
@@ -170,14 +173,12 @@
         </request>
                
         <response status="200">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
-        </response>
-        <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
+            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
             <representation mediaType="application/json"/>
-        </response>
+         </response>
+        <!-- On Error -->
+        &commonFaults;
+        &getFaults;
     </method>
 
     <method id="addPlainUnvalidatedEntry" name="POST">
@@ -192,15 +193,12 @@
             <representation mediaType="application/vnd.rackspace.atom+json"/>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The entry has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+        &commonFaults;
+        &postPutFaults;
     </method>
 
     <method id="addJsonContentOnly" name="POST">
@@ -221,15 +219,12 @@
             </representation>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+        &commonFaults;
+        &postPutFaults;
     </method>
 
     <method id="addPlainEntry" name="POST">
@@ -294,15 +289,12 @@
             </representation>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+         &commonFaults;
+         &postPutFaults;
     </method>
     
     <method id="addUsageDeadLetter" name="POST">
@@ -369,14 +361,11 @@
             </representation>
         </request>
         <!-- Okay -->
-        <response status="201">
-            <representation mediaType="application/atom+xml"/>
-            <representation mediaType="application/vnd.rackspace.atom+json"/>
+        <response status="201" >
+            <wadl:doc title="Created">The request has been fulfilled. The domain has been created.</wadl:doc>
         </response>
         <!-- On Error -->
-        <response status="400 401 409 500 503">
-            <representation mediaType="application/xml"/>
-            <representation mediaType="application/json"/>
-        </response>
+         &commonFaults;
+         &postPutFaults;
     </method>
 </application>

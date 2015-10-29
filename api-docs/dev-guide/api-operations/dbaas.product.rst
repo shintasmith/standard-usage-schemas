@@ -8,4 +8,4 @@ the Rackspace Cloud Databases service.
 
 
 .. include:: methods/get-get-feed-dbaas-events-tid.rst
-.. include:: methods/get-dbaas-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-database-event-dbaas-events-tid-entries-id.rst

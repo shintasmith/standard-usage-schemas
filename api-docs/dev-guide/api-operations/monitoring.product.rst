@@ -8,4 +8,4 @@ the Rackspace Cloud Monitoring service.
 
 
 .. include:: methods/get-get-feed-monitoring-events-tid.rst
-.. include:: methods/get-monitoring-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-monitoring-event-monitoring-events-tid-entries-id.rst 

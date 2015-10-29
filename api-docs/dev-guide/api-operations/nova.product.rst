@@ -8,4 +8,4 @@ the Open Stack Servers service.
 
 
 .. include:: methods/get-get-feed-nova-events-tid.rst
-.. include:: methods/get-nova-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-servers-(openstack)-event-nova-events-tid-entries-id.rst 

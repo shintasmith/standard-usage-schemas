@@ -136,8 +136,23 @@
                             <representation mediaType="application/atom+xml"/>
                         </response>
                         <!-- On Error -->
-                        <response status="400 401 409 500 503">
-                            <representation mediaType="application/xml"/>
+                        <response status="400">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Bad Request" xml:lang="EN">The request is missing one or more elements, or the values of some 
+                                elements are invalid.</wadl:doc>
+                        </response>
+                        <response status="401">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
+                        </response>
+                        <response status="409">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="The object already exists." xml:lang="EN">Duplicate entry ID sent 
+                                in request. Fix entry and repost.
+                            </wadl:doc>
+                        </response>
+                        <response status="500">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Internal Server Error" xml:lang="EN">The server encountered an unexpected condition which prevented it from fulfilling the request.</wadl:doc>
+                        </response>
+                        <response status="503">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Service Unavailable" xml:lang="EN">Service is not available. Try again later.</wadl:doc>
                         </response>
                     </method>
                 </resource>
@@ -274,12 +289,27 @@
                         </representation>
                     </request>
                     <!-- Okay -->
-                    <response status="201">
-                        <representation mediaType="application/atom+xml"/>
-                    </response>
+                    <response status="201" >
+            			<wadl:doc title="Created">The request has been fulfilled. The entry has been created.</wadl:doc>
+        			</response>
                     <!-- On Error -->
-                    <response status="400 401 409 500 503">
-                        <representation mediaType="application/xml"/>
+                    <response status="400">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Bad Request" xml:lang="EN">The request is missing one or more elements, or the values of some 
+                                elements are invalid.</wadl:doc>
+                        </response>
+                        <response status="401">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
+                        </response>
+                        <response status="409">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="The object already exists." xml:lang="EN">Duplicate entry ID sent 
+                                in request. Fix entry and repost.
+                            </wadl:doc>
+                        </response>
+                        <response status="500">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Internal Server Error" xml:lang="EN">The server encountered an unexpected condition which prevented it from fulfilling the request.</wadl:doc>
+                        </response>
+                        <response status="503">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Service Unavailable" xml:lang="EN">Service is not available. Try again later.</wadl:doc>
                     </response>
                 </method>
                 <xsl:variable name="opencurly">{</xsl:variable>
@@ -311,8 +341,23 @@
                             <representation mediaType="application/atom+xml"/>
                         </response>
                         <!-- On Error -->
-                        <response status="400 401 409 500 503">
-                            <representation mediaType="application/xml"/>
+                        <response status="400">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Bad Request" xml:lang="EN">The request is missing one or more elements, or the values of some 
+                                elements are invalid.</wadl:doc>
+                        </response>
+                        <response status="401">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
+                        </response>
+                        <response status="409">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="The object already exists." xml:lang="EN">Duplicate entry ID sent 
+                                in request. Fix entry and repost.
+                            </wadl:doc>
+                        </response>
+                        <response status="500">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Internal Server Error" xml:lang="EN">The server encountered an unexpected condition which prevented it from fulfilling the request.</wadl:doc>
+                        	</response>
+                        <response status="503">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Service Unavailable" xml:lang="EN">Service is not available. Try again later.</wadl:doc>
                         </response>
                     </method>
                 </resource>

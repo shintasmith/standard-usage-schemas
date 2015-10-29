@@ -8,4 +8,4 @@ the Rackspace Cloud Backup service.
 
 
 .. include:: methods/get-get-feed-backup-events-tid.rst
-.. include:: methods/get-backup-events-tid-entries-id.rst 
+.. include:: methods/get-get-cloud-backup-event-backup-events-tid-entries-id.rst 

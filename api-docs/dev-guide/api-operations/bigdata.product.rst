@@ -8,4 +8,4 @@ Use the Cloud Big Data API operations to get information about usage and system 
 the Rackspace Cloud Big Data service.
 
 .. include:: methods/get-get-feed-bigdata-events-tid.rst
-.. include:: methods/get-bigdata-events-tid-entries-id.rst 
+.. include:: methods/get-get-big-data-event-bigdata-events-tid-entries-id.rst 

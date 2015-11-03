@@ -13,9 +13,11 @@ message_samples/widgettest/
 target
 .classpath
 .settings
+env
 wadl/product.wadl
 generated_product_xsds/*
 core_xsd/usage.xsd
 normalized/*
+src/wadl2rst
 TODO.org
 _build

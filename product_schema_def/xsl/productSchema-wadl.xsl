@@ -136,7 +136,9 @@
                             </request>
                         </xsl:if>
                         <response status="200">
-                            <representation mediaType="application/atom+xml" title="OK" xml:lang="EN">The request completed successfully</representation>
+                            <representation mediaType="application/atom+xml"/>
+                            <outwadl:doc xmlns:outwadl="http://wadl.dev.java.net/2009/02" 
+                                         xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request completed successfully</outwadl:doc>
                         </response>
                         <!-- On Error -->
                         <response status="400">
@@ -341,7 +343,9 @@
                         </request>
                         </xsl:if>
                         <response status="200">
-                            <representation mediaType="application/atom+xml" title="OK" xml:lang="EN">The request completed successfully</representation>
+                            <representation mediaType="application/atom+xml"/>
+                            <outwadl:doc xmlns:outwadl="http://wadl.dev.java.net/2009/02" 
+                                         xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request completed successfully</outwadl:doc>
                         </response>
                         <!-- On Error -->
                         <response status="400">

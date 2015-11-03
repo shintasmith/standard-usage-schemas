@@ -100,7 +100,8 @@ This table shows the possible response codes for this operation:
 +--------------------------+-------------------------+-------------------------+
 |Response Code             |Name                     |Description              |
 +==========================+=========================+=========================+
-|200                       |                         |                         |
+|200                       |OK                       |The request completed    |
+|                          |                         |successfully             |
 +--------------------------+-------------------------+-------------------------+
 |400                       |Bad Request              |The request is missing   |
 |                          |                         |one or more elements, or |

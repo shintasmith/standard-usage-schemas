@@ -18,6 +18,7 @@
     xmlns:cdnBand="http://docs.rackspace.com/usage/rackspacecdn/bandwidth"
     xmlns:cdnReqCount="http://docs.rackspace.com/usage/rackspacecdn/requestcount"
     xmlns:sitesSubscription="http://docs.rackspace.com/usage/sites/subscription"
+    xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0"
     xmlns:xslout="http://www.rackspace.com/repose/wadl/checker/Transform"
     xmlns:saxon="http://saxon.sf.net/"
     xmlns:sum="http://docs.rackspace.com/core/usage/schema/summary"
@@ -135,7 +136,7 @@
                             </request>
                         </xsl:if>
                         <response status="200">
-                            <representation mediaType="application/atom+xml"/>
+                            <representation mediaType="application/atom+xml" title="OK" xml:lang="EN">The request completed successfully</representation>
                         </response>
                         <!-- On Error -->
                         <response status="400">
@@ -340,7 +341,7 @@
                         </request>
                         </xsl:if>
                         <response status="200">
-                            <representation mediaType="application/atom+xml"/>
+                            <representation mediaType="application/atom+xml" title="OK" xml:lang="EN">The request completed successfully</representation>
                         </response>
                         <!-- On Error -->
                         <response status="400">
@@ -1084,6 +1085,16 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:variable name="sampleXMLFile" 
+                      select="replace(resolve-uri(
+                                         ($sampleMessages//sch:message[
+                                         @type = $context and
+                                         @namespace = current()/@namespace and
+                                         @version = current()/@version and
+                                         @serviceCode = current()/@serviceCode and
+                                         @summary = $summary]/@path)[1]),
+                                  '/message_samples/',
+                                  '/target/docbkx/message_samples/')"/>
         <xsl:variable name="json_content">
             <xsl:value-of
                     select=" unparsed-text(resolve-uri(
@@ -1094,6 +1105,14 @@
                     @serviceCode = current()/@serviceCode and
                     @summary = $summary]/@json_path)[1], base-uri()))"/>
         </xsl:variable>
+        <xsl:variable name="sampleJSONFile" 
+                      select="resolve-uri(
+                                          ($sampleMessages//sch:message[
+                                          @type = $context and
+                                          @namespace = current()/@namespace and
+                                          @version = current()/@version and
+                                          @serviceCode = current()/@serviceCode and
+                                          @summary = $summary]/@json_path)[1])"/>
         <example>
             <title><xsl:value-of select="replace(normalize-space(./sch:description),'^(.+)\.$','$1')"/>, version <xsl:value-of select="@version"/></title>
             <xsl:if test="sch:attribute|sch:attributeGroup">
@@ -1129,7 +1148,7 @@
             <xsl:choose>
                 <xsl:when test="$content != ''">
                     <para><emphasis role="bold">XML Sample</emphasis>
-                        <programlisting language="xml"><xsl:copy-of select="replace($content,'\n.*atom.*feed.*ignore.*used for testing.*(\n)','$1')"/></programlisting>
+                        <xsdxt:code href="{$sampleXMLFile}"/>
                     </para>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1140,7 +1159,7 @@
             <xsl:choose>
                 <xsl:when test="$json_content != ''">
                     <para><emphasis role="bold">JSON Sample</emphasis>
-                        <programlisting language="json"><xsl:copy-of select="$json_content"/></programlisting>
+                        <xsdxt:code href="{$sampleJSONFile}"/>
                     </para>
                 </xsl:when>
                 <xsl:otherwise>

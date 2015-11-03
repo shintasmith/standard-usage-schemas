@@ -14,115 +14,129 @@ This http request fetches one particular event whose ID is listed in the URI.
 
 Specifies the usage message for a big data cluster, version 1
 
-Attribute NameDescriptionTypeOptionality``flavorId``
 
-Specifies the flavor Id of the cluster.
++------------------------------+---------------+---------------+---------------+
+|Attribute Name                |Description    |Type           |Optionality    |
++==============================+===============+===============+===============+
+|``flavorId``                  |Specifies the  |string         |Required       |
+|                              |flavor Id of   |               |               |
+|                              |the cluster.   |               |               |
++------------------------------+---------------+---------------+---------------+
+|``flavorName``                |Specifies the  |string         |Required       |
+|                              |flavor name of |               |               |
+|                              |the cluster.   |               |               |
++------------------------------+---------------+---------------+---------------+
+|``numberServersInCluster``    |Specifies the  |unsignedInt    |Required       |
+|                              |number of data |               |               |
+|                              |nodes that are |               |               |
+|                              |in the cluster.|               |               |
++------------------------------+---------------+---------------+---------------+
+|``aggregatedClusterDuration`` |Specifies the  |unsignedLong   |Optional       |
+|                              |sum of the     |               |               |
+|                              |durations of   |               |               |
+|                              |all nodes of   |               |               |
+|                              |the cluster,   |               |               |
+|                              |in seconds.    |               |               |
++------------------------------+---------------+---------------+---------------+
+|``bandwidthIn``               |Specifies the  |unsignedLong   |Required       |
+|                              |inbound        |               |               |
+|                              |bandwidth, in  |               |               |
+|                              |bytes.         |               |               |
++------------------------------+---------------+---------------+---------------+
+|``bandwidthOut``              |Specifies the  |unsignedLong   |Required       |
+|                              |outband        |               |               |
+|                              |bandwidth, in  |               |               |
+|                              |bytes.         |               |               |
++------------------------------+---------------+---------------+---------------+
+XML Sample.. code::
 
-string
+``< ?xml version="1.0" encoding="UTF-8"? > < !-- This example has been generated using 'mvn -P generate-samples clean generate-sources -DproductSchema=sample_product_schemas/bigdata.xml -DfeedName=bigdata' call. Some assumptions have been made when generating this and might not be correct. Manual modification might be required for the unit tests to pass. The assumptions: - If the productSchema requires a 'resourceId' attribute, its value is set to '4a2b42f4-6c63-11e1-815b-7fcbcf67f549'. - If the productSchema has < xpathAssertion > nodes, the assertions might not be satisfied by the generated content. - No optional nodes or attributes are generated. - Does not process the 'withEventType' and 'withResource' attributes. -- > < atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema" > < atom:id > urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814 < /atom:id > < atom:category term="tid:1234"/ > < atom:category term="rgn:DFW"/ > < atom:category term="dc:DFW1"/ > < atom:category term="rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"/ > < atom:category term="bigdata.bigdata.hadoop_hdp1_1.usage"/ > < atom:category term="type:bigdata.bigdata.hadoop_hdp1_1.usage"/ > < atom:title > BigData < /atom:title > < atom:content type="application/xml" > < event xmlns="http://docs.rackspace.com/core/event" xmlns:sample="http://docs.rackspace.com/usage/bigdata" id="e53d007a-fc23-11e1-975c-cfa6b29bb814" version="2" resourceId="4a2b42f4-6c63-11e1-815b-7fcbcf67f549" tenantId="1234" startTime="2013-03-15T11:51:11Z" endTime="2013-03-16T00:00:00Z" type="USAGE" dataCenter="DFW1" region="DFW" > < sample:product aggregatedClusterDuration="43729" serviceCode="BigData" version="1" resourceType="HADOOP_HDP1_1" flavorId="a" flavorName="a" numberServersInCluster="1" bandwidthIn="0" bandwidthOut="0"/ > < /event > < /atom:content > < atom:link href="https://ord.feeds.api.rackspacecloud.com/bigdata/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814" rel="self"/ > < atom:updated > 2013-03-01T19:42:35.507Z < /atom:updated > < atom:published > 2013-03-01T19:42:35.507 < /atom:published > < /atom:entry >`` 
 
-Required
 
-``flavorName``
 
-Specifies the flavor name of the cluster.
 
-string
+JSON Sample.. code::
 
-Required
+``{ "entry": { "@type": "http://www.w3.org/2005/Atom", "category": [ { "term": "tid:1234" }, { "term": "rgn:DFW" }, { "term": "dc:DFW1" }, { "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549" }, { "term": "bigdata.bigdata.hadoop_hdp1_1.usage" }, { "term": "type:bigdata.bigdata.hadoop_hdp1_1.usage" } ], "link": [ { "href": "https://ord.feeds.api.rackspacecloud.com/bigdata/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "rel": "self" } ], "id": "urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "title": "BigData", "content": { "event": { "@type": "http://docs.rackspace.com/core/event", "id": "e53d007a-fc23-11e1-975c-cfa6b29bb814", "version": "2", "resourceId": "4a2b42f4-6c63-11e1-815b-7fcbcf67f549", "tenantId": "1234", "startTime": "2013-03-15T11:51:11Z", "endTime": "2013-03-16T00:00:00Z", "type": "USAGE", "dataCenter": "DFW1", "region": "DFW", "product": { "@type": "http://docs.rackspace.com/usage/bigdata", "aggregatedClusterDuration": 43729, "serviceCode": "BigData", "version": "1", "resourceType": "HADOOP_HDP1_1", "flavorId": "a", "flavorName": "a", "numberServersInCluster": 1, "bandwidthIn": 0, "bandwidthOut": 0 } } }, "updated": "2013-03-01T19:42:35.507Z", "published": "2013-03-01T19:42:35.507" } }`` 
 
-``numberServersInCluster``
 
-Specifies the number of data nodes that are in the cluster.
 
-unsignedInt
-
-Required
-
-``aggregatedClusterDuration``
-
-Specifies the sum of the durations of all nodes of the cluster, in seconds.
-
-unsignedLong
-
-Optional
-
-``bandwidthIn``
-
-Specifies the inbound bandwidth, in bytes.
-
-unsignedLong
-
-Required
-
-``bandwidthOut``
-
-Specifies the outband bandwidth, in bytes.
-
-unsignedLong
-
-Required
-
-XML Sample ``< ?xml version="1.0" encoding="UTF-8"? > < atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema" > < atom:id > urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814 < /atom:id > < atom:category term="tid:1234"/ > < atom:category term="rgn:DFW"/ > < atom:category term="dc:DFW1"/ > < atom:category term="rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"/ > < atom:category term="bigdata.bigdata.hadoop_hdp1_1.usage"/ > < atom:category term="type:bigdata.bigdata.hadoop_hdp1_1.usage"/ > < atom:title > BigData < /atom:title > < atom:content type="application/xml" > < event xmlns="http://docs.rackspace.com/core/event" xmlns:sample="http://docs.rackspace.com/usage/bigdata" id="e53d007a-fc23-11e1-975c-cfa6b29bb814" version="2" resourceId="4a2b42f4-6c63-11e1-815b-7fcbcf67f549" tenantId="1234" startTime="2013-03-15T11:51:11Z" endTime="2013-03-16T00:00:00Z" type="USAGE" dataCenter="DFW1" region="DFW" > < sample:product aggregatedClusterDuration="43729" serviceCode="BigData" version="1" resourceType="HADOOP_HDP1_1" flavorId="a" flavorName="a" numberServersInCluster="1" bandwidthIn="0" bandwidthOut="0"/ > < /event > < /atom:content > < atom:link href="https://ord.feeds.api.rackspacecloud.com/bigdata/events/1234/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814" rel="self"/ > < atom:updated > 2013-03-01T19:42:35.507Z < /atom:updated > < atom:published > 2013-03-01T19:42:35.507 < /atom:published > < /atom:entry >`` 
-
-JSON Sample ``{ "entry": { "@type": "http://www.w3.org/2005/Atom", "category": [ { "term": "tid:1234" }, { "term": "rgn:DFW" }, { "term": "dc:DFW1" }, { "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549" }, { "term": "bigdata.bigdata.hadoop_hdp1_1.usage" }, { "term": "type:bigdata.bigdata.hadoop_hdp1_1.usage" } ], "link": [ { "href": "https://ord.feeds.api.rackspacecloud.com/bigdata/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "rel": "self" } ], "id": "urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "title": "BigData", "content": { "event": { "@type": "http://docs.rackspace.com/core/event", "id": "e53d007a-fc23-11e1-975c-cfa6b29bb814", "version": "2", "resourceId": "4a2b42f4-6c63-11e1-815b-7fcbcf67f549", "tenantId": "1234", "startTime": "2013-03-15T11:51:11Z", "endTime": "2013-03-16T00:00:00Z", "type": "USAGE", "dataCenter": "DFW1", "region": "DFW", "product": { "@type": "http://docs.rackspace.com/usage/bigdata", "aggregatedClusterDuration": 43729, "serviceCode": "BigData", "version": "1", "resourceType": "HADOOP_HDP1_1", "flavorId": "a", "flavorName": "a", "numberServersInCluster": 1, "bandwidthIn": 0, "bandwidthOut": 0 } } }, "updated": "2013-03-01T19:42:35.507Z", "published": "2013-03-01T19:42:35.507" } }`` 
 
 Specifies the usage message for a big data cluster, version 2
 
-Attribute NameDescriptionTypeOptionality``flavorId``
 
-Specifies the flavor Id of the cluster.
++------------------------------+---------------+---------------+---------------+
+|Attribute Name                |Description    |Type           |Optionality    |
++==============================+===============+===============+===============+
+|``flavorId``                  |Specifies the  |string         |Required       |
+|                              |flavor Id of   |               |               |
+|                              |the cluster.   |               |               |
+|                              |Allowed        |               |               |
+|                              |Values:        |               |               |
+|                              |``hadoop1-2``, |               |               |
+|                              |``hadoop1-4``, |               |               |
+|                              |``hadoop1-7``, |               |               |
+|                              |``hadoop1-     |               |               |
+|                              |15``,          |               |               |
+|                              |``hadoop1-     |               |               |
+|                              |30``,          |               |               |
+|                              |``hadoop1-     |               |               |
+|                              |60``,          |               |               |
+|                              |``onmetal-     |               |               |
+|                              |io1``,         |               |               |
+|                              |``general1-    |               |               |
+|                              |1``,           |               |               |
+|                              |``general1-    |               |               |
+|                              |2``,           |               |               |
+|                              |``general1-    |               |               |
+|                              |4``,           |               |               |
+|                              |``general1-    |               |               |
+|                              |8``, ``io1-    |               |               |
+|                              |120``, ``io1-  |               |               |
+|                              |15``, ``io1-   |               |               |
+|                              |30``, ``io1-   |               |               |
+|                              |60``, ``io1-   |               |               |
+|                              |90``           |               |               |
++------------------------------+---------------+---------------+---------------+
+|``flavorName``                |Specifies the  |string         |Required       |
+|                              |flavor name of |               |               |
+|                              |the cluster.   |               |               |
++------------------------------+---------------+---------------+---------------+
+|``numberServersInCluster``    |Specifies the  |unsignedInt    |Required       |
+|                              |number of data |               |               |
+|                              |nodes in       |               |               |
+|                              |cluster.       |               |               |
++------------------------------+---------------+---------------+---------------+
+|``aggregatedClusterDuration`` |Specifies the  |unsignedLong   |Optional       |
+|                              |sum of the     |               |               |
+|                              |durations of   |               |               |
+|                              |all nodes of   |               |               |
+|                              |the cluster,   |               |               |
+|                              |in seconds.    |               |               |
++------------------------------+---------------+---------------+---------------+
+|``bandwidthIn``               |Specifies the  |unsignedLong   |Required       |
+|                              |inbound        |               |               |
+|                              |bandwidth, in  |               |               |
+|                              |bytes.         |               |               |
++------------------------------+---------------+---------------+---------------+
+|``bandwidthOut``              |Specifies the  |unsignedLong   |Required       |
+|                              |outbound       |               |               |
+|                              |bandwidth, in  |               |               |
+|                              |bytes.         |               |               |
++------------------------------+---------------+---------------+---------------+
+XML Sample.. code::
 
-Allowed Values:
+``< ?xml version="1.0" encoding="UTF-8"? > < !-- This example has been generated using 'mvn -P generate-samples clean generate-sources -DproductSchema=sample_product_schemas/bigdata.xml -DfeedName=bigdata' call. Some assumptions have been made when generating this and might not be correct. Manual modification might be required for the unit tests to pass. The assumptions: - If the productSchema requires a 'resourceId' attribute, its value is set to '4a2b42f4-6c63-11e1-815b-7fcbcf67f549'. - If the productSchema has < xpathAssertion > nodes, the assertions might not be satisfied by the generated content. - No optional nodes or attributes are generated. - Does not process the 'withEventType' and 'withResource' attributes. -- > < atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema" > < atom:id > urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814 < /atom:id > < atom:category term="tid:1234"/ > < atom:category term="rgn:DFW"/ > < atom:category term="dc:DFW1"/ > < atom:category term="rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"/ > < atom:category term="bigdata.bigdata.hadoop_hdp2_1.usage"/ > < atom:category term="type:bigdata.bigdata.hadoop_hdp2_1.usage"/ > < atom:title > BigData < /atom:title > < atom:content type="application/xml" > < event xmlns="http://docs.rackspace.com/core/event" xmlns:sample="http://docs.rackspace.com/usage/bigdata" id="e53d007a-fc23-11e1-975c-cfa6b29bb814" version="2" resourceId="4a2b42f4-6c63-11e1-815b-7fcbcf67f549" tenantId="1234" startTime="2013-03-15T11:51:11Z" endTime="2013-03-16T00:00:00Z" type="USAGE" dataCenter="DFW1" region="DFW" > < sample:product aggregatedClusterDuration="43729" serviceCode="BigData" version="2" resourceType="HADOOP_HDP2_1" flavorId="hadoop1-7" flavorName="a" numberServersInCluster="1" bandwidthIn="0" bandwidthOut="0"/ > < /event > < /atom:content > < atom:link href="https://ord.feeds.api.rackspacecloud.com/bigdata/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814" rel="self"/ > < atom:updated > 2013-03-01T19:42:35.507Z < /atom:updated > < atom:published > 2013-03-01T19:42:35.507 < /atom:published > < /atom:entry >`` 
 
-``hadoop1-2``, ``hadoop1-4``, ``hadoop1-7``, ``hadoop1-15``, ``hadoop1-30``, ``hadoop1-60``, ``onmetal-io1``, ``general1-1``, ``general1-2``, ``general1-4``, ``general1-8``, ``io1-120``, ``io1-15``, ``io1-30``, ``io1-60``, ``io1-90``
 
-string
 
-Required
 
-``flavorName``
+JSON Sample.. code::
 
-Specifies the flavor name of the cluster.
+``{ "entry": { "@type": "http://www.w3.org/2005/Atom", "category": [ { "term": "tid:1234" }, { "term": "rgn:DFW" }, { "term": "dc:DFW1" }, { "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549" }, { "term": "bigdata.bigdata.hadoop_hdp2_1.usage" }, { "term": "type:bigdata.bigdata.hadoop_hdp2_1.usage" } ], "link": [ { "href": "https://ord.feeds.api.rackspacecloud.com/bigdata/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "rel": "self" } ], "id": "urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "title": "BigData", "content": { "event": { "@type": "http://docs.rackspace.com/core/event", "id": "e53d007a-fc23-11e1-975c-cfa6b29bb814", "version": "2", "resourceId": "4a2b42f4-6c63-11e1-815b-7fcbcf67f549", "tenantId": "1234", "startTime": "2013-03-15T11:51:11Z", "endTime": "2013-03-16T00:00:00Z", "type": "USAGE", "dataCenter": "DFW1", "region": "DFW", "product": { "@type": "http://docs.rackspace.com/usage/bigdata", "aggregatedClusterDuration": 43729, "serviceCode": "BigData", "version": "2", "resourceType": "HADOOP_HDP2_1", "flavorId": "hadoop1-7", "flavorName": "a", "numberServersInCluster": 1, "bandwidthIn": 0, "bandwidthOut": 0 } } }, "updated": "2013-03-01T19:42:35.507Z", "published": "2013-03-01T19:42:35.507" } }`` 
 
-string
 
-Required
 
-``numberServersInCluster``
-
-Specifies the number of data nodes in cluster.
-
-unsignedInt
-
-Required
-
-``aggregatedClusterDuration``
-
-Specifies the sum of the durations of all nodes of the cluster, in seconds.
-
-unsignedLong
-
-Optional
-
-``bandwidthIn``
-
-Specifies the inbound bandwidth, in bytes.
-
-unsignedLong
-
-Required
-
-``bandwidthOut``
-
-Specifies the outbound bandwidth, in bytes.
-
-unsignedLong
-
-Required
-
-XML Sample ``< ?xml version="1.0" encoding="UTF-8"? > < atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema" > < atom:id > urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814 < /atom:id > < atom:category term="tid:1234"/ > < atom:category term="rgn:DFW"/ > < atom:category term="dc:DFW1"/ > < atom:category term="rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"/ > < atom:category term="bigdata.bigdata.hadoop_hdp2_1.usage"/ > < atom:category term="type:bigdata.bigdata.hadoop_hdp2_1.usage"/ > < atom:title > BigData < /atom:title > < atom:content type="application/xml" > < event xmlns="http://docs.rackspace.com/core/event" xmlns:sample="http://docs.rackspace.com/usage/bigdata" id="e53d007a-fc23-11e1-975c-cfa6b29bb814" version="2" resourceId="4a2b42f4-6c63-11e1-815b-7fcbcf67f549" tenantId="1234" startTime="2013-03-15T11:51:11Z" endTime="2013-03-16T00:00:00Z" type="USAGE" dataCenter="DFW1" region="DFW" > < sample:product aggregatedClusterDuration="43729" serviceCode="BigData" version="2" resourceType="HADOOP_HDP2_1" flavorId="hadoop1-7" flavorName="a" numberServersInCluster="1" bandwidthIn="0" bandwidthOut="0"/ > < /event > < /atom:content > < atom:link href="https://ord.feeds.api.rackspacecloud.com/bigdata/events/1234/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814" rel="self"/ > < atom:updated > 2013-03-01T19:42:35.507Z < /atom:updated > < atom:published > 2013-03-01T19:42:35.507 < /atom:published > < /atom:entry >`` 
-
-JSON Sample ``{ "entry": { "@type": "http://www.w3.org/2005/Atom", "category": [ { "term": "tid:1234" }, { "term": "rgn:DFW" }, { "term": "dc:DFW1" }, { "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549" }, { "term": "bigdata.bigdata.hadoop_hdp2_1.usage" }, { "term": "type:bigdata.bigdata.hadoop_hdp2_1.usage" } ], "link": [ { "href": "https://ord.feeds.api.rackspacecloud.com/bigdata/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "rel": "self" } ], "id": "urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814", "title": "BigData", "content": { "event": { "@type": "http://docs.rackspace.com/core/event", "id": "e53d007a-fc23-11e1-975c-cfa6b29bb814", "version": "2", "resourceId": "4a2b42f4-6c63-11e1-815b-7fcbcf67f549", "tenantId": "1234", "startTime": "2013-03-15T11:51:11Z", "endTime": "2013-03-16T00:00:00Z", "type": "USAGE", "dataCenter": "DFW1", "region": "DFW", "product": { "@type": "http://docs.rackspace.com/usage/bigdata", "aggregatedClusterDuration": 43729, "serviceCode": "BigData", "version": "2", "resourceType": "HADOOP_HDP2_1", "flavorId": "hadoop1-7", "flavorName": "a", "numberServersInCluster": 1, "bandwidthIn": 0, "bandwidthOut": 0 } } }, "updated": "2013-03-01T19:42:35.507Z", "published": "2013-03-01T19:42:35.507" } }`` 
 
 
 
@@ -134,7 +148,28 @@ This table shows the possible response codes for this operation:
 +==========================+=========================+=========================+
 |200                       |                         |                         |
 +--------------------------+-------------------------+-------------------------+
-|400 401 409 500 503       |                         |                         |
+|400                       |Bad Request              |The request is missing   |
+|                          |                         |one or more elements, or |
+|                          |                         |the values of some       |
+|                          |                         |elements are invalid.    |
++--------------------------+-------------------------+-------------------------+
+|401                       |Unauthorized             |Authentication failed,   |
+|                          |                         |or the user does not     |
+|                          |                         |have permissions for a   |
+|                          |                         |requested operation.     |
++--------------------------+-------------------------+-------------------------+
+|409                       |The object already       |Duplicate entry ID sent  |
+|                          |exists.                  |in request. Fix entry    |
+|                          |                         |and repost.              |
++--------------------------+-------------------------+-------------------------+
+|500                       |Internal Server Error    |The server encountered   |
+|                          |                         |an unexpected condition  |
+|                          |                         |which prevented it from  |
+|                          |                         |fulfilling the request.  |
++--------------------------+-------------------------+-------------------------+
+|503                       |Service Unavailable      |Service is not           |
+|                          |                         |available. Try again     |
+|                          |                         |later.                   |
 +--------------------------+-------------------------+-------------------------+
 
 

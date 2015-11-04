@@ -351,6 +351,26 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>clean-samples-for-docs</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <tasks>
+                                <exec executable="src/main/scripts/cleanSamplesForDocs.sh">
+                                    <arg value="${basedir}/message_samples" />
+                                </exec>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
@@ -920,13 +940,30 @@
                                 <phase>process-sources</phase>
                                 <configuration>
                                     <tasks>
-                                        <exec executable="pip">
+                                        <property environment="env"/>
+
+                                        <!-- delete the old virtualenv -->
+                                        <exec executable="rm" failonerror="false">
+                                            <env key="PATH" path="${env.PATH}"/>
+                                            <arg value="-r" />
+                                            <arg value="${project.basedir}/env" />
+                                        </exec>
+
+                                        <!-- create the new mkvirtualenv -->
+                                        <exec executable="virtualenv">
+                                            <env key="PATH" path="${env.PATH}"/>
+                                            <arg value="${project.basedir}/env" />
+                                        </exec>
+
+                                        <!-- install wadl2rst into the virtualenv -->
+                                        <exec executable="${project.basedir}/env/bin/pip">
                                             <arg value="install"/>
                                             <arg value="-e"/>
                                             <arg value="git+git@github.rackspace.com:Product-DevOps/wadl2rst.git@master#egg=wadl2rst"/>
                                             <arg value="-I"/>
                                         </exec>
-                                        <exec executable="wadl2rst"/>
+
+                                        <exec executable="${project.basedir}/env/bin/wadl2rst"/>
                                         <copy todir="${basedir}/api-docs/dev-guide/api-operations/methods/">
                                             <fileset dir="${basedir}/target/rst/dev-guide/api-operations/">
                                                 <include name="get-*tid*.rst"/>

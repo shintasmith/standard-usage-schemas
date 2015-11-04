@@ -20,9 +20,32 @@ This table shows the possible response codes for this operation:
 +--------------------------+-------------------------+-------------------------+
 |Response Code             |Name                     |Description              |
 +==========================+=========================+=========================+
-|200                       |                         |                         |
+|200                       |OK                       |The request succeeded.   |
 +--------------------------+-------------------------+-------------------------+
-|400 401 409 500 503       |                         |                         |
+|400                       |Bad Request              |The request is missing   |
+|                          |                         |one or more elements, or |
+|                          |                         |the values of some       |
+|                          |                         |elements are invalid.    |
++--------------------------+-------------------------+-------------------------+
+|401                       |Unauthorized             |Authentication failed,   |
+|                          |                         |or the user does not     |
+|                          |                         |have permissions for a   |
+|                          |                         |requested operation.     |
++--------------------------+-------------------------+-------------------------+
+|404                       |Not Found                |The requested resource   |
+|                          |                         |was not found.           |
++--------------------------+-------------------------+-------------------------+
+|429                       |Rate Limited             |Retry until the entry is |
+|                          |                         |posted.                  |
++--------------------------+-------------------------+-------------------------+
+|500                       |Internal Server Error    |The server encountered   |
+|                          |                         |an unexpected condition  |
+|                          |                         |which prevented it from  |
+|                          |                         |fulfilling the request.  |
++--------------------------+-------------------------+-------------------------+
+|503                       |Service Unavailable      |Service is not           |
+|                          |                         |available. Try again     |
+|                          |                         |later.                   |
 +--------------------------+-------------------------+-------------------------+
 
 

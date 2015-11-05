@@ -138,10 +138,6 @@ This table shows the possible response codes for this operation:
 |                          |                         |have permissions for a   |
 |                          |                         |requested operation.     |
 +--------------------------+-------------------------+-------------------------+
-|409                       |The object already       |Duplicate entry ID sent  |
-|                          |exists.                  |in request. Fix entry    |
-|                          |                         |and repost.              |
-+--------------------------+-------------------------+-------------------------+
 |500                       |Internal Server Error    |The server encountered   |
 |                          |                         |an unexpected condition  |
 |                          |                         |which prevented it from  |

@@ -112,6 +112,11 @@ class SampleMessagesSuite extends BaseUsageSuite {
         assert(eventParent != null, "  content should have an eventError")
       }
 
+      // special handling for jsoncontentonlytest samples
+      if ( f.getAbsolutePath().contains("jsoncontentonlytest") ) {
+        eventParent = eventParent.get("@text").get.asInstanceOf[Map[String,Any]]
+      }
+
       val eventObject = eventParent.get("event").get.asInstanceOf[Map[String,Any]]
       assert(eventObject != null, "  content should have an event")
       assert(eventObject.get("id") != null, "  event should have an id")

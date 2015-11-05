@@ -1,0 +1,50 @@
+{
+  "entry": {
+    "content": {
+      "@text": {
+          "event": {
+            "typeURI": "http://schemas.dmtf.org/cloud/audit/1.0/event", 
+            "eventTime": "2015-07-10T21:15:57+00:00", 
+            "target": {
+              "typeURI": "service/bss/billing/account", 
+              "id": "020-123456"
+            }, 
+            "observer": {
+              "typeURI": "service", 
+              "id": "billing.Billing-Service-Auditor", 
+              "name": "billing-service-audit"
+            }, 
+            "eventType": "activity", 
+            "initiator": {
+              "typeURI": "network/node", 
+              "id": "billing"
+            }, 
+            "action": "create", 
+            "outcome": "success", 
+            "id": "0fa234aea93f38c26fa234aea93f38g3", 
+            "attachments": [
+              {
+                "content": {
+                  "auditData": {
+                    "ran": "020-123456", 
+                    "stateTransition": "SUCCESSFUL_PAYMENT", 
+                    "amount": "100", 
+                    "version": "1", 
+                    "currency": "USD"
+                  }
+                }, 
+                "contentType": "http://billing.api.rackspacecloud.com/cadf/billing-system-event", 
+                "name": "auditData"
+              }
+            ]
+          }
+      },
+      "type": "application/json"
+    },
+    "@type": "http://www.w3.org/2005/Atom",
+    "title": {
+      "@text": "Billing Audit event",
+      "type": "text"
+    }
+  }
+}

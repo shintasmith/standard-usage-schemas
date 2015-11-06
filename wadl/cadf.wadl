@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application[
+<!ENTITY % common SYSTEM "../src/docbkx/common/common.ent">
+    %common;
+]>
 <application xmlns="http://wadl.dev.java.net/2009/02"
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:db="http://docbook.org/ns/docbook"
@@ -11,7 +15,10 @@
              xmlns:cadf="http://schemas.dmtf.org/cloud/audit/1.0/event"
              xmlns:ua="http://feeds.api.rackspacecloud.com/cadf/user-access-event"
              xmlns:xi="http://www.w3.org/2001/XInclude">
-
+    
+    <!--*******************************************************-->
+    <!--             All Resources                             -->
+    <!--*******************************************************-->
     <resource_type id="UserAccessEvent">
         <method id="addUserAccessEventEntry" name="POST" rax:roles="cloudfeeds:service-admin">
             <wadl:doc title="Add User Access Event" xmlns="http://docbook.org/ns/docbook">
@@ -230,12 +237,13 @@
                     <rax:preprocess href="atom_hopper_pre.xsl"/>
                 </representation>
             </request>
-            <response status="201">
-                <representation mediaType="application/atom+xml"/>
+            <response status="200">
+                <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
+                <representation mediaType="application/json"/>
             </response>
-            <response status="400 401 409 500 503">
-                <representation mediaType="application/xml"/>
-            </response>
+            <!-- On Error -->
+            &commonFaults;
+            &getFaults;
         </method>
         <resource path="entries/{id}" id="getEntry_UserAccessEvent">
             <param name="id" type="xs:anyURI" style="template">

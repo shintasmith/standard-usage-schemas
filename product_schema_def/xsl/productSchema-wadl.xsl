@@ -148,7 +148,7 @@
                         <response status="401">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
                         </response>
-                        <response status="409">
+                        <response status="429">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Rate Limited" xml:lang="EN">Too many requests. Wait and retry.</wadl:doc>
                         </response>
                         <response status="500">
@@ -303,7 +303,7 @@
                         <response status="401">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
                         </response>
-                        <response status="409">
+                        <response status="429">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="The object already exists." xml:lang="EN">Duplicate entry ID sent 
                                 in request. Fix entry and repost.
                             </wadl:doc>
@@ -353,7 +353,7 @@
                         <response status="401">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
                         </response>
-                        <response status="409">
+                        <response status="429">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Rate Limited" xml:lang="EN">Too many requests. Wait and retry.</wadl:doc>
                         </response>
                         <response status="500">

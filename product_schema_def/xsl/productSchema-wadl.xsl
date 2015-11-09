@@ -148,6 +148,9 @@
                         <response status="401">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
                         </response>
+                        <response status="429">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Rate Limited" xml:lang="EN">Too many requests. Wait and retry.</wadl:doc>
+                        </response>
                         <response status="500">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Internal Server Error" xml:lang="EN">The server encountered an unexpected condition which prevented it from fulfilling the request.</wadl:doc>
                         </response>
@@ -305,6 +308,9 @@
                                 in request. Fix entry and repost.
                             </wadl:doc>
                         </response>
+                        <response status="429">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Rate Limited" xml:lang="EN">Too many requests. Wait and retry.</wadl:doc>
+                        </response>
                         <response status="500">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Internal Server Error" xml:lang="EN">The server encountered an unexpected condition which prevented it from fulfilling the request.</wadl:doc>
                         </response>
@@ -349,6 +355,9 @@
                         </response>
                         <response status="401">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Unauthorized" xml:lang="EN">Authentication failed, or the user does not have permissions for a requested operation.</wadl:doc>
+                        </response>
+                        <response status="429">
+                            <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Rate Limited" xml:lang="EN">Too many requests. Wait and retry.</wadl:doc>
                         </response>
                         <response status="500">
                             <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Internal Server Error" xml:lang="EN">The server encountered an unexpected condition which prevented it from fulfilling the request.</wadl:doc>

@@ -135,7 +135,7 @@
                     <listitem>
                         <para><emphasis role="bold">Generic events in CADF</emphasis> adhere to the
                             CADF standard. For more information, see <link linkend="Generic_CADF"
-                                >Working with feeds in generic CADF format</link>.</para>
+                                >Generic CADF feds</link>.</para>
                     </listitem>
                 </itemizedlist>
             </para>
@@ -236,8 +236,8 @@
                             <td>generic CADF</td>
                             <td>This setting specifies that the feed is of type unvalidated CADF.
                                 The content node must be of <code>type=application/json</code>. For
-                                more information, see <link linkend="Generic_CADF">Working with
-                                    feeds in generic CADF format</link>.</td>
+                                more information, see <link linkend="Generic_CADF">Generic CADF
+                                    feeds</link>.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -2517,26 +2517,129 @@ mvn -P tiamat-check test</programlisting>
                     <para>The content for CADF events of non-user access type must be in JSON. </para>
                 </listitem>
                 <listitem>
-                    <para>The event can have an Atom XML envelope. If the event is published in JSON
-                        and retrieved in XML, only the Atom envelope is translated. The event
-                        payload remains in JSON.</para>
-                </listitem>
+                        <para>The event can have an Atom XML envelope. If the event is published in
+                            JSON and retrieved in XML, only the Atom envelope is translated. The
+                            event payload remains in JSON.</para>
+                        <para>The following example shows a billing service audit event with an Atom
+                            XML enveloped and the event payload in JSON format:</para>
+                        <para>
+                            <programlisting>&lt;?atom feed="jsoncontentonlytest/events"?>
+&lt;atom:entry xmlns="http://docs.rackspace.com/core/event"
+            xmlns:atom="http://www.w3.org/2005/Atom"
+            xmlns:cf-b="http://docs.rackspace.com/usage/cloudfiles/bandwidth">
+    &lt;atom:title type="text"&gt;Billing Audit event&lt;/atom:title>
+            &lt;atom:content type="application/json">
+        {
+          "event": {
+            "typeURI": "http://schemas.dmtf.org/cloud/audit/1.0/event", 
+            "eventTime": "2015-07-10T21:15:57+00:00", 
+            "target": {
+              "typeURI": "service/bss/billing/account", 
+              "id": "020-123456"
+            }, 
+            "observer": {
+              "typeURI": "service", 
+              "id": "billing.Billing-Service-Auditor", 
+              "name": "billing-service-audit"
+            }, 
+            "eventType": "activity", 
+            "initiator": {
+              "typeURI": "network/node", 
+              "id": "billing"
+            }, 
+            "action": "create", 
+            "outcome": "success", 
+            "id": "0fa234aea93f38c26fa234aea93f38g3", 
+            "attachments": [
+              {
+                "content": {
+                  "auditData": {
+                    "ran": "020-123456", 
+                    "stateTransition": "SUCCESSFUL_PAYMENT", 
+                    "amount": "100", 
+                    "version": "1", 
+                    "currency": "USD"
+                  }
+                }, 
+                "contentType": "http://billing.api.rackspacecloud.com/cadf/billing-system-event", 
+                "name": "auditData"
+              }
+            ]
+          }
+        }
+    &lt;/atom:content>
+&lt;/atom:entry></programlisting>
+                        </para>
+                    </listitem>
                 <listitem>
-                    <para>The <code>atom:content</code> node must be of
-                            <code>type="applicaton/json"</code> as shown in the following
-                        example:</para>
-                    <para><programlisting> &lt;atom:content type="application/json"></programlisting>The
-                        following example shows a generic CADF event of
-                        type="application/json":</para>
-
-
-        <para>
-            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
+                        <para>The <code>atom:content</code> node must be of
+                                <code>type="applicaton/json"</code> as shown in the following
+                            example:</para>
+                        <para><programlisting> &lt;atom:content type="application/json"></programlisting>The
+                            following example shows a generic CADF event of
+                            type="application/json":</para>
+                        <para>
+                            <programlisting> &lt;atom:entry xmlns:atom="<link xlink:href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom"</link>>
   &lt;atom:content type="application/json"
        { "name" : "Jonas" }
    &lt;/atom:content>&lt;/atom:entry></programlisting>
-        </para>
-</listitem>
+                        </para>
+                        <para>The following example shows a billing service audit event that is
+                            entirely in JSON format:</para>
+                        <para>
+                            <programlisting>{
+  "entry": {
+    "content": {
+      "@text": {
+          "event": {
+            "typeURI": "http://schemas.dmtf.org/cloud/audit/1.0/event", 
+            "eventTime": "2015-07-10T21:15:57+00:00", 
+            "target": {
+              "typeURI": "service/bss/billing/account", 
+              "id": "020-123456"
+            }, 
+            "observer": {
+              "typeURI": "service", 
+              "id": "billing.Billing-Service-Auditor", 
+              "name": "billing-service-audit"
+            }, 
+            "eventType": "activity", 
+            "initiator": {
+              "typeURI": "network/node", 
+              "id": "billing"
+            }, 
+            "action": "create", 
+            "outcome": "success", 
+            "id": "0fa234aea93f38c26fa234aea93f38g3", 
+            "attachments": [
+              {
+                "content": {
+                  "auditData": {
+                    "ran": "020-123456", 
+                    "stateTransition": "SUCCESSFUL_PAYMENT", 
+                    "amount": "100", 
+                    "version": "1", 
+                    "currency": "USD"
+                  }
+                }, 
+                "contentType": "http://billing.api.rackspacecloud.com/cadf/billing-system-event", 
+                "name": "auditData"
+              }
+            ]
+          }
+      },
+      "type": "application/json"
+    },
+    "@type": "http://www.w3.org/2005/Atom",
+    "title": {
+      "@text": "Billing Audit event",
+      "type": "text"
+    }
+  }
+}
+ </programlisting>
+                        </para>
+                    </listitem>
         <listitem><para>Generic CADF feeds are private unless they have the <code>tid:</code> category prefix
             defined. The following shows an example of a generic CADF event with a category prefix
             of type <code>tid:</code> defined:</para>

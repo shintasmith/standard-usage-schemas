@@ -35,8 +35,8 @@ This table shows the possible response codes for this operation:
 |404                       |Not Found                |The requested resource   |
 |                          |                         |was not found.           |
 +--------------------------+-------------------------+-------------------------+
-|429                       |Rate Limited             |Retry until the entry is |
-|                          |                         |posted.                  |
+|429                       |Rate Limited             |Too many requests. Wait  |
+|                          |                         |and retry.               |
 +--------------------------+-------------------------+-------------------------+
 |500                       |Internal Server Error    |The server encountered   |
 |                          |                         |an unexpected condition  |

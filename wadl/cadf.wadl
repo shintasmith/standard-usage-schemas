@@ -967,12 +967,13 @@
                            rax:message="getEntryUserAccessEvent: Accept header contains unsupported media types: application/*json"
                            name="ACCEPT"/>
                 </request>
-                <response status="200">
-                    <representation mediaType="application/atom+xml"/>
-                </response>
-                <response status="400 401 409 500 503">
-                    <representation mediaType="application/xml"/>
-                </response>
+               <response status="200">
+                <wadl:doc xmlns="http://docbook.org/ns/docbook" title="OK" xml:lang="EN">The request succeeded.</wadl:doc>
+                <representation mediaType="application/json"/>
+            </response>
+            <!-- On Error -->
+            &commonFaults;
+            &getFaults;
             </method>
         </resource>
     </resource_type>

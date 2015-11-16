@@ -451,6 +451,12 @@
                                 <include>product.wadl</include>
                             </includes>
                         </fileset>
+                        <fileset>
+                            <directory>${basedir}/normalized</directory>
+                            <includes>
+                                <include>allfeeds.wadl</include>
+                            </includes>
+                        </fileset>
                     </filesets>
                 </configuration>
             </plugin>
@@ -937,7 +943,7 @@
                             </execution>
                             <execution>
                                 <id>rst-install-generate</id>
-                                <phase>process-sources</phase>
+                                <phase>process-resources</phase>
                                 <configuration>
                                     <tasks>
                                         <property environment="env"/>
@@ -984,7 +990,7 @@
                         <executions>
                             <execution>
                                 <id>strip-test-feeds</id>
-                                <phase>generate-sources</phase>
+                                <phase>process-sources</phase>
                                 <goals>
                                     <goal>transform</goal>
                                 </goals>

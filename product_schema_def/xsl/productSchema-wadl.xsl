@@ -17,6 +17,7 @@
     xmlns:maas="http://docs.rackspace.com/usage/maas"
     xmlns:cdnBand="http://docs.rackspace.com/usage/rackspacecdn/bandwidth"
     xmlns:cdnReqCount="http://docs.rackspace.com/usage/rackspacecdn/requestcount"
+    xmlns:cdnSsl="http://docs.rackspace.com/usage/rackspacecdn/sslcertificate"
     xmlns:sitesSubscription="http://docs.rackspace.com/usage/sites/subscription"
     xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0"
     xmlns:xslout="http://www.rackspace.com/repose/wadl/checker/Transform"
@@ -256,7 +257,7 @@
                                         <rax:restrict-rule serviceCode="CloudSites"         nsprefixes="sitesSubscription"          resourceTypes="SITES_SUBSCRIPTION"/>
                                         <rax:restrict-rule serviceCode="DomainRegistration" nsprefixes="domain"                     resourceTypes="DOMAIN_SUBSCRIPTION"/>
                                         <rax:restrict-rule serviceCode="DcxIpAdmin"         nsprefixes="dcxIpAddress dcxIpAddress"  resourceTypes="IP_ADDRESS DEVICE"/>
-                                        <rax:restrict-rule serviceCode="RackspaceCDN"       nsprefixes="cdnBand cdnReqCount"        resourceTypes="HOSTNAME HOSTNAME"/>
+                                        <rax:restrict-rule serviceCode="RackspaceCDN"       nsprefixes="cdnBand cdnReqCount cdnSsl"        resourceTypes="HOSTNAME HOSTNAME SSL_CERTIFICATE"/>
                                    </rax:restrict-rules>
                                 </xsl:with-param>
                             </xsl:call-template>

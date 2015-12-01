@@ -124,7 +124,8 @@
                                     or $nsUri = 'http://docs.rackspace.com/event/domain'
                                     or $nsUri = 'http://docs.rackspace.com/event/dcx/ip-address-association'
                                     or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/bandwidth'
-                                    or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/requestcount'">
+                                    or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/requestcount'
+                                    or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/sslcertificate'">
                         <xsl:choose>
                             <xsl:when test="/atom:entry/atom:content/event:event/@region = $value or 'GLOBAL' = $value">
                                 <xsl:copy>
@@ -186,7 +187,8 @@
                                     or $nsUri = 'http://docs.rackspace.com/usage/sites/subscription'
                                     or $nsUri = 'http://docs.rackspace.com/event/domain'
                                     or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/bandwidth'
-                                    or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/requestcount'">
+                                    or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/requestcount'
+                                    or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/sslcertificate'">
                         <xsl:choose>
                             <xsl:when test="/atom:entry/atom:content/event:event/@dataCenter = $value or 'GLOBAL' = $value">
                                 <xsl:copy>
@@ -292,7 +294,8 @@
                                 or $nsUri = 'http://docs.rackspace.com/usage/sites/subscription'
                                 or $nsUri = 'http://docs.rackspace.com/event/domain'
                                 or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/bandwidth'
-                                or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/requestcount'">
+                                or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/requestcount'
+                                or $nsUri = 'http://docs.rackspace.com/usage/rackspacecdn/sslcertificate'">
                    <xsl:call-template name="addCategory">
                         <xsl:with-param name="term" select="$event/@region"/>
                         <xsl:with-param name="prefix" select="'rgn:'"/>

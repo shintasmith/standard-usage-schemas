@@ -29,6 +29,8 @@
     <xsl:import href="productSchema-summary-util.xsl"/>
     <xsl:import href="../../target/xslt-artifacts/rm_private_attrs_for_obs.xsl"/>
 
+    <xsl:param  name="isForWadl2Rst"/>
+
     <!-- for samples -->
     <xsl:template match="comment()" mode="rm_priv"/>
 
@@ -1152,7 +1154,14 @@
             <xsl:choose>
                 <xsl:when test="$content != ''">
                     <para><emphasis role="bold">XML Sample</emphasis>
-                        <xsdxt:code href="{$sampleXMLFile}"/>
+                        <xsl:choose>
+                            <xsl:when test="$isForWadl2Rst = 'yes'">
+                                <xsdxt:code href="{$sampleXMLFile}"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <programlisting language="xml"><xsl:copy-of select="replace($content,'\n.*atom.*feed.*ignore.*used for testing.*(\n)','$1')"/></programlisting>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </para>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1163,7 +1172,14 @@
             <xsl:choose>
                 <xsl:when test="$json_content != ''">
                     <para><emphasis role="bold">JSON Sample</emphasis>
-                        <xsdxt:code href="{$sampleJSONFile}"/>
+                        <xsl:choose>
+                            <xsl:when test="$isForWadl2Rst = 'yes'">
+                                <xsdxt:code href="{$sampleJSONFile}"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <programlisting language="json"><xsl:copy-of select="$json_content"/></programlisting>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </para>
                 </xsl:when>
                 <xsl:otherwise>

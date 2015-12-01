@@ -690,6 +690,27 @@
                                         </source>
                                     </sources>
                                 </mapping>
+                                <!-- This is a workaround to the recent Documentation related edits 
+                                     to enable WADL to RST generation
+                                -->
+                                <mapping>
+                                    <directory>/etc/repose/usage-schema/src/docbkx/common</directory>
+                                    <filemode>755</filemode>
+                                    <configuration>false</configuration>
+                                    <directoryIncluded>true</directoryIncluded>
+                                </mapping>
+                                <mapping>
+                                    <directory>/etc/repose/usage-schema/src/docbkx/common</directory>
+                                    <username>repose</username>
+                                    <groupname>repose</groupname>
+                                    <filemode>444</filemode>
+                                    <configuration>true</configuration>
+                                    <sources>
+                                        <source>
+                                            <location>src/docbkx/common/common.ent</location>
+                                        </source>
+                                    </sources>
+                                </mapping>
                             </mappings>
                             <!-- Not sure we want to blow away this dir everytime
                             <postremoveScriptlet>
@@ -929,12 +950,32 @@
                                 <phase>generate-sources</phase>
                                 <configuration>
                                     <tasks>
+                                        <!-- rename the productDoc.wadl to product.wadl,
+                                             normalize it, then rename the original back.
+                                             The reason we do this, allfeeds.wadl has
+                                             references everywhere to product.wadl#resource
+                                        -->
+                                        <copy tofile="${basedir}/target/product.wadl.sv">
+                                            <fileset dir="${basedir}/wadl/">
+                                                <include name="product.wadl"/>
+                                            </fileset>
+                                        </copy>
+                                        <copy tofile="${basedir}/wadl/product.wadl">
+                                            <fileset dir="${basedir}/wadl/">
+                                                <include name="productDoc.wadl"/>
+                                            </fileset>
+                                        </copy>
                                         <exec executable="wadl-tools/bin/normalizeWadl.sh">
                                             <arg value="-f" />
                                             <arg value="tree" />
                                             <arg value="-w" />
                                             <arg value="allfeeds.wadl" />
                                         </exec>
+                                        <copy tofile="${basedir}/wadl/product.wadl">
+                                            <fileset dir="${basedir}/target/">
+                                                <include name="product.wadl.sv"/>
+                                            </fileset>
+                                        </copy>
                                     </tasks>
                                 </configuration>
                                 <goals>

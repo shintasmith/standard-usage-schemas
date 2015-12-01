@@ -15,6 +15,7 @@ target
 .settings
 env
 wadl/product.wadl
+wadl/productDoc.wadl
 generated_product_xsds/*
 core_xsd/usage.xsd
 normalized/*

@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rackspace.usage</groupId>
     <artifactId>usage-schema</artifactId>
-    <version>1.104.0-SNAPSHOT</version>
+    <version>1.104.0</version>
     <packaging>jar</packaging>
 
     <name>Usage Schema</name>
@@ -957,12 +957,12 @@
                                         -->
                                         <copy tofile="${basedir}/target/product.wadl.sv">
                                             <fileset dir="${basedir}/wadl/">
-                                                <include name="product.wadl"/>
+                                                <include name="product.wadl" />
                                             </fileset>
                                         </copy>
                                         <copy tofile="${basedir}/wadl/product.wadl">
                                             <fileset dir="${basedir}/wadl/">
-                                                <include name="productDoc.wadl"/>
+                                                <include name="productDoc.wadl" />
                                             </fileset>
                                         </copy>
                                         <exec executable="wadl-tools/bin/normalizeWadl.sh">
@@ -973,7 +973,7 @@
                                         </exec>
                                         <copy tofile="${basedir}/wadl/product.wadl">
                                             <fileset dir="${basedir}/target/">
-                                                <include name="product.wadl.sv"/>
+                                                <include name="product.wadl.sv" />
                                             </fileset>
                                         </copy>
                                     </tasks>
@@ -987,33 +987,33 @@
                                 <phase>process-resources</phase>
                                 <configuration>
                                     <tasks>
-                                        <property environment="env"/>
+                                        <property environment="env" />
 
                                         <!-- delete the old virtualenv -->
                                         <exec executable="rm" failonerror="false">
-                                            <env key="PATH" path="${env.PATH}"/>
+                                            <env key="PATH" path="${env.PATH}" />
                                             <arg value="-r" />
                                             <arg value="${project.basedir}/env" />
                                         </exec>
 
                                         <!-- create the new mkvirtualenv -->
                                         <exec executable="virtualenv">
-                                            <env key="PATH" path="${env.PATH}"/>
+                                            <env key="PATH" path="${env.PATH}" />
                                             <arg value="${project.basedir}/env" />
                                         </exec>
 
                                         <!-- install wadl2rst into the virtualenv -->
                                         <exec executable="${project.basedir}/env/bin/pip">
-                                            <arg value="install"/>
-                                            <arg value="-e"/>
-                                            <arg value="git+git@github.rackspace.com:Product-DevOps/wadl2rst.git@master#egg=wadl2rst"/>
-                                            <arg value="-I"/>
+                                            <arg value="install" />
+                                            <arg value="-e" />
+                                            <arg value="git+git@github.rackspace.com:Product-DevOps/wadl2rst.git@master#egg=wadl2rst" />
+                                            <arg value="-I" />
                                         </exec>
 
-                                        <exec executable="${project.basedir}/env/bin/wadl2rst"/>
+                                        <exec executable="${project.basedir}/env/bin/wadl2rst" />
                                         <copy todir="${basedir}/api-docs/dev-guide/api-operations/methods/">
                                             <fileset dir="${basedir}/target/rst/dev-guide/api-operations/">
-                                                <include name="get-*tid*.rst"/>
+                                                <include name="get-*tid*.rst" />
                                             </fileset>
                                         </copy>
                                     </tasks>

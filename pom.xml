@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rackspace.usage</groupId>
     <artifactId>usage-schema</artifactId>
-    <version>1.105.0-SNAPSHOT</version>
+    <version>1.104.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Usage Schema</name>
@@ -703,7 +703,7 @@
                                     <directory>/etc/repose/usage-schema/src/docbkx/common</directory>
                                     <username>repose</username>
                                     <groupname>repose</groupname>
-                                    <filemode>444</filemode>
+                                    <filemode>755</filemode>
                                     <configuration>true</configuration>
                                     <sources>
                                         <source>

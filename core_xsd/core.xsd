@@ -498,6 +498,11 @@
                                                   if (@dataCenter = ('LON1','LON3','LON5')) then (@region = 'LON') else
                                                   if (@dataCenter = 'ORD1') then (@region = 'ORD') else
                                                   if (@dataCenter = 'SYD2') then (@region = 'SYD') else
+                                                  if (@dataCenter = ('AWS-US-EAST-1','AWS-US-WEST-1','AWS-US-WEST-2')) then (@region = 'AWS-US') else
+                                                  if (@dataCenter = ('AWS-EU-WEST-1','AWS-EU-CENTRAL-1')) then (@region = 'AWS-EU') else
+                                                  if (@dataCenter = ('AWS-AP-SOUTHEAST-1','AWS-AP-NORTHEAST-1')) then (@region = 'AWS-AP') else
+                                                  if (@dataCenter = 'AWS-AP-SOUTHEAST-2') then (@region = 'AWS-AU') else
+                                                  if (@dataCenter = 'AWS-SA-EAST-1') then (@region = 'AWS-SA') else
                                                   if (@type = ('USAGE','USAGE_SUMMARY','USAGE_SNAPSHOT')) then ((@dataCenter = 'GLOBAL') and (@region = 'GLOBAL'))
                                                   else true()
                                                   "
@@ -693,6 +698,11 @@
             <enumeration value="LON"/>
             <enumeration value="ORD"/>
             <enumeration value="SYD"/>
+            <enumeration value="AWS-US"/>
+            <enumeration value="AWS-EU"/>
+            <enumeration value="AWS-AP"/>
+            <enumeration value="AWS-AU"/>
+            <enumeration value="AWS-SA"/>
         </restriction>
     </simpleType>
 
@@ -726,6 +736,15 @@
             <enumeration value="LON5"/>
             <enumeration value="ORD1"/>
             <enumeration value="SYD2"/>
+            <enumeration value="AWS-US-EAST-1"/>
+            <enumeration value="AWS-US-WEST-1"/>
+            <enumeration value="AWS-US-WEST-2"/>
+            <enumeration value="AWS-EU-WEST-1"/>
+            <enumeration value="AWS-EU-CENTRAL-1"/>
+            <enumeration value="AWS-AP-SOUTHEAST-1"/>
+            <enumeration value="AWS-AP-NORTHEAST-1"/>
+            <enumeration value="AWS-AP-SOUTHEAST-2"/>
+            <enumeration value="AWS-SA-EAST-1"/>
         </restriction>
     </simpleType>
 

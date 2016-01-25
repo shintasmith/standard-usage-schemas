@@ -58,7 +58,7 @@
     <attribute name="flavorId" type="string"
                maxLength="50" minLength="1"
                use="required"
-               allowedValues="hadoop1-2 hadoop1-4 hadoop1-7 hadoop1-15 hadoop1-30 hadoop1-60 onmetal-io1 general1-1 general1-2 general1-4 general1-8 io1-120 io1-15 io1-30 io1-60 io1-90"
+               allowedValues="hadoop1-2 hadoop1-4 hadoop1-7 hadoop1-15 hadoop1-30 hadoop1-60 onmetal-io1 general1-1 general1-2 general1-4 general1-8 io1-120 io1-15 io1-30 io1-60 io1-90 hadoop-aws-sd-8 hadoop-aws-sd-16 hadoop-aws-sd-30 hadoop-aws-sd-60 hadoop-aws-sd-120 hadoop-aws-sd-240 hadoop-aws-io-30 hadoop-aws-io-60 hadoop-aws-io-120 hadoop-aws-io-240 hadoop-aws-gp-8 hadoop-aws-gp-16 hadoop-aws-gp-32 hadoop-aws-gp-64 hadoop-aws-gp-160"
                groupBy="true">
         Specifies the flavor Id of the cluster.
     </attribute>

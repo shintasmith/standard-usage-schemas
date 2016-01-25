@@ -1,0 +1,61 @@
+{
+    "entry": {
+        "@type": "http://www.w3.org/2005/Atom",
+        "category": [
+            {
+                "term": "tid:1234"
+            },
+            {
+                "term": "rgn:AWS-US"
+            },
+            {
+                "term": "dc:AWS-US-WEST-1"
+            },
+            {
+                "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"
+            },
+            {
+                "term": "bigdata.bigdata.hadoop_hdp2_1.usage"
+            },
+            {
+                "term": "type:bigdata.bigdata.hadoop_hdp2_1.usage"
+            }
+        ],
+        "link": [
+            {
+                "href": "https://ord.feeds.api.rackspacecloud.com/bigdata/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814",
+                "rel": "self"
+            }
+        ],
+        "id": "urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814",
+        "title": "BigData",
+        "content": {
+            "event": {
+                "@type": "http://docs.rackspace.com/core/event",
+                "id": "e53d007a-fc23-11e1-975c-cfa6b29bb814",
+                "version": "2",
+                "resourceId": "4a2b42f4-6c63-11e1-815b-7fcbcf67f549",
+                "tenantId": "1234",
+                "startTime": "2013-03-15T11:51:11Z",
+                "endTime": "2013-03-16T00:00:00Z",
+                "type": "USAGE",
+                "dataCenter": "AWS-US-WEST-1",
+                "region": "AWS-US",
+                "product": {
+                    "@type": "http://docs.rackspace.com/usage/bigdata",
+                    "aggregatedClusterDuration": 43729,
+                    "serviceCode": "BigData",
+                    "version": "2",
+                    "resourceType": "HADOOP_HDP2_1",
+                    "flavorId": "hadoop1-7",
+                    "flavorName": "a",
+                    "numberServersInCluster": 1,
+                    "bandwidthIn": 0,
+                    "bandwidthOut": 0
+                }
+            }
+        },
+        "updated": "2013-03-01T19:42:35.507Z",
+        "published": "2013-03-01T19:42:35.507"
+    }
+}

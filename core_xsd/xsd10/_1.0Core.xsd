@@ -403,6 +403,11 @@
             <enumeration value="LON"/>
             <enumeration value="ORD"/>
             <enumeration value="SYD"/>
+            <enumeration value="AWS-US"/>
+            <enumeration value="AWS-EU"/>
+            <enumeration value="AWS-AP"/>
+            <enumeration value="AWS-AU"/>
+            <enumeration value="AWS-SA"/>
         </restriction>
     </simpleType>
 
@@ -435,6 +440,15 @@
             <enumeration value="LON5"/>
             <enumeration value="ORD1"/>
             <enumeration value="SYD2"/>
+            <enumeration value="AWS-US-EAST-1"/>
+            <enumeration value="AWS-US-WEST-1"/>
+            <enumeration value="AWS-US-WEST-2"/>
+            <enumeration value="AWS-EU-WEST-1"/>
+            <enumeration value="AWS-EU-CENTRAL-1"/>
+            <enumeration value="AWS-AP-SOUTHEAST-1"/>
+            <enumeration value="AWS-AP-NORTHEAST-1"/>
+            <enumeration value="AWS-AP-SOUTHEAST-2"/>
+            <enumeration value="AWS-SA-EAST-1"/>
         </restriction>
     </simpleType>
 

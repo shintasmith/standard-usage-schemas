@@ -1,3 +1,8 @@
 {
-  "contentIDBase": "https://github.com/rackerlabs/standard-usage-schemas/"
+  "contentIDBase": "https://github.com/rackerlabs/standard-usage-schemas/",
+  "githubUrl": "https://github.com/rackerlabs/standard-usage-schemas/",
+  "githubBranch": "master",
+  "meta": {
+    "preferGithubIssues": false
+  }
 }

@@ -17,5 +17,4 @@ The Rackspace Cloud Feeds API uses `standard HTTP/1.1 response codes`_.
    
    early-access
    additional-resources
-   pricing-and-service-level
 

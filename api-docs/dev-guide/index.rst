@@ -19,7 +19,6 @@ Identity service REST API.
    getting-started
    getting-started/index
    developer-guide
-   service-access-endpoints
    concepts/index
    general-api-info/index
    feeds-archiving

@@ -1,7 +1,7 @@
 .. _response-codes:
 
 Response codes for Cloud Feeds publishers and subscribers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Rackspace Cloud Fee API uses `standard HTTP/1.1 response codes`_.
 

@@ -1,7 +1,7 @@
 .. _using:
 
 Using Cloud Feeds
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 To use Cloud Feeds you need to have a basic understanding of REST APIs. This section 
 describes how to use the Cloud Feeds REST API to perform basic API operations.
@@ -10,7 +10,7 @@ describes how to use the Cloud Feeds REST API to perform basic API operations.
    This section assumes that you are using token-based authentication and
    that you have successfully authenticated against the Rackspace Cloud API
    and obtained an authentication token as described in 
-   :ref:`token authentication <token-authentication>`.
+   :ref:`token authentication <authenticate-using-curl>`.
      
    Please make sure to record the token because you need it to complete the
    exercises in this chapter. For information on how to make API calls
@@ -21,7 +21,7 @@ describes how to use the Cloud Feeds REST API to perform basic API operations.
 .. _reading-a-feed: 
 
 Reading a feed
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 To retrieve an Atom feed or an Atom entry that was posted, submit a
 **GET** request by using the following syntax:
 
@@ -69,7 +69,7 @@ readable, you can submit the following request:
 .. _navigating-through-feeds:
 
 Navigating through feeds
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A successful response to a GET request to obtain a feed returns links that help you navigate
 to the Atom entries in the feed. The following links are returned in the Cloud Feeds responses:
@@ -97,7 +97,7 @@ to the Atom entries in the feed. The following links are returned in the Cloud F
 
 The following diagram shows how pagination works with Cloud Feeds:
     
- .. image:: _images/CloudFeedsAtomHopper.png
+ .. image:: ../_images/CloudFeedsAtomHopper.png
         :alt: How Cloud Feeds works with pagination
        
 .. important:: 
@@ -123,7 +123,7 @@ The following diagram shows how pagination works with Cloud Feeds:
 .. _query-params:
 
 Cloud Feeds query parameters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use query parameters to customize the entries and their order
 within a feed. Query parameters are part of the URL that is passed to
@@ -204,7 +204,7 @@ Cloud Feeds.
 .. _filter-by-marker:
 
 Filtering entries by using the marker parameter
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use the ``marker`` parameter to denote an entry that you have
 previously used. If you specify a marker in the **GET** request, you can
@@ -248,7 +248,7 @@ backward.
 .. _filter-by-categories:
 
 Filtering by categories
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use a **GET** request to filter for certain types of events you
 want to obtain from a feed by defining a specific search category. You
@@ -263,7 +263,7 @@ event types that fall under the ``cloudsites.metered.site.usage`` category:
 
 
 Advanced filtering by using AND, OR, and NOT
-..............................................
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Cloud Feeds supports advanced filters by using the AND, OR, and NOT
 operators and their combinations.
@@ -321,7 +321,7 @@ statement**
 .. _filter-by-time-stamp:
 
 Filtering by time stamp
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use the ``startingAt`` query parameter to filter for feed
 entries that start at a certain time stamp. The parameter takes an ISO
@@ -358,7 +358,7 @@ parameter to ``backward``:
 .. _support-for-weak-etags:
      
 Support for weak ETags
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Cloud Feeds supports weak entity tags (ETags). An ETag identifies a
 specific feed version. When the content of the feed changes, a different
@@ -384,7 +384,7 @@ ETags are not returned in the following situations:
 .. _best-practices for consumers:
    
 Best practices for consumers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. Comment  In this section, I had to change the formmatting and remove the second example
    in list because sample line was too long and did not render correctly. If it needs to 
    be restored, investigate different formatting structures that can render content 

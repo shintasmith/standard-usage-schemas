@@ -1,5 +1,7 @@
+.. _pagination:
+
 Pagination
-^^^^^^^^^^^^
+~~~~~~~~~~~~~~
 
 To reduce the load on the service, list operations return a maximum of
 25 entries at a time. However, you can use the ``limit`` parameter in

@@ -77,7 +77,9 @@ release = '1'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', 'samples', 'api-operations/methods*']
+exclude_patterns = ['_build', 'samples', 'api-operations/methods*', 
+                    'dev-guide', 'api-operations/methods-formatted*',
+                    'common-gs']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -102,6 +104,7 @@ extlinks = {
     'rax': ('http://www.rackspace.com/%s', ''),
     'rax-cloud': ('http://www.rackspace.com/cloud/%s', ''),
     'rax-dev': ('https://developer.rackspace.com/%s', ''),
+    'rax-devdocs': ('http://developer.rackspace.com/docs/%s', ''),
     'rax-devguide':('http:/developer.rackspace.com/docs/%s/developer-guide/',''),
     'rax-api': ('http:/developer.rackspace.com/docs/%s/developer-guide/#api-reference',''),
     'rax-git': ('https://github.com/rackspace/%s', ''),
@@ -116,6 +119,14 @@ extlinks = {
     'rocket': ('https://objectrocket.com/%s', '')
 }
 
+# Global variables that are replaced by the specified value during the build process.
+
+rst_epilog = """
+.. |apiservice| replace:: Rackspace Cloud Feeds API
+.. |no changes| replace:: None for this release
+.. |contract version| replace:: 1.0
+.. |product name| replace:: Rackspace Cloud Feeds
+"""
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []

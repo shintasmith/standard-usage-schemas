@@ -1,7 +1,7 @@
 .. _-data-format-accept-header:
  
 Data format in Accept header
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Cloud Feeds supports both XML and JSON formats. You can specify the
 format in which you want your data to be returned in by configuring the

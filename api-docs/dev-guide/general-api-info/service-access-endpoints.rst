@@ -11,7 +11,8 @@ Cloud Feeds servers.
 
 ..  note::
  
-    - For more information about regions, see the `About regions`_ article in the Rackspace Knowledge Center.
+    - For more information about regions, see the :how-to:`About regions <about-regions>` 
+      article in the Rackspace How To collection.
     
     - The Identity Service catalog returned in response to a successful authentication 
       request includes a link to the Cloud Feeds service catalog. The Cloud Feeds service 

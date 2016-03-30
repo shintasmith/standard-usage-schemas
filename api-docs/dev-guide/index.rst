@@ -2,20 +2,25 @@
 Rackspace Cloud Feeds API 1.0
 =========================================================
 
-Learn how to use the Rackspace Cloud Feeds service by using the REST API. 
+*Last updated:* |today|
 
-- For details about using the API, see the :ref:`Developer Guide <developer-guide>`.
-- For details about API resources, operations, requests and responses, see the 
-  :ref:`API reference <api-reference>`.
+Use the following links to get user and reference information for using the Rackspace Cloud 
+Identity service REST API.
+
+- :ref:`Getting Started Guide <getting-started>`
+- :ref:`Developer Guide <developer-guide>`
+- :ref:`Cloud Feeds Archiving Guide <cf-archiving-api>`
+- :ref:`API reference <api-reference>`
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    
    overview/index
-   developer-guide  
+   getting-started
+   getting-started/index
+   developer-guide
    concepts/index
    general-api-info/index
-   using-cloud-feeds
    feeds-archiving
    api-reference
    api-operations/index

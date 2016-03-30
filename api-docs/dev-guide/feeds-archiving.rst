@@ -1,7 +1,8 @@
 ..  _cf-archiving-api:
 
-Cloud Feeds Archiving
-~~~~~~~~~~~~~~~~~~~~~~~
+=================================
+**Cloud Feeds Archiving Guide**
+=================================
 
 Cloud Feeds supports archiving of events. Normally, an event remains in
 the database for three days. Archiving enables customers to permanently
@@ -26,8 +27,9 @@ Feeds archiving is described in RFC 5005: `Feed Paging and
 Archiving <https://tools.ietf.org/html/rfc5005>`__.
 
 
+======================
 Archiving overview
-^^^^^^^^^^^^^^^^^^^
+======================
 
 Cloud Feeds archives a user's events based on region by storing the data
 in the Cloud Files container in a particular region.
@@ -81,17 +83,18 @@ You can configure the following settings for Cloud Feeds archiving:
 .. _cf-archiving-api-ops:
 
 Archiving Configuration API operations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------
 
 Use the Archiving Configuration API to retrieve and upload archive settings for Cloud 
 Feeds. This section describes the elements, service endpoint, and RBAC roles for the 
 Archiving Configuration API.  See the Cloud Feeds API operations reference for details.
 about the Archive Configuration API operations.  
 
+
 .. _elements-archiving-config-api: 
 
 Elements of the Archiving Configuration API
-...............................................
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Cloud Feeds enables users to configure their Cloud Feeds archiving
 settings by using the Archiving Configuration API.
@@ -132,17 +135,17 @@ settings by using the Archiving Configuration API.
 .. _archiving-config-api-service-endpoint:
 
 Archiving Configuration API service endpoint
-..............................................
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the following endpoint to make REST calls against the Archiving Configuration API:
 
 ``https://preferences.feeds.api.rackspacecloud.com``
 
 
-.. _archiving-config-api-rbac-roles:
+.. _cf-archiving-config-api-rbac-roles:
 
 RBAC Roles for the Archiving Configuration API
-.................................................
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The RBAC roles for the Archiving Configuration API differ from the RBAC
 roles for the Cloud Feeds API. The main difference is in the
@@ -171,100 +174,166 @@ The following table shows the RBAC role matrix for Cloud Feeds:
 | any other roles          | No                      | No                      |
 +--------------------------+-------------------------+-------------------------+
 
+.. _cf-rbac-archiving-permissions:
+
+RBAC roles for accessing archived feeds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To access archived files from a Cloud Files container requires specified RBAC roles to 
+be set. Two roles (admin and observer) can be used to access the Cloud Files API 
+specifically. The following table describes these roles and their permissions.
+
+
+**Table: Cloud Files product roles and permissions**
+
++----------------------------+--------------------------+
+| Role                       |Description               |
++============================+============+=============+
+| *object-store:admin*       |This role provides create,| 
+|                            |read, update, and delete  |
+|                            |permissions in Cloud      |
+|                            |Files, where access is    |
+|                            |granted.                  |
++----------------------------+--------------------------+
+| *object-store:observer*    |This role provides read,  | 
+|                            |permission in Cloud Files,|
+|                            |where access is           |
+|                            |granted.                  |
++----------------------------+--------------------------+
+
+
+Additionally, two multiproduct roles apply to all products. Users with multiproduct 
+roles inherit access to future products when those products become RBAC-enabled. The 
+following table describes these roles and their permissions.
+
+
+**Table: Multiproduct roles and permissions**
+
++----------------------------+--------------------------+
+| Role                       |Description               |
++============================+============+=============+
+| *admin*                    |This role provides create,| 
+|                            |read, update, and delete  |
+|                            |permissions in all        |
+|                            |products, where access is |
+|                            |granted.                  |
++----------------------------+--------------------------+
+| *observer*                 |This role provides read,  | 
+|                            |permission in Cloud Files,|
+|                            |where access is           |
+|                            |granted.                  |
++----------------------------+--------------------------+
+
+For more information, see 
+:how-to:`Permissions matrix for Cloud Files <permissions-matrix-for-cloud-files>`.
 
 
 Configuring Cloud Feeds archiving settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure the Cloud Feeds archiving settings, you need to do the
-following:
+To configure Cloud Feeds archiving settings by using the API, submi
 
--  Make a **POST** request against the
-   ``https://preferences.feeds.api.rackspacecloud.com/archive/<tenantid``>
-   endpoint and provide the configuration information in the request
-   body.
+- Make a **POST** request against the
+  ``https://preferences.feeds.api.rackspacecloud.com/archive/<tenantid``>
+  endpoint and provide the configuration information in the request
+  body.
 
--  Be sure to set the ``enabled`` parameter to "true," and the
-   ``data_format`` parameter to and array of values (JSON, XML, or
-   both).
-
+- Set the ``enabled`` parameter to "true," and the
+  ``data_format`` parameter to and array of values (JSON, XML, or
+  both).
+  
+You can also configure Cloud Feeds archiving settings from the 
+:how-to:`Cloud Control Panel <configure-cloud-feeds-archiving-in-the-cloud-control-panel>`.
 
 .. Important:: 
     The Archiving Configuration API only supports token-based
     authentication. It does not support basic authentication.
+    
+    
+When you configure the Cloud Files container to store events, you have several options. 
 
-If you want to specify **one single container URL** to store all events,
-regardless of which region they originate from, set the
-``default_container_URL`` parameter to a valid URL from your Cloud Files
-account, as shown in the following example:
 
-.. code::  
+Single container
 
-    curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: my_auth_token" https://preferences.feeds.api.rackspacecloud.com/archive/147587 -i -d '{
-      "data_format": [
-        "JSON"
-      ],
-      "default_archive_container_url": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/FeedsArchives",
-      "enabled": true
-    };'
+    If you want to specify **one single container URL** to store all events,
+    regardless of which region they originate from, set the
+    ``default_container_URL`` parameter to a valid URL from your Cloud Files
+    account, as shown in the following example:
 
-If you want to specify a **specific container URL** for each region, so
-that Cloud Feeds routes all the events to be archived to a container
-that corresponds with the region of the event, use the
-``archive_container_urls`` parameter. For each region, point to a valid
-URL from your Cloud Files account that you want the events to be routed
-to, as shown in the following example:
 
-.. code::  
+   .. code::  
 
-     curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: my_auth_token" https://preferences.feeds.api.rackspacecloud.com/archive/147587 -i -d '{
-      "data_format": [
-        "JSON", "XML"
-      ],
-      "archive_container_urls": {
-        "iad": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/USArchives",
-        "dfw": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/USArchives",
-        "ord": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/USArchives",
-        "lon": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/UKArchives",
-        "syd": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives",
-        "hkg": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives   
-      },  
-      "enabled": true
-    };'
+       curl -X POST -H "Content-Type: application/json" \
+            -H "X-Auth-Token: my_auth_token" \
+            https://preferences.feeds.api.rackspacecloud.com/archive/147587 \
+            -d '{"data_format": ["JSON"],\
+            "default_archive_container_url": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/FeedsArchives",\
+            "enabled": true};'
 
-Cloud Files also provides the option to specify a default container URL
-and one or more archive container URLs. In this configuration, all feeds
-that are configured for a region-specific container URL are routed to
-that URL. All other feeds are routed to the default container URL. The
-following example shows a configuration that routes the feeds from
-``lon``, ``syd``, and ``hkg`` to a region-specific URL. All other feeds
-are routed to the default container URL.
 
-.. code::  
+Specific container for each region
 
-     curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: ****" https://preferences.feeds.api.rackspacecloud.com/archive/147587 -i -d '{
-      "data_format": [
-        "JSON", "XML"
-      ],
-      "default_archive_container_url": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/FeedsArchives",
-      "archive_container_urls": {
-        "lon": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/UKArchives",
-        "syd": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives",
-        "hkg": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives   
-      },  
-      "enabled": true
-    };'
+   If you want to specify a **specific container URL** for each region, so
+   that Cloud Feeds routes all the events to be archived to a container
+   that corresponds with the region of the event, use the
+   ``archive_container_urls`` parameter. For each region, point to a valid
+   URL from your Cloud Files account that you want the events to be routed
+   to, as shown in the following example:
+
+   .. code::  
+
+      curl -X POST \
+           -H "Content-Type: application/json" \
+           -H "X-Auth-Token: my_auth_token" https://preferences.feeds.api.rackspacecloud.com/archive/147587 \
+           -d \
+           '{"data_format": ["JSON", "XML"]\,
+           "archive_container_urls": \
+           {\
+           "iad": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/USArchives",\
+           "dfw": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/USArchives",\
+           "ord": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/USArchives",\
+           "lon": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/UKArchives",\
+           "syd": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives",\
+           "hkg": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives\  
+           },\  
+           "enabled": true\
+           };'
+
+Default container
+
+   Cloud Files also provides the option to specify a default container URL
+   and one or more archive container URLs. In this configuration, all feeds
+   that are configured for a region-specific container URL are routed to
+   that URL. All other feeds are routed to the default container URL. The
+   following example shows a configuration that routes the feeds from
+   ``lon``, ``syd``, and ``hkg`` to a region-specific URL. All other feeds
+   are routed to the default container URL.
+
+   .. code::  
+
+      curl -X POST \
+           -H "Content-Type: application/json" \
+           -H "X-Auth-Token: ****" https://preferences.feeds.api.rackspacecloud.com/archive/147587\
+           -d \
+           '{"data_format": ["JSON", "XML"]\,
+           "default_archive_container_url": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/FeedsArchives",\
+           "archive_container_urls": {\
+           "lon": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/UKArchives",\
+           "syd": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives",\
+           "hkg": "https://storage.stg.swift.racklabs.com/v1/StagingUS_6b881249-b992-44ef-9ad1-2b9f5107d2f9/APACArchives\
+            },\  
+           "enabled": true\
+           };'
 
 
 Working with archived feeds
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
+
 Review the following sections to learn about managing archived feeds:
 
 -  :ref:`cf-download-archived-feeds`
 
 -  :ref:`cf-navigating-archived-feeds`
-
--  :ref:`cf-rbac-roles-archive-config`
 
 -  :ref:`cf-format-archived-feeds`
 
@@ -272,14 +341,13 @@ Review the following sections to learn about managing archived feeds:
 .. _cf-download-archived-feeds:
 
 Downloading archived feeds
-............................
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can access your archived feeds by submitting a **GET** request
 against the external feeds endpoint. The **GET** request downloads your
 archived feeds directly from Cloud Files.
 
-Cloud Feeds provides the following endpoint for accessing external
-feeds:
+Cloud Feeds provides the following endpoint for accessing external feeds:
 
 ``https://external.feeds.endpoint/``.
 
@@ -311,6 +379,7 @@ To submit a **GET** request, use the following syntax:
 
     curl -i -u cfeedstestadminrole:apikey -H "accept: application/json" http://external.feeds.endpoint/archive/StagingUS_cab08997-1c5d-4545-815a-186592907ef9/FeedsArchives/dfw_backup-events_2015-01-27.json 
 
+
 A successful **GET** request returns a 200: OK, success code and a link
 to the archived feeds.
 
@@ -336,7 +405,7 @@ returned.
 .. _cf-navigating-archived-feeds:
 
 Navigating archived feeds
-...........................
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can navigate archived feeds in similar way to live feeds by using
 the **prev-archive** and **next-archive**, and **current** links:
@@ -362,55 +431,12 @@ working with live feeds:
 For general information on how to navigate feeds, see :ref:`navigating-through-feeds`.
 
 
-.. _cf-rbac-roles-archive-config: 
-
-RBAC Roles for the Archiving Configuration API
-................................................
-
-The RBAC roles for the Archiving Configuration API differ from the RBAC
-roles for the Cloud Feeds API. The main difference is in the
-cloudfeeds:service-admin role. Users who are assigned the
-cloudfeeds:service-admin role cannot issue **GET** or **POST** requests
-on **multiple** tenants but only on a **single** tenant.
-
-The following table shows the RBAC role matrix for Cloud Feeds:
-
-**Table: Cloud Files product roles and permissions**
-
-+-----------------------+-------------------------------------------------------------+
-| Role                  | Description                                                 |
-+=======================+=============================================================+
-| object-store:admin    | This role provides Create, Read, Update, and Delete         |
-|                       | permissions in Cloud Files where access is granted.         |
-+-----------------------+-------------------------------------------------------------+
-| object-store:observer | This role provides Read permission in Cloud Files,          |
-|                       | where access is granted.                                    |
-+-----------------------+-------------------------------------------------------------+
-
-Additionally, two multi-product roles apply to all products. Users with multi-product roles 
-inherit access to future products when those products become RBAC-enabled. The following 
-table describes these roles and their permissions.
-
-**Table: Multiproduct roles and permissions**
-
-+-----------------------+-------------------------------------------------------------+
-| Role                  | Description                                                 |
-+=======================+=============================================================+
-| admin                 | This role provides Create, Read, Update, and Delete         |
-|                       | permissions in Cloud Files where access is granted.         |
-+-----------------------+-------------------------------------------------------------+
-| observer              | This role provides Read permission in all products,         |
-|                       | where access is granted.                                    |
-+-----------------------+-------------------------------------------------------------+
-
-For more information about Cloud Files roles and permissions, see the *Cloud Files 
-Developer Guide*.
 
 
 .. _cf-format-archived-feeds:
 
 Format of archived feeds
-.........................
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Archived feeds use the same formatting as regular feeds.
 

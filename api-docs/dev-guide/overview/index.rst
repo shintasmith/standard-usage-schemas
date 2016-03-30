@@ -15,6 +15,5 @@ The Rackspace Cloud Feeds API uses `standard HTTP/1.1 response codes`_.
 .. toctree:: :hidden:
    :maxdepth: 2
    
-   early-access
    additional-resources
 

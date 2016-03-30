@@ -1,7 +1,7 @@
-.. _-date-and-time-format: 
+.. _date-and-time-format: 
 
 Date and time format
-^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 For the display and consumption of date and time values, Rackspace Cloud services 
 use a date format that complies with ISO 8601.

@@ -20,7 +20,9 @@ and use the API for this service.
    :maxdepth: 2
    
    service-access-endpoints
-   authentication
+   authentication-gen-api
+   rbac-roles-feeds
+   rate-limits
    data-format-accept-header
    date-time-format
    response-codes

@@ -1,5 +1,7 @@
-Feeds catalog
-~~~~~~~~~~~~~~
+.. _get-feeds-catalog:
+
+Get feeds catalog
+~~~~~~~~~~~~~~~~~~~~~~
 
 You can obtain a list of all the feeds that are available by submitting
 a **GET** request against the Cloud Feeds endpoint as shown in the

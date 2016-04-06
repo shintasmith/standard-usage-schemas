@@ -1011,7 +1011,7 @@
                                         </exec>
 
                                         <exec executable="${project.basedir}/env/bin/wadl2rst" />
-                                        <copy todir="${basedir}/api-docs/dev-guide/api-operations/methods/">
+                                        <copy todir="${basedir}/api-docs/api-operations/methods/">
                                             <fileset dir="${basedir}/target/rst/dev-guide/api-operations/">
                                                 <include name="get-*tid*.rst" />
                                             </fileset>

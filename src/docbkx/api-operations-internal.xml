@@ -166,7 +166,7 @@
     </resources>
   </section>
   <section xml:id="neutron.product">
-    <title>Neutron</title>
+    <title>Cloud Networks</title>
     <resources xmlns="http://wadl.dev.java.net/2009/02">
       <resource href="../../allfeeds.wadl#neutron_events"/>
     </resources>

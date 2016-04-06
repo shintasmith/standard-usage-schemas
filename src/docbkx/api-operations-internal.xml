@@ -165,6 +165,12 @@
       <resource href="../../allfeeds.wadl#monitoring_events_getEntry_CloudMonitoring"/>
     </resources>
   </section>
+  <section xml:id="neutron.product">
+    <title>Neutron</title>
+    <resources xmlns="http://wadl.dev.java.net/2009/02">
+      <resource href="../../allfeeds.wadl#neutron_events"/>
+    </resources>
+  </section>
   <section xml:id="novaaccess.product">
         <title>Nova User Access Events</title>
         <resources xmlns="http://wadl.dev.java.net/2009/02">

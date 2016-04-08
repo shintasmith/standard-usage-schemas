@@ -116,6 +116,9 @@
         <resource id="netdevice_events"
                   path="netdevice/events"
                   type="wadl/feed.wadl#AtomFeed wadl/product.wadl#NetDevice"/>
+        <resource id="neutron_events"
+                  path="neutron/events"
+                  type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/>
 	    <resource id="newrelic_events"
                   path="newrelic/events"
                   type="wadl/feed.wadl#AtomFeed wadl/product.wadl#NewRelic"/>

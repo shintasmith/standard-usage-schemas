@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?atom feed="cloudnetworks/events" ?>
-<?expect code="400" message="wrong ip version"?>
+<?expect code="400"?>
 
 <!--
     This example has been generated using

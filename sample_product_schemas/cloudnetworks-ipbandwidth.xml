@@ -12,14 +12,14 @@
                allowedValues="4"
                use="required"
                groupBy="true">
-        Specifies the IP address version.
+        Specifies the IP version.
     </attribute>
     <attribute name="ipType"
                type="Name"
                use="required"
                allowedValues="FLOATING"
                groupBy="true">
-        Specifies the IP address type.
+        Specifies the IP type.
     </attribute>
     <attribute name="bandwidthOut"
                type="unsignedLong"

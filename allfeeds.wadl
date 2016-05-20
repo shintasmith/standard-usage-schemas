@@ -40,10 +40,6 @@
         <resource id="cbs_events"
                   path="cbs/events"
                   type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudBlockStorage wadl/feed.wadl#TenantAtomFeed wadl/product.wadl#CloudBlockStorageTenant"/>
-        <resource id="cloudnetworks_events"
-                  path="cloudnetworks/events"
-                  type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudNetworks
-                        wadl/feed.wadl#TenantAtomFeed wadl/product.wadl#CloudNetworksTenant"/>
         <resource id="concorde_events"
                   path="concorde/events"
                   type="wadl/feed.wadl#AtomFeed wadl/product.wadl#Concorde"/>
@@ -122,7 +118,9 @@
                   type="wadl/feed.wadl#AtomFeed wadl/product.wadl#NetDevice"/>
         <resource id="neutron_events"
                   path="neutron/events"
-                  type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/>
+                  type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudNetworks
+                        wadl/feed.wadl#TenantAtomFeed wadl/product.wadl#CloudNetworksTenant
+                        wadl/feed.wadl#Validated"/>
         <resource id="nimbus_events"
                   path="nimbus/events"
                   type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Unvalidated"/>
@@ -345,9 +343,6 @@
             <resource id="cbs_usagesummary_events"
                       path="cbs/events"
                       type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudBlockStorageSummary"/>
-            <resource id="cloudnetworks_usagesummary_events"
-                      path="cloudnetworks/events"
-                      type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudNetworksSummary"/>
             <resource id="dbaas_usagesummary_events"
                       path="dbaas/events"
                       type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudDatabaseSummary"/>
@@ -369,6 +364,9 @@
             <resource id="nova_usagesummary_events"
                       path="nova/events"
                       type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudServersOpenStackSummary wadl/product.wadl#RHELSummary"/>
+            <resource id="neutron_usagesummary_events"
+                      path="neutron/events"
+                      type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudNetworksSummary"/>
             <resource id="rackspacecdn_usagesummary_events"
                       path="rackspacecdn/events"
                       type="wadl/feed.wadl#AtomFeed wadl/product.wadl#RackspaceCDNSummary"/>

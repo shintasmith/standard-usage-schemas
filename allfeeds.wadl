@@ -119,8 +119,7 @@
         <resource id="neutron_events"
                   path="neutron/events"
                   type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudNetworks
-                        wadl/feed.wadl#TenantAtomFeed wadl/product.wadl#CloudNetworksTenant
-                        wadl/feed.wadl#Validated"/>
+                        wadl/feed.wadl#TenantAtomFeed wadl/product.wadl#CloudNetworksTenant"/>
         <resource id="nimbus_events"
                   path="nimbus/events"
                   type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Unvalidated"/>

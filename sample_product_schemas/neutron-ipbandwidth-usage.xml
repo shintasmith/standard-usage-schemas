@@ -1,0 +1,32 @@
+<productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/usage/neutron/ipbandwidth"
+               serviceCode="CloudNetworks"
+               version="1"
+               resourceTypes="IP"
+               type="USAGE">
+    <description>
+        Specifies the amount of bandwidth for a single ip resource.
+    </description>
+    <attribute name="ipVersion"
+               type="string"
+               allowedValues="4"
+               use="required"
+               groupBy="true">
+        Specifies the IP version.
+    </attribute>
+    <attribute name="ipType"
+               type="Name"
+               use="required"
+               allowedValues="FLOATING"
+               groupBy="true">
+        Specifies the IP type.
+    </attribute>
+    <attribute name="bandwidthOut"
+               type="unsignedLong"
+               use="required"
+               unitOfMeasure="B"
+               aggregateFunction="SUM"
+               max="109951162777600">
+        Specifies the amount of out bandwidth, in bytes.
+    </attribute>
+</productSchema>

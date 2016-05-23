@@ -118,7 +118,8 @@
                   type="wadl/feed.wadl#AtomFeed wadl/product.wadl#NetDevice"/>
         <resource id="neutron_events"
                   path="neutron/events"
-                  type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/>
+                  type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudNetworks
+                        wadl/feed.wadl#TenantAtomFeed wadl/product.wadl#CloudNetworksTenant"/>
         <resource id="nimbus_events"
                   path="nimbus/events"
                   type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Unvalidated"/>
@@ -222,6 +223,8 @@
                         wadl/product.wadl#CloudLoadBalancersTenant wadl/product.wadl#CloudLoadBalancersSummaryTenant
                         wadl/product.wadl#CloudMonitoring wadl/product.wadl#CloudMonitoringSummary
                         wadl/product.wadl#CloudMonitoringTenant wadl/product.wadl#CloudMonitoringSummaryTenant
+                        wadl/product.wadl#CloudNetworks wadl/product.wadl#CloudNetworksSummary
+                        wadl/product.wadl#CloudNetworksTenant wadl/product.wadl#CloudNetworksSummaryTenant
                         wadl/product.wadl#CloudQueues wadl/product.wadl#CloudQueuesSummary
                         wadl/product.wadl#CloudQueuesTenant wadl/product.wadl#CloudQueuesSummaryTenant
                         wadl/product.wadl#CloudServers wadl/product.wadl#CloudServersSummary
@@ -360,6 +363,9 @@
             <resource id="nova_usagesummary_events"
                       path="nova/events"
                       type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudServersOpenStackSummary wadl/product.wadl#RHELSummary"/>
+            <resource id="neutron_usagesummary_events"
+                      path="neutron/events"
+                      type="wadl/feed.wadl#AtomFeed wadl/product.wadl#CloudNetworksSummary"/>
             <resource id="rackspacecdn_usagesummary_events"
                       path="rackspacecdn/events"
                       type="wadl/feed.wadl#AtomFeed wadl/product.wadl#RackspaceCDNSummary"/>

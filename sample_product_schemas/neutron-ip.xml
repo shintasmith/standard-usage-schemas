@@ -1,0 +1,42 @@
+<productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	namespace="http://docs.rackspace.com/usage/neutron/ip"
+	serviceCode="CloudNetworks"
+	version="1"
+	resourceTypes="IP"
+	type="CREATE DELETE UP DOWN">
+	<description>
+		Specifies the events for billable IPs for neutron.
+		CREATE: Fixed/Shared IP was allocated.
+		DELETE: Fixed/Shared IP was deallocated.
+		UP: Floating/Scaling IP was associated.
+		DOWN: Floating/Scaling IP was disassociated.
+	</description>
+	<attribute name="subnetId"
+		type="UUID"
+	       	use="required">
+		Specifies a subnet id the associated with the IP address.
+	</attribute>
+	<attribute name="networkId"
+		type="UUID"
+		use="required">
+		Specifies a network id the associated with the IP address.
+	</attribute>
+	<attribute name="public"
+		type="boolean"
+		use="required">
+		Specifies whether the IP address is public or private.
+	</attribute>
+	<attribute name="ipVersion"
+		type="string"
+		use="required"
+		allowedValues="4 6">
+		Specifies the IP version. The only valid values are 4 and 6.
+	</attribute>
+	<attribute name="ipType"
+		type="Name"
+		use="required"
+		allowedValues="FIXED SHARED FLOATING SCALING">
+		Specifies the IP type.
+	</attribute>
+</productSchema>

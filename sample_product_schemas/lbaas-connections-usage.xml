@@ -1,0 +1,23 @@
+<productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/usage/lbaas/connections"
+               serviceCode="CloudLoadBalancers"
+               version="2"
+               type="USAGE_SNAPSHOT"
+               resourceTypes="LOADBALANCER">
+    <description>
+        Specifies the connections usage for the Cloud Load Balancer.
+    </description>
+    <attribute name="isSSL"
+               type="boolean"
+               use="required"
+               groupBy="true">
+        Specifies a Boolean flag to determine whether or not the Cloud Load Balancer used SSL/TLS terminated connections.
+    </attribute>
+    <attribute name="connections"
+               type="unsignedLong"
+               use="required"
+               unitOfMeasure="COUNT"
+               aggregateFunction="SUM">
+        Specifies the amount of connections.
+    </attribute>
+</productSchema>

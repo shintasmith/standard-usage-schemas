@@ -387,6 +387,6 @@
 	    <resource id="keepaccess_events"
                       path="keep_access/events"
 		      type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#TenantAtomFeed wadl/cadf.wadl#UserAccessEvent wadl/cadf.wadl#UserAccessEventTenant"/>
-        </resource>
+         </resource>
     </resources>
 </application>

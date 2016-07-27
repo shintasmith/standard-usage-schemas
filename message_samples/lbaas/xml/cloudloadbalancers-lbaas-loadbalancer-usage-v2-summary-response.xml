@@ -41,14 +41,11 @@
              region="DFW">
          <sample:product summary="true"
                          serviceCode="CloudLoadBalancers"
-                         version="1"
+                         version="2"
                          resourceType="LOADBALANCER"
-                         avgConcurrentConnectionsSum="1"
-                         publicBandWidthInSum="1000"
-                         bandWidthOut="1000"
-                         bandWidthOutSsl="1000"
-                         publicBandWidthOutSum="1000"
-                         hasSSLConnection="true"/>
+                         sslConnections="1000"
+                         nonSslConnections="1000"
+                         publicBandWidthOut="1000"/>
       </event>
    </atom:content>   
    <atom:link href="https://ord.feeds.api.rackspacecloud.com/lbaas/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814"

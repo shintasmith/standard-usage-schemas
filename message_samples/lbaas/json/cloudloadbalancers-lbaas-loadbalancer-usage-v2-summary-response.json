@@ -47,14 +47,11 @@
                     "@type": "http://docs.rackspace.com/usage/lbaas",
                     "summary": "true",
                     "serviceCode": "CloudLoadBalancers",
-                    "version": "1",
+                    "version": "2",
                     "resourceType": "LOADBALANCER",
-                    "avgConcurrentConnectionsSum": 1,
-                    "publicBandWidthInSum": 1000,
-                    "bandWidthOut": 1000,
-                    "bandWidthOutSsl": 1000,
-                    "publicBandWidthOutSum": 1000,
-                    "hasSSLConnection": true
+                    "sslConnections": 1000,
+                    "nonSslConnections": 1000,
+                    "publicBandWidthOut": 1000
                 }
             }
         },

@@ -463,4 +463,10 @@
             <resource href="../../allfeeds.wadl#newrelic_events_getEntry_NewRelic"/>
         </resources>
     </section>
+    <section xml:id="keepaccess.product">
+        <title>User access events for Cloud Keep</title>
+        <resources xmlns="http://wadl.dev.java.net/2009/02">
+            <resource href="../../allfeeds.wadl#keepaccess_events"/>
+        </resources>
+    </section>
 </chapter>

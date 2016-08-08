@@ -15,7 +15,7 @@
     <xsl:import href="productSchema-summary-util.xsl"/>
 
     <xsl:output method="xml" indent="yes"/>
-    
+
     <xsl:variable name="MAX_STRING">255</xsl:variable>
     <xsl:variable name="MAX_OCCURS_VALUE">5000</xsl:variable>
 
@@ -98,7 +98,7 @@
                         <xsl:when test="./@minLength"><xsl:value-of select="./@minLength"/></xsl:when>
                         <xsl:otherwise>0</xsl:otherwise>
                     </xsl:choose>
-                </xsl:variable> 
+                </xsl:variable>
                 <simpleType name="string{$minLengthValue}_{$maxLengthValue}">
                     <restriction base="xsd:string">
                         <minLength value="{$minLengthValue}"/>
@@ -112,7 +112,7 @@
                         <xsl:when test="./@minLength"><xsl:value-of select="./@minLength"/></xsl:when>
                         <xsl:otherwise>0</xsl:otherwise>
                     </xsl:choose>
-                </xsl:variable> 
+                </xsl:variable>
                 <simpleType name="string">
                     <restriction base="xsd:string">
                         <minLength value="{$minLengthValue}"/>
@@ -372,7 +372,7 @@
                 <xsl:when test="$attribute/@minLength"><xsl:value-of select="$attribute/@minLength"/></xsl:when>
                 <xsl:otherwise>0</xsl:otherwise>
             </xsl:choose>
-        </xsl:variable> 
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="ends-with($type, '*')">
                 <xsl:value-of select="usage:listNameType($vname,true())"/>
@@ -405,8 +405,8 @@
                        min and max values.  Since this doesn't impact the base type, it doesn't impact documenation
                        and isn't included in productSchema-summary-util.xsl
                      -->
-                    <xsl:when test="($attribute/@min or $attribute/@max) and not($usage-summary and $attribute/@aggregateFunction = 'SUM' and $type = ( 'double', 'int', 'long', 'short', 'byte', 'unsignedInt', 'unsignedLong', 'unsignedShort', 'unsignedByte'))">
-                        <xsl:value-of select="usage:minMaxType($vname,true(),$usage-summary and $attribute/@aggregateFunction=('SUM', 'AVG','WEIGHTED_AVG'))"/>
+                    <xsl:when test="($attribute/@min or $attribute/@max) and not($usage-summary and $attribute/@aggregateFunction = ('SUM','DAILY_WEIGHTED_SUM') and $type = ( 'double', 'int', 'long', 'short', 'byte', 'unsignedInt', 'unsignedLong', 'unsignedShort', 'unsignedByte'))">
+                        <xsl:value-of select="usage:minMaxType($vname,true(),$usage-summary and $attribute/@aggregateFunction=('SUM','DAILY_WEIGHTED_SUM','AVG','WEIGHTED_AVG'))"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="sum:getTypeXSD( $type, $usage-summary, $attribute/@aggregateFunction )"/>
@@ -501,7 +501,7 @@
         <xsl:variable name="attrib" as="node()" select="."/>
         <xsl:choose>
             <xsl:when test="$usage-summary">
-                <xsl:if test="@aggregateFunction=('AVG','WEIGHTED_AVG', 'SUM') and (@min or @max)">
+                <xsl:if test="@aggregateFunction=('AVG','WEIGHTED_AVG', 'SUM','DAILY_WEIGHTED_SUM') and (@min or @max)">
                     <xsl:call-template name="addMinMaxType"/>
                 </xsl:if>
             </xsl:when>
@@ -592,7 +592,7 @@
         <xsl:variable name="do-usage-summary-minmax" as="xsd:boolean"
                       select="if ($usage-summary) then @aggregateFunction=('AVG','WEIGHTED_AVG') else false()"/>
         <xsl:variable name="usage-summary-no-minmax" as="xsd:boolean"
-                      select="if ($usage-summary) then @aggregateFunction=('SUM') else false()"/>
+                      select="if ($usage-summary) then @aggregateFunction=('SUM','DAILY_WEIGHTED_SUM') else false()"/>
         <simpleType>
             <xsl:attribute name="name" select="usage:minMaxType(usage:versionName(@name, $use-version, $version), false(),
                                                ($do-usage-summary-minmax or $usage-summary-no-minmax))"/>
@@ -697,7 +697,7 @@
                 <xsl:when test="$attrib/@minLength"><xsl:value-of select="$attrib/@minLength"/></xsl:when>
                 <xsl:otherwise>0</xsl:otherwise>
             </xsl:choose>
-        </xsl:variable> 
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="$type='UUID'">
                 <xsl:value-of select="concat('p:',$type)"/>

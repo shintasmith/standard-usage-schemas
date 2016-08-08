@@ -78,7 +78,7 @@
                         <xsl:if test="@resourceTypes">
                             <xsl:attribute name="resourceId">4a2b42f4-6c63-11e1-815b-7fcbcf67f549</xsl:attribute>
                         </xsl:if>
-    
+
                         <xsl:attribute name="tenantId">123456</xsl:attribute>
                         <xsl:attribute name="rackspaceAccountNumber">020-123456</xsl:attribute>
                         <xsl:attribute name="startTime">2013-03-15T11:51:11Z</xsl:attribute>
@@ -122,10 +122,10 @@
 
     <xsl:template match="schema:attribute[not(@groupBy=false() and @aggregateFunction='NONE') and  (@use='required' or @use='synthesized')]">
         <xsl:variable name="type" select="@type[1]"/>
-        
+
         <xsl:attribute name="{@name}">
             <xsl:choose>
-                <xsl:when test="@aggregateFunction='SUM'">
+                <xsl:when test="@aggregateFunction=('SUM','DAILY_WEIGHTED_SUM')">
                     <xsl:call-template name="getIntValue">
                         <xsl:with-param name="defaultValue" select="'1000'"/>
                         <xsl:with-param name="noMinMax" select="true()"/>
@@ -140,7 +140,7 @@
                     <xsl:call-template name="getValueByType">
                         <xsl:with-param name="type" select="$type"/>
                     </xsl:call-template>
-                </xsl:otherwise>                
+                </xsl:otherwise>
             </xsl:choose>
         </xsl:attribute>
     </xsl:template>

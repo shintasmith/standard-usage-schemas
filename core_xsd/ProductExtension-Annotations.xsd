@@ -154,6 +154,7 @@
         <restriction base="xsd:string">
             <enumeration value="NONE"/>
             <enumeration value="SUM"/>
+            <enumeration value="DAILY_WEIGHTED_SUM"/>
             <enumeration value="AVG"/>
             <enumeration value="WEIGHTED_AVG"/>
             <enumeration value="MAX"/>

@@ -6,8 +6,12 @@
     <description>
         Specifies the storage of a server image for a tenant.
     </description>
-    <attribute name="storage" type="unsignedLong" use="required"
-               unitOfMeasure="B" max="2199023255552" aggregateFunction="SUM">
+    <attribute name="storage"
+               type="unsignedLong"
+               use="required"
+               unitOfMeasure="B"
+               max="2199023255552"
+               aggregateFunction="DAILY_WEIGHTED_SUM">
         Specifies the amount of storage that is consumed by images for this tenant.
     </attribute>
 </productSchema>

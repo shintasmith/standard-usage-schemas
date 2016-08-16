@@ -18,7 +18,7 @@
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns="http://www.w3.org/2001/XMLSchema">
    <atom:id>urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814</atom:id>
-   <atom:category term="tid:1234"/>
+   <atom:category term="tid:123456"/>
    <atom:category term="rgn:DFW"/>
    <atom:category term="dc:DFW1"/>
    <atom:category term="rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"/>
@@ -29,13 +29,13 @@
       <event xmlns="http://docs.rackspace.com/core/event"
              xmlns:sample="http://docs.rackspace.com/usage/lbaas"
              id="e53d007a-fc23-11e1-975c-cfa6b29bb814"
-             version="1"
+             version="2"
              resourceId="4a2b42f4-6c63-11e1-815b-7fcbcf67f549"
-             tenantId="1234"
-             rackspaceAccountNumber="020-1234"
+             tenantId="123456"
+             rackspaceAccountNumber="020-123456"
              startTime="2013-03-15T11:51:11Z"
-             endTime="2013-03-16T11:51:11Z"
-             duration="PT10M"
+             endTime="2013-03-16T00:00:00Z"
+             duration="PT20M"
              type="USAGE_SUMMARY"
              dataCenter="DFW1"
              region="DFW">
@@ -50,5 +50,9 @@
                          publicBandWidthOutSum="1000"
                          hasSSLConnection="true"/>
       </event>
-   </atom:content>
+   </atom:content>   
+   <atom:link href="https://ord.feeds.api.rackspacecloud.com/lbaas/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814"
+              rel="self"/>
+   <atom:updated>2013-03-01T19:42:35.507Z</atom:updated>
+   <atom:published>2013-03-01T19:42:35.507</atom:published>
 </atom:entry>

@@ -2,7 +2,7 @@
 <?atom feed="lbaas/events" ?>
 <!--
     This example has been generated using
-    'mvn -P generate-samples clean generate-sources -DproductSchema=sample_product_schemas/lbaas-connections-usage.xml -DfeedName=lbaas' call.
+    'mvn -P generate-samples clean generate-sources -DproductSchema=sample_product_schemas/lbaas.xml -DfeedName=lbaas' call.
     Some assumptions have been made when generating this and might not be correct.  Manual modification
     might be required for the unit tests to pass.
 
@@ -21,20 +21,22 @@
    <atom:title>CloudLoadBalancers</atom:title>
    <atom:content type="application/xml">
       <event xmlns="http://docs.rackspace.com/core/event"
-             xmlns:sample="http://docs.rackspace.com/usage/lbaas/connections"
+             xmlns:sample="http://docs.rackspace.com/usage/lbaas"
              id="e53d007a-fc23-11e1-975c-cfa6b29bb814"
              version="2"
              resourceId="4a2b42f4-6c63-11e1-815b-7fcbcf67f549"
              tenantId="1234"
-             eventTime="2013-03-15T11:51:11Z"
-             type="USAGE_SNAPSHOT"
+             startTime="2013-03-15T11:51:11Z"
+             endTime="2013-03-16T00:00:00Z"
+             type="USAGE"
              dataCenter="DFW1"
              region="DFW">
          <sample:product serviceCode="CloudLoadBalancers"
                          version="2"
                          resourceType="LOADBALANCER"
-                         isSSL="true"
-                         connections="44"/>
+                         sslConnections="0"
+                         nonSslConnections="0"
+                         publicBandWidthOut="0"/>
       </event>
    </atom:content>
 </atom:entry>

@@ -3,7 +3,7 @@
         "@type": "http://www.w3.org/2005/Atom",
         "category": [
             {
-                "term": "tid:123456"
+                "term": "tid:1234"
             },
             {
                 "term": "rgn:DFW"
@@ -15,10 +15,10 @@
                 "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"
             },
             {
-                "term": "cloudloadbalancers.uptime.loadbalancer.usage_summary"
+                "term": "cloudloadbalancers.lbaas.loadbalancer.usage"
             },
             {
-                "term": "type:cloudloadbalancers.uptime.loadbalancer.usage_summary"
+                "term": "type:cloudloadbalancers.lbaas.loadbalancer.usage"
             }
         ],
         "link": [
@@ -28,27 +28,39 @@
             }
         ],
         "id": "urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814",
-        "title": "CloudLoadBalancers Summary",
+        "title": "CloudLoadBalancers",
         "content": {
             "event": {
                 "@type": "http://docs.rackspace.com/core/event",
                 "id": "e53d007a-fc23-11e1-975c-cfa6b29bb814",
                 "version": "2",
                 "resourceId": "4a2b42f4-6c63-11e1-815b-7fcbcf67f549",
-                "tenantId": "123456",
-                "rackspaceAccountNumber": "020-123456",
+                "tenantId": "1234",
                 "startTime": "2013-03-15T11:51:11Z",
                 "endTime": "2013-03-16T00:00:00Z",
-                "duration": "PT20M",
-                "type": "USAGE_SUMMARY",
+                "type": "USAGE",
                 "dataCenter": "DFW1",
                 "region": "DFW",
                 "product": {
-                    "@type": "http://docs.rackspace.com/usage/lbaas/uptime",
-                    "summary": "true",
+                    "@type": "http://docs.rackspace.com/usage/lbaas",
+                    "avgConcurrentConnectionsSum": 0,
+                    "publicBandWidthInSum": 0,
+                    "publicBandWidthOutSum": 0,
+                    "hasSSLConnection": true,
                     "serviceCode": "CloudLoadBalancers",
-                    "version": "2",
-                    "resourceType": "LOADBALANCER"
+                    "version": "1",
+                    "resourceType": "LOADBALANCER",
+                    "avgConcurrentConnections": 0,
+                    "avgConcurrentConnectionsSsl": 0,
+                    "bandWidthIn": 0,
+                    "bandWidthInSsl": 0,
+                    "bandWidthOut": 0,
+                    "bandWidthOutSsl": 0,
+                    "numPolls": 0,
+                    "numVips": 0,
+                    "vipType": "PUBLIC",
+                    "sslMode": "ON",
+                    "status": "ACTIVE"
                 }
             }
         },

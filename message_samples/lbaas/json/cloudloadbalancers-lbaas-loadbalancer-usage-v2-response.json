@@ -15,10 +15,10 @@
                 "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"
             },
             {
-                "term": "cloudloadbalancers.connections.loadbalancer.usage_snapshot"
+                "term": "cloudloadbalancers.lbaas.loadbalancer.usage"
             },
             {
-                "term": "type:cloudloadbalancers.connections.loadbalancer.usage_snapshot"
+                "term": "type:cloudloadbalancers.lbaas.loadbalancer.usage"
             }
         ],
         "link": [
@@ -36,17 +36,19 @@
                 "version": "2",
                 "resourceId": "4a2b42f4-6c63-11e1-815b-7fcbcf67f549",
                 "tenantId": "1234",
-                "eventTime": "2013-03-15T11:51:11Z",
-                "type": "USAGE_SNAPSHOT",
+                "startTime": "2013-03-15T11:51:11Z",
+                "endTime": "2013-03-16T00:00:00Z",
+                "type": "USAGE",
                 "dataCenter": "DFW1",
                 "region": "DFW",
                 "product": {
-                    "@type": "http://docs.rackspace.com/usage/lbaas/connections",
+                    "@type": "http://docs.rackspace.com/usage/lbaas",
                     "serviceCode": "CloudLoadBalancers",
                     "version": "2",
                     "resourceType": "LOADBALANCER",
-                    "isSSL": true,
-                    "connections": 44
+                    "sslConnections": 0,
+                    "nonSslConnections": 0,
+                    "publicBandWidthOut": 0
                 }
             }
         },

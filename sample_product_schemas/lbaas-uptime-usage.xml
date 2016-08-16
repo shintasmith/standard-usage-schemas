@@ -1,9 +1,0 @@
-<productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
-               namespace="http://docs.rackspace.com/usage/lbaas/uptime"
-               serviceCode="CloudLoadBalancers"
-               version="2"
-               resourceTypes="LOADBALANCER">
-    <description>
-        Specifies the uptime usage for the Cloud Load Balancer.
-    </description>
-</productSchema>

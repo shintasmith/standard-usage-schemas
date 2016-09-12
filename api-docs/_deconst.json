@@ -1,8 +1,8 @@
 {
   "contentIDBase": "https://github.com/rackerlabs/standard-usage-schemas/",
-  "githubUrl": "https://github.com/rackerlabs/standard-usage-schemas/",
+  "githubUrl": "https://github.com/rackerlabs/docs-rackspace/",
   "githubBranch": "master",
   "meta": {
-    "preferGithubIssues": false
+    "preferGithubIssues": true
   }
 }

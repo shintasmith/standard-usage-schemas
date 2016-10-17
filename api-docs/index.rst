@@ -1,11 +1,11 @@
-=========================================================
-Rackspace Cloud Feeds API 1.0
-=========================================================
+=====================================================
+|product name (TM)| API |contract version|
+=====================================================
 
 *Last updated:* |today|
 
-Use the following links to get user and reference information for using the Rackspace Cloud 
-Identity service REST API.
+Use the following links to get user and reference information for using the
+|product name (TM)| service REST API.
 
 - :ref:`Getting Started Guide <getting-started>`
 - :ref:`Developer Guide <developer-guide>`
@@ -14,7 +14,7 @@ Identity service REST API.
 
 .. toctree::
    :maxdepth: 5
-   
+
    overview/index
    getting-started
    getting-started/index
@@ -24,4 +24,3 @@ Identity service REST API.
    feeds-archiving
    api-reference
    api-operations/index
-   

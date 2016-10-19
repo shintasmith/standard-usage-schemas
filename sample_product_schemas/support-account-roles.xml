@@ -1,7 +1,7 @@
 <productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
                namespace="http://docs.rackspace.com/event/support/account/roles"
                serviceCode="Support"
-               version="1" resourceTypes="ACCOUNT_SUPPORT" 
+               version="1" resourceTypes="ACCOUNT_SUPPORT"
                type="CREATE UPDATE">
     <description>
         Lists all the events for support-related information for a support accounts.
@@ -10,11 +10,10 @@
         <description>
             Describes the roles of Rackspace employees for a given support account.
         </description>
-        <attribute name="sso" type="Name" use="required"> 
+        <attribute name="sso" type="Name" use="required">
             Specifies the SSO login for the Rackspace employee.
         </attribute>
-        <attribute name="role" type="Name" use="required"
-                   allowedValues="ACCOUNT_MANAGER BUSINESS_DEVELOPMENT_CONSULTANT CLOUD_ADVISOR LAUNCH_MANAGER ONBOARDING_SPECIALIST SALES_ASSOCIATE TEAM_OWNER TECH_LEAD TECHNICAL_ACCOUNT_MANAGER"> 
+        <attribute name="role" type="Name" use="required">
             Specifies the role of the Rackspace employee.
         </attribute>
         <attribute name="roleId" type="int" use="required">

@@ -1,0 +1,23 @@
+<alternatives xmlns="http://docs.rackspace.com/core/usage/schema">
+    <productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+                   namespace="http://docs.rackspace.com/event/identity/accounts"
+                   serviceCode="CloudIdentity"
+                   version="1" resourceTypes="ACCOUNT"
+                   type="CREATE">
+        <description>
+            Specifies the identity user messages.
+        </description>
+        <attribute name="rcn" type="string" use="required">
+            Specifies the RCN associated with the event
+        </attribute>
+        <attribute name="accounts" type="string*" use="optional">
+            Specifies the space delimited list of accounts associated with the event
+        </attribute>
+        <attribute name="domains" type="string*" use="optional">
+            Specifies the space delimited list of domains created for the account
+        </attribute>
+        <attribute name="tenants" type="string*" use="optional">
+            Specifies the space delimited list of tenants created for the account
+        </attribute>
+    </productSchema>
+</alternatives>

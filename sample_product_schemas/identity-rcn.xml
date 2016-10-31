@@ -1,14 +1,17 @@
 <alternatives xmlns="http://docs.rackspace.com/core/usage/schema">
     <productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
-                   namespace="http://docs.rackspace.com/event/identity/accounts"
+                   namespace="http://docs.rackspace.com/event/identity/rcn"
                    serviceCode="CloudIdentity"
-                   version="1" resourceTypes="ACCOUNT"
-                   type="CREATE">
+                   version="1" resourceTypes="RCN"
+                   type="UPDATE">
         <description>
-            Specifies the identity user messages.
+            Represents a change in the resources related to an RCN within Identity.
         </description>
-        <attribute name="rcn" type="string" use="required">
-            Specifies the RCN associated with the event
+        <attribute name="accountEventId" type="string" use="optional">
+            Specifies the UUID of the customer accounts feed event that triggered this change
+        </attribute>
+        <attribute name="accountEventUri" type="string" use="optional">
+            Specifies the URI of the customer accounts feed event that triggered this change
         </attribute>
         <attribute name="accounts" type="string*" use="optional">
             Specifies the space delimited list of accounts associated with the event

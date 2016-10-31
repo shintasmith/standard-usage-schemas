@@ -9,13 +9,13 @@
                 "term": "dc:DFW1"
             },
             {
-                "term": "rid:4a2b42f4-6c63-11e1-815b-7fcbcf67f549"
+                "term": "rid:RCN-123-456-789"
             },
             {
-                "term": "cloudidentity.accounts.account.create"
+                "term": "cloudidentity.rcn.rcn.update"
             },
             {
-                "term": "type:cloudidentity.accounts.account.create"
+                "term": "type:cloudidentity.rcn.rcn.update"
             }
         ],
         "link": [
@@ -31,20 +31,21 @@
                 "@type": "http://docs.rackspace.com/core/event",
                 "id": "e53d007a-fc23-11e1-975c-cfa6b29bb814",
                 "version": "2",
-                "resourceId": "urn:uuid:7c3f6ccc-70b3-4a38-ae19-611b3bcda6b3",
+                "resourceId": "RCN-123-456-789",
                 "eventTime": "2013-03-15T11:51:11Z",
-                "type": "CREATE",
+                "type": "UPDATE",
                 "dataCenter": "DFW1",
                 "region": "DFW",
                 "product": {
-                    "@type": "http://docs.rackspace.com/event/identity/accounts",
+                    "@type": "http://docs.rackspace.com/event/identity/rcn",
                     "serviceCode": "CloudIdentity",
                     "version": "1",
-                    "resourceType": "ACCOUNT",
-                    "rcn": "RCN-123-456-789",
+                    "resourceType": "RCN",
                     "accounts": "12345 account123",
                     "tenants": "12345 hybrid:account123",
-                    "domains": "12345 dedicated:account123"
+                    "domains": "12345 dedicated:account123",
+                    "accountEventId": "urn:uuid:7c3f6ccc-70b3-4a38-ae19-611b3bcda6b3",
+                    "accountEventUri": "https://atom.staging.ord1.us.ci.rackspace.net/customer_accounts/events/entries/urn:uuid:7c3f6ccc-70b3-4a38-ae19-611b3bcda6b3"
                 }
             }
         },

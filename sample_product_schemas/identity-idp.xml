@@ -1,0 +1,21 @@
+<productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/event/identity/idp"
+               serviceCode="CloudIdentity"
+               version="1" resourceTypes="IDP"
+               type="CREATE UPDATE DELETE">
+    <description>
+        Specifies the invalidation event for the IDP.  This means
+        something in the IDP has changed.
+
+        To keep things simple for version one of the event only the
+        IDP ID, which as the event resource Id and the issuer is
+        specified.
+
+        Future versions may consider pushing the attributes that
+        actually changed such as the authenticationURL, name, or
+        mapping policy.
+    </description>
+    <attribute name="issuer" type="anyURI" use="required">
+        Specifies the issuer uri associated with this IDP.
+    </attribute>
+</productSchema>

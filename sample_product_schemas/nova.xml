@@ -1,56 +1,180 @@
-<productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-               namespace="http://docs.rackspace.com/event/nova"
-               serviceCode="CloudServersOpenStack"
-               version="1" resourceTypes="SERVER"
-               type="USAGE">
-    <description>
-        Specifies the usage message for a Next Generation (Nova) server.
-    </description>
-    <attribute name="flavorId" type="string" minLength="1" maxLength="50"
-               use="required" 
-               groupBy="true">
-        Specifies the flavor Id of the server.
-    </attribute>
-    <attribute name="flavorName" type="string" minLength="1" maxLength="255"
-               use="required"
-               groupBy="true">
-        Specifies the flavor name of the server.
-    </attribute>
-    <attribute name="status" type="Name"
-               use="required" allowedValues="ACTIVE BUILD DELETED ERROR HARD_REBOOT MIGRATING PASSWORD PAUSED REBOOT REBUILD RESCUE RESIZE REVERT_RESIZE SHELVED SHELVED_OFFLOADED SHUTOFF SOFT_DELETED SUSPENDED UNKNOWN VERIFY_RESIZE"
-               groupBy="true">
-        Specifies the status of the server.
-    </attribute>
-    <attribute name="osLicenseType" type="Name"
-               use="optional" default="LINUX"
-               allowedValues="VYATTA RHEL WINDOWS LINUX"
-               groupBy="true">
-        Specifies OS license type for this server.
-    </attribute>
-    <attribute name="applicationLicense" type="Name*"
-               use="optional" 
-               allowedValues="MSSQL_WEB MSSQL"
-               groupBy="true">
-        Specifies an application license on this server.
-    </attribute>
-    <attribute name="isManaged" type="boolean"
-               use="optional" default="false"
-               groupBy="true">
-        Specifies whether this a managed server.
-    </attribute>    
-    <attribute name="bandwidthIn" type="unsignedLong" use="required"
-               unitOfMeasure="B" aggregateFunction="SUM" min="0"
-               max="6635520000000">
-        Specifies the amount of inbound bandwidth, in bytes.
-    </attribute>
-    <attribute name="bandwidthOut" type="unsignedLong" use="required"
-               unitOfMeasure="B" aggregateFunction="SUM" min="0"
-               max="6635520000000">
-        Specifies the amount of outbound bandwidth, in bytes.
-    </attribute>
-    <xpathAssertion test="if ( @applicationLicense = 'MSSQL_WEB' or @applicationLicense = 'MSSQL' ) then
+<alternatives xmlns="http://docs.rackspace.com/core/usage/schema">
+    <productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+                   namespace="http://docs.rackspace.com/event/nova"
+                   serviceCode="CloudServersOpenStack"
+                   version="1"
+                   resourceTypes="SERVER"
+                   type="USAGE">
+        <description>
+            Specifies the usage message for a Next Generation (Nova) server.
+        </description>
+        <attribute name="flavorId"
+                   type="string"
+                   minLength="1"
+                   maxLength="50"
+                   use="required"
+                   groupBy="true">
+            Specifies the flavor Id of the server.
+        </attribute>
+        <attribute name="flavorName"
+                   type="string"
+                   minLength="1"
+                   maxLength="255"
+                   use="required"
+                   groupBy="true">
+            Specifies the flavor name of the server.
+        </attribute>
+        <attribute name="status"
+                   type="Name"
+                   use="required"
+                   allowedValues="ACTIVE BUILD DELETED ERROR HARD_REBOOT PASSWORD REBOOT REBUILD RESCUE RESIZE REVERT_RESIZE SHUTOFF SUSPENDED UNKNOWN VERIFY_RESIZE"
+                   groupBy="true">
+            Specifies the status of the server.
+        </attribute>
+        <attribute name="osLicenseType"
+                   type="Name"
+                   use="optional"
+                   default="LINUX"
+                   allowedValues="VYATTA RHEL WINDOWS LINUX"
+                   groupBy="true">
+            Specifies OS license type for this server.
+        </attribute>
+        <attribute name="applicationLicense"
+                   type="Name*"
+                   use="optional"
+                   allowedValues="MSSQL_WEB MSSQL"
+                   groupBy="true">
+            Specifies an application license on this server.
+        </attribute>
+        <attribute name="isManaged"
+                   type="boolean"
+                   use="optional"
+                   default="false"
+                   groupBy="true">
+            Specifies whether this a managed server.
+        </attribute>
+        <attribute name="bandwidthIn"
+                   type="unsignedLong"
+                   use="required"
+                   unitOfMeasure="B"
+                   aggregateFunction="SUM"
+                   min="0"
+                   max="6635520000000">
+            Specifies the amount of inbound bandwidth, in bytes.
+        </attribute>
+        <attribute name="bandwidthOut"
+                   type="unsignedLong"
+                   use="required"
+                   unitOfMeasure="B"
+                   aggregateFunction="SUM"
+                   min="0"
+                   max="6635520000000">
+            Specifies the amount of outbound bandwidth, in bytes.
+        </attribute>
+        <xpathAssertion test="if ( @applicationLicense = 'MSSQL_WEB' or @applicationLicense = 'MSSQL' ) then
                           @osLicenseType = 'WINDOWS' else true()">
-        If applicationLicense is set to MSSQL_WEB or MSSQL, then osLicenseType must be WINDOWS.
-    </xpathAssertion>
-</productSchema>
+            If applicationLicense is set to MSSQL_WEB or MSSQL, then osLicenseType must be WINDOWS.
+        </xpathAssertion>
+    </productSchema>
+    <productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+                   namespace="http://docs.rackspace.com/event/nova"
+                   serviceCode="CloudServersOpenStack"
+                   version="2"
+                   resourceTypes="SERVER"
+                   type="USAGE">
+        <description>
+            Specifies the usage message for a Next Generation (Nova) server.
+        </description>
+        <attribute name="flavorId"
+                   type="string"
+                   minLength="1"
+                   maxLength="50"
+                   use="required"
+                   groupBy="true">
+            Specifies the flavor Id of the server.
+        </attribute>
+        <attribute name="flavorName"
+                   type="string"
+                   minLength="1"
+                   maxLength="255"
+                   use="required"
+                   groupBy="true">
+            Specifies the flavor name of the server.
+        </attribute>
+        <attribute name="status"
+                   type="Name"
+                   use="required"
+                   allowedValues="ACTIVE BUILD DELETED ERROR HARD_REBOOT PASSWORD REBOOT REBUILD RESCUE RESIZE REVERT_RESIZE SHUTOFF SUSPENDED UNKNOWN VERIFY_RESIZE"
+                   groupBy="true">
+            Specifies the status of the server.
+        </attribute>
+        <attribute name="osLicenseType"
+                   type="Name"
+                   use="optional"
+                   default="LINUX"
+                   allowedValues="VYATTA RHEL WINDOWS LINUX"
+                   groupBy="true">
+            Specifies OS license type for this server.
+        </attribute>
+        <attribute name="applicationLicense"
+                   type="Name*"
+                   use="optional"
+                   allowedValues="MSSQL_WEB MSSQL"
+                   groupBy="true">
+            Specifies an application license on this server.
+        </attribute>
+        <attribute name="isManaged"
+                   type="boolean"
+                   use="optional"
+                   default="false"
+                   groupBy="true">
+            Specifies whether this a managed server.
+        </attribute>
+        <attribute name="bandwidthIn"
+                   type="unsignedLong"
+                   use="required"
+                   unitOfMeasure="B"
+                   aggregateFunction="SUM"
+                   min="0"
+                   max="6635520000000">
+            Specifies the amount of inbound bandwidth, in bytes.
+        </attribute>
+        <attribute name="bandwidthOut"
+                   type="unsignedLong"
+                   use="required"
+                   unitOfMeasure="B"
+                   aggregateFunction="SUM"
+                   min="0"
+                   max="6635520000000">
+            Specifies the amount of outbound bandwidth, in bytes.
+        </attribute>
+        <attribute name="additionalIpv4"
+                   type="unsignedInt"
+                   use="optional"
+                   unitOfMeasure="COUNT"
+                   default="0"
+                   min="0"
+                   max="10"
+                   aggregateFunction="MAX">
+            The number of additional IPv4 addresses.
+        </attribute>
+        <attribute name="additionalIpv6"
+                   type="unsignedInt"
+                   use="optional"
+                   unitOfMeasure="COUNT"
+                   default="0"
+                   min="0"
+                   max="10"
+                   aggregateFunction="MAX">
+            The number of additional IPv6 addresses.
+        </attribute>
+        <xpathAssertion test="if ( @applicationLicense = 'MSSQL_WEB' or @applicationLicense = 'MSSQL' ) then
+                          @osLicenseType = 'WINDOWS' else true()">
+            If applicationLicense is set to MSSQL_WEB or MSSQL, then osLicenseType must be WINDOWS.
+        </xpathAssertion>
+        <xpathAssertion test="if ( @additionalIpv4 + @additionalIpv6 > 10 ) then
+                          false() else true()">
+            The max value of IPv4 addresses plus IPv6 addresses is 10
+        </xpathAssertion>
+    </productSchema>
+</alternatives>

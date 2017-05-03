@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?atom feed="nova/events"?>
+<?expect code="400"?>
+<atom:entry xmlns:atom="http://www.w3.org/2005/Atom"
+            xmlns="http://www.w3.org/2001/XMLSchema">
+    <atom:title>CloudServersOpenStack</atom:title>
+    <atom:content type="application/xml">
+        <event xmlns="http://docs.rackspace.com/core/event"
+               xmlns:sample="http://docs.rackspace.com/event/nova"
+               id="e53d007a-fc23-11e1-975c-cfa6b29bb814"
+               version="2"
+               resourceId="4a2b42f4-6c63-11e1-815b-7fcbcf67f549"
+               tenantId="1234"
+               startTime="2013-03-15T11:51:11Z"
+               endTime="2013-03-16T00:00:00Z"
+               type="USAGE"
+               dataCenter="DFW1"
+               region="DFW">
+            <sample:product serviceCode="CloudServersOpenStack"
+                            version="2"
+                            resourceType="SERVER"
+                            flavorId="a"
+                            flavorName="a"
+                            status="ACTIVE"
+                            bandwidthIn="0"
+                            bandwidthOut="0"
+                            additionalIpv4="5"
+                            additionalIpv6="6"/>
+        </event>
+    </atom:content>
+</atom:entry>

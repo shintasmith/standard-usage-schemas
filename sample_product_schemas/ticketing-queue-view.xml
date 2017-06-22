@@ -24,6 +24,6 @@
         Source query
     </attribute>
     <attribute name="queueViewUpdateTime" type="dateTime" use="required">
-        The unique identifier for the ticket
+        The time in which the queue view definition was updated.
     </attribute>
 </productSchema>

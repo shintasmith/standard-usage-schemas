@@ -23,7 +23,7 @@
     <attribute name="sourceQuery" type="string" use="required">
         Source query
     </attribute>
-    <attribute name="eventDateTime" type="dateTime" use="required">
+    <attribute name="queueViewUpdateTime" type="dateTime" use="required">
         The unique identifier for the ticket
     </attribute>
 </productSchema>

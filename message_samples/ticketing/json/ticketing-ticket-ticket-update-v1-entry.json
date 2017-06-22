@@ -20,7 +20,7 @@
                     "ticketId": "sampleString",
                     "dificultyLevel": "LEVEL1",
                     "status": "sampleString",
-                    "eventDateTime": "2013-09-26T15:32:00-05:00",
+                    "ticketUpdateTime": "2013-09-26T15:32:00-05:00",
                     "queue": {
                         "id": "1",
                         "name": "sampleString"

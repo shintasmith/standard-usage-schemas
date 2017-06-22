@@ -34,7 +34,7 @@
     <attribute name="supportTeam" type="string" use="optional">
         The support team this ticket has been assigned to.
     </attribute>
-    <attribute name="eventDateTime" type="dateTime" use="required">
+    <attribute name="ticketUpdateTime" type="dateTime" use="required">
         The unique identifier for the ticket
     </attribute>
 </productSchema>

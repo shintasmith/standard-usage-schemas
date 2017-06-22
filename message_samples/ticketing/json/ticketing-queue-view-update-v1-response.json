@@ -46,7 +46,7 @@
                     "name": "sampleString",
                     "sourceSystem": "CORE",
                     "sourceQuery": "sampleString",
-                    "eventDateTime": "2013-09-26T15:32:00-05:00"
+                    "queueViewUpdateTime": "2013-09-26T15:32:00-05:00"
                 }
             }
         },

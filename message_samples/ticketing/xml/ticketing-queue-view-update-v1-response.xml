@@ -42,7 +42,7 @@
                          name="sampleString"
                          sourceSystem="CORE"
                          sourceQuery="sampleString"
-                         eventDateTime="2013-09-26T15:32:00-05:00"/>
+                         queueViewUpdateTime="2013-09-26T15:32:00-05:00"/>
       </event>
    </atom:content>   
    <atom:link href="https://ord.feeds.api.rackspacecloud.com/ticketing/events/entries/urn:uuid:e53d007a-fc23-11e1-975c-cfa6b29bb814"

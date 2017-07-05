@@ -22,7 +22,7 @@
             Specifies the queue name.
         </attribute>
     </attributeGroup>
-    <attribute name="dificultyLevel" type="string" use="required" allowedValues="LEVEL1 LEVEL2 LEVEL3">
+    <attribute name="difficultyLevel" type="string" use="required" allowedValues="LEVEL1 LEVEL2 LEVEL3">
         The difficulty level assigned to this ticket
     </attribute>
     <attribute name="status" type="string" use="required">

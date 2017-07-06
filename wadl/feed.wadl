@@ -25,6 +25,14 @@
         <method href="#getFeed" rax:roles="cloudfeeds:service-admin cloudfeeds:service-observer"/>
     </resource_type>
 
+    <!-- This resource_type is for the mixed XML/JSON content (the envelope is in XML but
+         the atom:content element has type="application/json". It is here only to support
+         older feeds that attempted to use JSON before JSON was officially supported in
+         Cloud Feeds. It should *NOT* be used for newly created feeds. 
+         JSON format is automatically supported on all feeds via the setting of 
+         Content-Type header (on publish) and Accept header (on consumption) to 
+         application/vnd.rackspace.atom+json
+    -->
     <resource_type id="AtomFeedAllowJson">
         <method href="#getFeedAllowJson" rax:roles="cloudfeeds:service-admin cloudfeeds:service-observer"/>
     </resource_type>

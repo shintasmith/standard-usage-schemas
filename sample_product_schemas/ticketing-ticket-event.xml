@@ -8,9 +8,6 @@
     <description>
         Lists all the events for ticket creation and updates.
     </description>
-    <attribute name="ticketId" type="string" use="required">
-        The unique identifier for the ticket
-    </attribute>
     <attributeGroup name="queue" minOccurs="1" maxOccurs="1">
         <description>
             The queue or group this ticket belongs to

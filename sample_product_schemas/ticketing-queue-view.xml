@@ -1,21 +1,15 @@
 <productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
-               namespace="http://docs.rackspace.com/event/ticketing/queue"
+               namespace="http://docs.rackspace.com/event/ticketing/queue/view"
                serviceCode="Ticketing"
                version="1" 
-               resourceTypes="VIEW"
+               resourceTypes="QUEUE_VIEW"
                type="UPDATE"
                writeRole="cloudfeeds:ticketing-publisher">
     <description>
         Queue View definition update event.
     </description>
-    <attribute name="id" type="string" use="required">
-        The unique identifier for the queue view
-    </attribute>
     <attribute name="number" type="int" use="required">
         Queue Id/number at Source
-    </attribute>
-    <attribute name="name" type="string" use="required">
-        Queue view name
     </attribute>
     <attribute name="sourceSystem" type="string" use="required" allowedValues="CORE ENCORE">
         Source System

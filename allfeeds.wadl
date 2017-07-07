@@ -179,6 +179,9 @@
         <resource id="support_events"
                   path="support/events"
                   type="wadl/feed.wadl#AtomFeedAllowJson wadl/product.wadl#Support"/>
+        <resource id="ticketing_events" 
+                  path="ticketing/events" 
+                  type="wadl/feed.wadl#AtomFeed wadl/product.wadl#Ticketing"/>          
         <resource id="usagecorrelation_events"
                   path="usagecorrelation/events"
                   type="wadl/feed.wadl#AtomFeed wadl/feed.wadl#Validated"/>

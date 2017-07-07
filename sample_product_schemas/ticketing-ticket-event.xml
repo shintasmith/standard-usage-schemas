@@ -1,0 +1,37 @@
+<productSchema xmlns="http://docs.rackspace.com/core/usage/schema"
+               namespace="http://docs.rackspace.com/event/ticketing/ticket"
+               serviceCode="Ticketing"
+               version="1" 
+               resourceTypes="TICKET"
+               type="UPDATE"
+               writeRole="cloudfeeds:ticketing-publisher">
+    <description>
+        Lists all the events for ticket creation and updates.
+    </description>
+    <attributeGroup name="queue" minOccurs="1" maxOccurs="1">
+        <description>
+            The queue or group this ticket belongs to
+        </description>
+        <attribute name="id" type="int" use="required" > 
+            Specifies the queue id.
+        </attribute>
+        <attribute name="name" type="string" use="required" > 
+            Specifies the queue name.
+        </attribute>
+    </attributeGroup>
+    <attribute name="difficultyLevel" type="string" use="required" allowedValues="LEVEL1 LEVEL2 LEVEL3">
+        The difficulty level assigned to this ticket
+    </attribute>
+    <attribute name="status" type="string" use="required">
+        Current ticket status
+    </attribute>
+    <attribute name="assignee" type="string" use="optional">
+        The sso of the racker currently assigned to the ticket.
+    </attribute>
+    <attribute name="supportTeam" type="string" use="optional">
+        The support team this ticket has been assigned to.
+    </attribute>
+    <attribute name="ticketUpdateTime" type="dateTime" use="required">
+        The time in which the ticket was updated.
+    </attribute>
+</productSchema>

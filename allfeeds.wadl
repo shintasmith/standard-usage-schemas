@@ -260,6 +260,7 @@
                         wadl/product.wadl#Ssl
                         wadl/product.wadl#SslTenant
                         wadl/product.wadl#Support
+                        wadl/product.wadl#Ticketing
                         wadl/feed.wadl#UsageDeadLetter
                         wadl/cadf.wadl#UserAccessEvent
                         wadl/product.wadl#Widget wadl/product.wadl#WidgetSummary"/>
